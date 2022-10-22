@@ -13,8 +13,8 @@ DMM WEBCAMPコンテンツ【ポートフォリオ制作】の研修課題
 総合通信販売
 
 ## ●テーマを選んだ理由
-以前から通信販売は普及していたが、コロナ禍により更に需要が高まった。
-物販サイトは日常生活に不可欠な存在であり、今や消費するだけではなく個人が売り買いする時代となっていることから、製作に至った。
+以前から通信販売は普及していたが、コロナ禍により更に需要が高まった。<br>
+物販サイトは日常生活に不可欠な存在であり、今や消費するだけではなく個人が売り買いする時代となっていることから、制作に至った。
 
 ## ●ターゲットユーザー
 インターネット環境が整っている企業、個人
@@ -24,6 +24,11 @@ DMM WEBCAMPコンテンツ【ポートフォリオ制作】の研修課題
 
 実装機能リスト
 https://docs.google.com/spreadsheets/d/1yxF27KHBhO-ZB3o25UEpUIyk3kVoMdbrnDyAcRVY9AA/edit?usp=sharing
+
+<!--アプリケーション詳細設計書-->
+<!--https://docs.google.com/spreadsheets/d/1zh4xEbdjdPelP8iP8SCuJWXfhb1wL9G19Zi2M2YFgcA/edit?usp=sharing-->
+
+
 <!---->
 
 
