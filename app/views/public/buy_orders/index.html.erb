@@ -1,0 +1,42 @@
+<!--<h1>Public::BuyOrders#index</h1>-->
+<!--<p>Find me in app/views/public/buy_orders/index.html.erb</p>-->
+<br>
+<h1><span style="background-color:lightgray" class="m-5">　注文履歴一覧　</span></h1>
+<br>
+  <table border="1" width="1200" class="mx-auto"><!--ボーダーを入れるときは←の設定する(widthはtdの総計)-->
+    <thead>
+        <tr bgcolor="lightgray" style="text-align:center" height="50">
+          <th>注文日</th>
+          <th>配送先</th>
+          <th>注文商品</th>
+          <th>支払金額</th>
+          <th>ステータス</th>
+          <th>注文詳細</th>
+        </tr>
+    </thead>
+  <!---->
+    <tbody>
+    <% @index_public_order.each do |order| %>
+        <tr height="80">
+          <td width="100"><%= order.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td><!--注文日-->
+          <!--.in_time_zone('Tokyo')→UTC(協定世界時刻のデフォルト値)をJST(日本時間)に換算する-->
+          <!--.strftime("%Y-%m-%d %H:%M:%S")→UTCを消して時刻のフォーマットに変更する-->
+          <td width="500">〒<%= order.postal_code %><%= order.address %><br><%= order.name %></td><!--郵便番号、住所、氏名-->
+
+          <td width="400">
+          <% order.order_details.each do |order_detail| %>
+            <%#= image_tag order.item.get_image %><%= order_detail.item.name %><!--注文商品--><br>
+          <% end %>
+          </td>
+          
+          <td width="100"><%= order.total_payment.to_s(:delimited) %></td><!--支払金額--><!--to_s(:delimited)→文字列に変換してカンマをつける-->
+          <td width="150"><%= order.status_i18n %></td><!--ステータス--><!--i18n→日本語に変換する-->
+          <td width="150" align="center"><!--注文詳細-->
+            <!--遷移先：public/orders#show(注文履歴詳細)-->
+            <%= link_to "表示する", order_path(order.id), class: "btn btn-primary" %>　　
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+<br>

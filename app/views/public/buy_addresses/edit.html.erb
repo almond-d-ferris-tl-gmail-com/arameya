@@ -1,0 +1,25 @@
+<!--<h1>Public::BuyAddresses#edit</h1>-->
+<!--<p>Find me in app/views/public/buy_addresses/edit.html.erb</p>-->
+<br>
+<h1><span style="background-color:lightgray" class="m-5">　配送先編集　</span></h1>
+<br>
+  <%= form_with model: @edit_public_address, url: address_path do |f| %><!--url(遷移先):public/addresses#update-->
+    <table border="0" style="display:flex; justify-content:center">
+      <tr height="50">
+        <td width="200">郵便番号(ハイフンなし)</td>
+        <td width="400"><%= f.text_field :postal_code%></td>
+      </tr>
+      
+      <tr height="50">
+        <td>住所</td>
+        <td><%= f.text_area :address, size: "50" %></td>
+      </tr>
+      
+      <tr height="50">
+        <td>宛名</td>
+        <td><%= f.text_field :name %></td>
+        <td><%= f.submit '変更内容を保存', class: "btn btn-success" %></td>
+      </tr>
+    </table>
+  <% end %>
+<br>

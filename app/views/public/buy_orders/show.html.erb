@@ -1,0 +1,84 @@
+<!--<h1>Public::BuyOrders#show</h1>-->
+<!--<p>Find me in app/views/public/buy_orders/show.html.erb</p>-->
+<br>
+<h1><span style="background-color:lightgray" class="m-5">　注文履歴詳細　</span></h1>
+<br>
+
+<div class="container">
+  <div class="row">
+    <div class="col-9"><!--左側-->
+    <table border="1">
+      
+      <h3>注文情報</h3>
+      <tr height="50">
+        <td bgcolor="lightgray" width="150"><b>注文日</b></td>
+        <td width="800"><%= @show_public_order.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
+        <!--.in_time_zone('Tokyo')→UTC(協定世界時刻のデフォルト値)をJST(日本時間)に換算する-->
+        <!--.strftime("%Y-%m-%d %H:%M:%S")→UTCを消して時刻のフォーマットに変更する-->
+      </tr>
+      
+      <tr height="50">
+        <td bgcolor="lightgray"><b>配送先</b></td>
+        <td>〒<%= @show_public_order.postal_code %><%= @show_public_order.address %><br><%= @show_public_order.name %></td>
+      </tr>
+      
+      <tr height="50">
+        <td bgcolor="lightgray"><b>支払方法</b></td>
+        <td><%= @show_public_order.payment_method_i18n %></td><!--i18n→日本語に変換する-->
+      </tr>
+      
+      <tr height="50">
+        <td bgcolor="lightgray"><b>ステータス</b></td>
+        <td><%= @show_public_order.status_i18n %></td><!--i18n→日本語に変換する-->
+      </tr>      
+    </table>
+    </div><!--col-9-->
+
+    <div class="col-3"><!--右側-->
+      <table border="1">
+        
+        <h3>請求情報</h3>
+          <tr height="50">
+            <td bgcolor="lightgray" width="150"><b>商品合計</b></td>
+            <td><%= @show_public_order.total_payment.to_s(:delimited) %></td>
+          </tr>
+          
+          <tr height="50">
+            <td bgcolor="lightgray"><b>配送料</b></td>
+            <td width="150"><%= @show_public_order.shipping_cost %></td>
+          </tr>
+          
+          <tr height="50">
+            <td bgcolor="lightgray"><b>ご請求額</b></td>
+            <td><%= (@show_public_order.total_payment + @show_public_order.shipping_cost).to_s(:delimited) %></td>
+          </tr>      
+      </table>
+    </div><!--col-3-->
+  </div><!--row-->
+</div><!--container-->
+<br>
+
+<table border="1" class="mx-auto">
+  <thead>
+    <h3 align="center">注文内容</h3>
+    <tr bgcolor="lightgray" height="50">
+      <th width="500">商品</th>
+      <th width="100">単価(税込)</th>
+      <th width="100">個数</th>
+      <th width="100">小計</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @show_public_order.order_details.each do |order| %>
+    <%# @total_payment = @total_payment + order.subtotal_price %><!--小計を足していく-->
+      <tr height="50">
+        <td><%#= image_tag order.item.get_image %><%= order.item.name %></td><!--商品画像--><!--商品名-->
+        <td><%= order.item.tax_included_price.to_s(:delimited) %></td><!--税込--><!--to_s(:delimited)→文字列に変換してカンマをつける-->
+        <td><%= order.amount %></td><!--数量-->
+        <td><%= order.subtotal_price.to_s(:delimited) %></td><!--小計-->
+      </tr>      
+    <% end %>
+  </tbody>
+</table>
+<br>

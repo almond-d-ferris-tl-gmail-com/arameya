@@ -1,0 +1,67 @@
+<!--<h1>Public::Homes#top</h1>-->
+<!--<p>Find me in app/views/public/homes/top.html.erb</p>-->
+<br>
+<div class="container">
+<p id="notice"><%= notice %></p>
+  <div class="row">
+      
+<!--サイドバー-->
+    <div class="col-lg-2">
+      <table class="table" style="display:flex; justify-content:center">
+        <tr bgcolor="lightgray" style="text-align:center" height="50">
+          <th>ジャンル検索</th>
+        </tr>
+        <% @genres.each do |genre| %>
+        <tr height="50">
+          <td width="150"><%= genre.name %></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+    
+<!--メイン-->
+    <div class="col-lg-10">
+    　<div class="main-container">
+      <div class="mx-auto bd-color pl-5 pr-5">
+      <!--mx-auto→ブロック中央寄せ、bd-color→画像透過、pl-5→左側パディング、pr-5→右側パディング-->
+      <!--画像サイズ、透過設定→/nagano_cake/app/javascript/stylesheets/application.scss-->
+      　<b>
+        <h4>ようこそ、ながのCAKEへ！</h4>
+      　<h4>このサイトは、ケーキ販売のECサイトになります。</h4>
+      　<h4>会員でない方も商品の閲覧はできますが、</h4>
+      　<h4>購入には会員登録が必要になります。</h4>
+      　</b>
+      </div><!--mx-autoここまで-->
+      </div><!--main-containerここまで-->
+<br>
+
+      <table>
+        <h3>新着商品</h3>
+
+          <tr height="50">
+          <% @items.each do |item| %>
+            <td>
+            <%= link_to item_path(item.id) do %><!--画像、商品名、金額に商品詳細(public/items#show)へのリンク-->
+              <% if item.image.attached? %>
+                <%= image_tag item.image, size: "200x150" %><br>
+              <% else %>
+                <%= image_tag 'no_image', size: "200x150" %><br><!--画像４枚-->
+              <% end %>
+                <%= item.name %><br><!--商品名-->
+                税抜
+                <%= item.price %><!--金額-->
+                円
+            <% end %>
+            </td>
+          <% end %>
+          </tr>
+      </table>
+    </div>
+  </div>
+  </div>
+<br>
+
+<div align="right" class="pr-5">
+<%= link_to "全ての商品を見る＞", items_path %><!--index画面に遷移-->
+</div>
+<br>

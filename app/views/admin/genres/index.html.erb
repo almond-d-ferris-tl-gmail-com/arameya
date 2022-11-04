@@ -1,0 +1,32 @@
+<!--<h1>Admin::Genres#index</h1>-->
+<!--<p>Find me in app/views/admin/genres/index.html.erb</p>-->
+<br>
+<h1><span style="background-color:lightgray" class="m-5">　ジャンル一覧・追加　</span></h1>
+<br>
+  <%= form_with model: @genre, url: admin_genres_path do |f| %><!--url(遷移先):admin/genres#create-->
+    <table border="0" style="display:flex; justify-content:center">
+      <tr>
+        <td width="120">ジャンル名</td>
+        <td width="250"><%= f.text_field :name %></td>
+        <td width="150"><%= f.submit '新規登録', class: "btn btn-success" %></td>
+      </tr>
+    </table>
+  <% end %>
+
+<br><br>
+  <table class="table" style="display:flex; justify-content:center">
+    <tr bgcolor="lightgray" style="text-align:center" height="50">
+      <th>ジャンル</th>
+      <th></th>
+    </tr>
+  
+    <% @index_admin_genre.each do |genre| %>
+    <tr height="50">
+      <td width="200" class="align-middle"><%= genre.name %></td>
+      <!--admin/genres#edit(ジャンル編集)に遷移-->
+      <td><%= link_to "編集する", edit_admin_genre_path(genre.id), class: "btn btn-success" %></td>
+      <td></td>
+    </tr>
+    <% end %>
+  </table>
+<br>

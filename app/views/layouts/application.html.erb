@@ -1,16 +1,138 @@
+<!--共通部分-->
 <!DOCTYPE html>
 <html>
   <head>
     <title>Arameya</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <!--CSRF対策(クロスサイトリクエストフォージェリ)-->
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <!-- FontAwesomeの読み込み log in→account→kits→cb~→copy-->
+    <script src="https://kit.fontawesome.com/cb9c23a1e6.js" crossorigin="anonymous"></script>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="d-flex flex-column vh-100">
+    <header class="shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <!--ロゴ-->
+          <a class="navbar-brand; text-dark" href="/" ><h5>NaganoCake<%#= image_tag 'logo', size: "50x50" %></h5></a>
+          
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+            
+              <% if admin_signed_in? %><!--管理者側ログイン後 admin→テーブル名-->
+              
+                <li><!--admin/items#index　(current_user.id)-->
+                  <%= link_to admin_items_path, class: "nav-link text-light" do %>
+                    <button type="button" class="btn btn-outline-secondary">商品一覧</button>
+                  <% end %>
+                </li>
+                
+                <li><!--admin/customers#index-->
+                  <%= link_to admin_customers_path, class: "nav-link text-light" do %>
+                    <button type="button" class="btn btn-outline-secondary">会員一覧</button>
+                  <% end %>
+                </li>
+                
+                <li><!--admin/homes#top-->
+                  <%= link_to admin_root_path, class: "nav-link text-light" do %>
+                    <button type="button" class="btn btn-outline-secondary">注文履歴一覧</button>
+                  <% end %>
+                </li>
+                
+                <li><!--admin/genres#index-->
+                  <%= link_to admin_genres_path, class: "nav-link text-light" do %>
+                    <button type="button" class="btn btn-outline-secondary">ジャンル一覧</button>
+                  <% end %>
+                </li>
+                
+                <li><!--admin/sessions#destroy-->
+                  <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link text-light" do %>
+                    <button type="button" class="btn btn-outline-secondary">ログアウト</button>
+                  <% end %>
+                </li>
+                
+              <% elsif customer_signed_in? %><!--顧客側ログイン後 customer→テーブル名-->
+
+                <li><!--検索窓-->
+                  <%= render "/searches/form" %>
+                </li>
+
+                <li class="d-flex align-items-center justify-content-center">
+                  ようこそ、<%= current_customer.last_name %> <%= current_customer.first_name %>さん！
+                </li>
+                
+                <li><!--public/customers#show　(current_user.id)-->
+                  <%= link_to customers_my_page_path, class: "nav-link text-light" do %>
+                    <button type="button" class="btn btn-outline-secondary">マイページ</button>
+                  <% end %>
+                </li>
+                
+                <li><!--public/items#index-->
+                  <%= link_to items_path, class: "nav-link text-light" do %>
+                    <button type="button" class="btn btn-outline-secondary">商品一覧</button>
+                  <% end %>
+                </li>
+                
+                <li><!--public/cart_items#index-->
+                  <%= link_to cart_items_path, class: "nav-link text-light" do %>
+                    <button type="button" class="btn btn-outline-secondary">カート</button>
+                  <% end %>
+                </li>
+                
+                <li><!--public/sessions#destroy-->
+                  <%= link_to destroy_customer_session_path, method: :delete, class: "nav-link text-light" do %>
+                    <button type="button" class="btn btn-outline-secondary">ログアウト</button>
+                  <% end %>
+                </li>
+                
+              <% else %><!--ログイン前-->
+
+                <li><!--検索窓-->
+                  <%= render "/searches/form" %>
+                </li>
+
+                <li class="nav-item"><!--public/homes#about-->
+                  <%= link_to about_path, class: "nav-link text-light" do %>
+                    <button type="button" class="btn btn-outline-secondary">About</button>
+                  <% end %>
+                </li>
+                
+                <li><!--public/items#index-->
+                  <%= link_to items_path, class: "nav-link text-light" do %>
+                    <button type="button" class="btn btn-outline-secondary">商品一覧</button>
+                  <% end %>
+                </li>
+                
+                <li><!--public/registrations#new-->
+                  <%= link_to new_customer_registration_path, class: "nav-link text-light" do %>
+                    <button type="button" class="btn btn-outline-secondary">新規登録</button>
+                  <% end %>
+                </li>
+                
+                <li><!--public/sessions#new-->
+                  <%= link_to new_customer_session_path, class: "nav-link text-light" do %>
+                    <button type="button" class="btn btn-outline-secondary">ログイン</button>
+                  <% end %>
+                </li>
+              <% end %>
+            
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+  
+    <main class="mb-auto">
+      <%= yield %>
+    </main>
+  
+    <footer align="center"><br>CopyRight Infratop.inc
+    </footer>
   </body>
 </html>

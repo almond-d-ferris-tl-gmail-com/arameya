@@ -1,0 +1,67 @@
+<!--<h1>Admin::Members#edit</h1>-->
+<!--<p>Find me in app/views/admin/members/edit.html.erb</p>-->
+<br>
+<h1><span style="background-color:lightgray" class="m-5">　<%= @edit_admin_customer.last_name %><%= @edit_admin_customer.first_name %>さんの会員情報編集　</span></h1>
+<br>
+    <%= form_with model: @edit_admin_customer, url: admin_customer_path(@edit_admin_customer.id) do |f| %><!--url(遷移先):update-->
+
+      <table border="0" class="mx-auto">
+        <tr>
+          <td height="50" width="200">会員ID</td>
+          <td><%= @edit_admin_customer.id %></td>
+        </tr>
+
+        <tr>
+          <td height="50"><%= f.label :"氏名" %></td>
+          <!--autofocus: true：カーソルが移動して入力状態になる→htmlに１つだけ設定できる-->
+          <!--姓-->
+          <td width="250"><%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %></td>
+          <!--名-->
+          <td><%= f.text_field :first_name, autocomplete: "first_name" %></td>
+        </tr>
+        
+        <tr>
+          <td height="50"><%= f.label :"フリガナ" %></td>
+          <!--セイ-->
+          <td><%= f.text_field :last_name_kana, autocomplete: "last_name_kana" %></td>
+          <!--メイ-->
+          <td><%= f.text_field :first_name_kana, autocomplete: "first_name_kana" %></td>
+        </tr>
+        
+        <tr>
+          <td height="50"><%= f.label :"郵便番号" %></td>
+          <td><%= f.text_field :postal_code, autocomplete: "postal_code" %></td>
+        </tr>
+
+        <tr>
+          <td height="50"><%= f.label :"住所" %></td>
+          <td colspan="2"><%= f.text_area :address, autocomplete: "address", size: "50" %></td>
+        </tr>
+
+        <tr>
+          <td height="50"><%= f.label :"電話番号" %></td>
+          <td><%= f.text_field :telephone_number, autocomplete: "telephone_number" %></td>
+        </tr>
+
+        <tr>
+          <td height="50"><%= f.label :"メールアドレス" %></td>
+          <td><%= f.email_field :email, autocomplete: "email" %></td>
+        </tr>
+
+        <tr>
+          <td height="50"><%= f.label :"会員ステータス" %></td>
+          <td><!--ラジオボタン-->
+            <%= f.radio_button :is_deleted, :false %>
+            <%= f.label :is_deleted, "有効", {value: :false, style: "display: inline-block;"} %>
+            <%= f.radio_button :is_deleted, :true %>
+            <%= f.label :is_deleted, "退会", {value: :true, style: "display: inline-block;"} %>
+          </td>
+        </tr>
+
+        <tr>
+          <td height="50"></td>
+          <td><%= f.submit "変更を保存", class: "btn btn-success" %></td>
+        </tr>
+      </table>
+<% end %>
+<br>

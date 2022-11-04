@@ -1,0 +1,46 @@
+<!--<h1>Public::SellItems#new</h1>-->
+<!--<p>Find me in app/views/public/sell_items/new.html.erb</p>-->
+<br>
+<h1><span style="background-color:lightgray" class="m-5">　商品新規登録　</span></h1>
+<br>
+
+<%= form_with model: @new_admin_item, url: admin_items_path do |item| %><!--url(遷移先):admin/items#create-->
+
+<table border="0" style="display:flex; justify-content:center">
+  <tr>
+    <td height="50">商品画像</td>
+    <td><%= item.file_field :image, accept: "image/*" %></td>
+  </tr>
+  <tr>
+    <td height="50">商品名</td>
+    <td><%= item.text_field :name %></td>
+  </tr>
+  <tr>
+    <td height="80">商品説明</td>
+    <td><%= item.text_area :introduction, size: "50" %></td>
+  </tr>
+  <tr>
+    <td height="50">ジャンル</td>
+    <!--プルダウンを実装-->
+    <!--%<= f.collection_select :保存先のカラム名, テーブル（モデル）名.all, :実際にDBに保存させるカラム名, :選択肢に用いるカラム名, include_blank: "選択して下さい" %>-->
+    <td><%= item.collection_select :genre_id, Genre.all, :id, :name, include_blank: "選択して下さい" %></td>
+  </tr>
+  <tr>
+    <td height="50">税抜価格</td>
+    <td><%= item.text_field :price %>円</td>
+  </tr>
+  <tr>
+    <td height="50">販売ステータス　　</td>
+    <td>
+      <%= item.radio_button :is_active, :true %>
+        <%= item.label :is_active, "販売中", {value: :true, style: "display: inline-block;"} %>
+      <%= item.radio_button :is_active, :false %>
+        <%= item.label :is_active, "販売停止中", {value: :false, style: "display: inline-block;"} %>
+    </td>
+  </tr>
+  <tr>
+    <td height="100" colspan="3" style="text-align: center"><%= item.submit '新規登録', class: "btn btn-success" %></td>
+  </tr>
+</table>
+<% end %>
+<br>

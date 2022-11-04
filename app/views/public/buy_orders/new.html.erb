@@ -1,0 +1,94 @@
+<!--<h1>Public::BuyOrders#new</h1>-->
+<!--<p>Find me in app/views/public/buy_orders/new.html.erb</p>-->
+<br>
+<h1><span style="background-color:lightgray" class="m-5">　注文情報入力　</span></h1>
+<br>
+
+<%= form_with model: @new_public_order, url: orders_comfirm_path do |f| %><!--url(遷移先):public/orders#comfirm-->
+<!---->
+<table border="0" style="display:flex; justify-content:center">
+      <tr>
+        <td height="50"><h3><b>支払方法</b></h3></td>
+      </tr>
+      
+      <tr>
+        <td><!--ラジオボタン-->
+            <!--クレジットカード-->
+            　　<%= f.radio_button :payment_method, Order.payment_methods.key(0), {:checked => true} %><!--{:checked => true}→初期選択-->
+                <%= f.label :payment_method, Order.payment_methods_i18n[:credit_card] %><!--i18n→日本語に変換する-->
+        </td>
+      </tr>
+      
+      <tr>
+        <td>
+            <!--銀行振込-->
+            　　<%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
+                <%= f.label :payment_method, Order.payment_methods_i18n[:transfer]%><!--i18n→日本語に変換する-->
+        </td>
+      </tr>
+      
+      <tr>
+        <td height="50"><h3><b>お届け先</b></h3></td>
+      </tr>
+      
+      <tr>
+        <td><!--ラジオボタン-->
+          　　<%= f.radio_button :select_address, 0, {:checked => true} %><!--{:checked => true}→初期選択-->
+            <%= f.label :select_address, "ご自身の住所" %>
+        </td>
+      </tr>
+
+      <tr>
+        <td><!--カスタマー住所-->
+              　　　　〒<%= @customer.postal_code %>　<%= @customer.address %>
+        </td>
+      </tr>
+ 
+       <tr>
+        <td><!--カスタマー氏名-->
+            　　　　<%= @customer.last_name %> <%= @customer.first_name %>
+        </td>
+      </tr>
+     
+      <tr>
+        <td>
+          　　<%= f.radio_button :select_address, 1 %>
+            <%= f.label :select_address, "登録済住所から選択" %>
+        </td>
+      </tr>
+      
+      <tr>
+        <td colspan="2"><!--プルダウン-->
+            　　　　<%= f.select :address_id, options_from_collection_for_select(@addresses, :id, :address_display) %>
+        </td>
+      </tr>
+      
+      <tr>
+        <td>
+          　　<%= f.radio_button :select_address, 2 %>
+            <%= f.label :select_address, "新しいお届け先" %>
+        </td>
+      </tr>
+      
+      <tr>
+        <td height="50">　　　　郵便番号(ハイフンなし)</td>
+        <td><%= f.text_field :postal_code, autocomplete: "postal_code" %></td>
+      </tr>
+      
+      <tr>
+        <td height="50">　　　　住所</td>
+        <td><%= f.text_area :address, autocomplete: "address", size: "50" %></td>
+      </tr>
+      
+      <tr>  
+        <td height="50">　　　　宛名</td>
+        <td><%= f.text_field :name, autocomplete: "name" %></td>
+      </tr>
+
+  </table>
+<br><br>
+    <div class="text-center">
+        <%= f.submit '確認画面へ進む', class: "btn btn-primary" %>
+    </div>
+<% end %>
+<br>

@@ -1,0 +1,2 @@
+module Admin::MemberBuysHelper
+end

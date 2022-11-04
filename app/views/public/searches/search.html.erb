@@ -1,0 +1,8 @@
+<!--<h1>Public::Searches#search</h1>-->
+<!--<p>Find me in app/views/public/searches/search.html.erb</p>-->
+
+<% if @model == 'user' %>
+  <%= render 'users/index', users: @records %>
+<% elsif @model == 'book' %>
+  <%= render 'books/index', books: @records %>
+<% end %>

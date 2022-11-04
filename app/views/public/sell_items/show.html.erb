@@ -1,0 +1,46 @@
+<!--<h1>Public::SellItems#show</h1>-->
+<!--<p>Find me in app/views/public/sell_items/show.html.erb</p>-->
+<br>
+<h1><span style="background-color:lightgray" class="m-5">　商品詳細　</span></h1>
+<!--表示したいものが一つだけの場合、each文は書けない-->
+<br>
+<table border="0" style="display:flex; justify-content:center">
+  <tr>
+    <td rowspan="6"  width="350"><!--セル結合:colspan(列の長さ)、rowspan(行の長さ)-->
+      <% if @show_admin_item.image.attached? %>
+        <%= image_tag @show_admin_item.image, size: "300x200" %>
+      <% else %>
+        <%= image_tag 'no_image', size: "300x300" %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td height="50">商品名</td>
+    <td><%= @show_admin_item.name %></td>
+  </tr>
+  <tr>
+    <td height="50">商品説明</td>
+    <td><%= @show_admin_item.introduction %></td>
+  </tr>
+  <tr>
+    <td height="50">ジャンル</td>
+    <td><%= @show_admin_item.genre.name %></td>
+  </tr>
+  <tr>
+    <td height="50">税込価格<br>(税抜価格)</td>
+    <!--税込価格の計算式/nagano_cake/app/models/item.rb-->
+    <td><%= @show_admin_item.tax_included_price %>(<%= @show_admin_item.price %>)円</td>
+  </tr>
+  <tr>
+    <td height="50">販売ステータス　　</td>
+    <% if @show_admin_item.is_active == true %>
+      <td><font color="green">販売中</font></td>
+    <% else %>
+      <td><font color="gray">販売停止中</font></td>
+    <% end %>
+  </tr>
+  <tr>
+    <td height="100" colspan="3" style="text-align: center"><%= link_to "編集する", edit_admin_item_path(@show_admin_item.id), class: "btn btn-success" %></td>
+  </tr>
+</table>
+<br>

@@ -1,0 +1,33 @@
+<!--<h1>Admin::Homes#top</h1>-->
+<!--<p>Find me in app/views/admin/homes/top.html.erb</p>-->
+<br>
+<!--/nagano_cake/config/locales/ja.yml-->
+<%= notice %><!--ログインに成功したらメッセージを表示する-->
+<h1><span style="background-color:lightgray" class="m-5">　注文履歴一覧　</span></h1>
+<br>
+<table class="table" style="display:flex; justify-content:center">
+  <tr bgcolor="lightgray" height="50">
+    <th width="250">購入日時</th>
+    <th width="300">購入者</th>
+    <th width="200">購入個数</th>
+    <th width="200">注文ステータス</th>
+  </tr>
+  
+<% @orders.each do |order| %>
+    <tr height="50">
+      <!--購入日時--><!--admin/orders#show画面に遷移-->
+      <td><%=link_to order.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S"), admin_order_path(order.id) %></td>
+      <!--.in_time_zone('Tokyo')→UTC(協定世界時刻のデフォルト値)をJST(日本時間)に換算する-->
+      <!--.strftime("%Y-%m-%d %H:%M:%S")→UTCを消して時刻のフォーマットに変更する-->
+      <td><%= order.name %></td>
+      <!--order.amountだとorderテーブルのamountカラムになってしまう。その注文に紐づいている注文商品数-->
+      <td><%= order.order_details.sum(:amount) %></td><!--個人の注文数量総計-->
+      <td><%= order.status_i18n %></td><!--i18n→日本語に変換する-->
+    </tr>
+<% end %>
+</table>
+<br>
+<!--ページネーション-->
+<!--https://getbootstrap.jp/→ドキュメント→検索-->
+<div class="d-flex justify-content-center"><%= paginate @orders %></div>
+<br>

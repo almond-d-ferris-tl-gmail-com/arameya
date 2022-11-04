@@ -1,0 +1,18 @@
+<!--<h1>Public::Members#unsubscribe</h1>-->
+<!--<p>Find me in app/views/public/members/unsubscribe.html.erb</p>-->
+<br><br><br>
+<h2 class="text-center">本当に退会しますか？</h2>
+<br>
+<div class="text-center">
+  <p>退会すると、会員登録情報や</p>
+  <p>これまでの購入履歴が閲覧できなくなります。</p>
+  <p>退会する場合は、「退会する」をクリックしてください。</p>
+</div>
+<br>
+<div class="text-center">
+    <!--遷移先：public/customers#show(マイページ)-->
+    <%= link_to "退会しない", customers_my_page_path, class: "btn btn-primary" %>　　　
+    <!--遷移先：public/customers#withdraw(顧客の退会処理)-->
+    <%= link_to "退会する", customers_withdraw_path, class: "btn btn-danger", method: :PATCH, "data-confirm" => "本当に退会しますか？" %>
+</div>
+<br>

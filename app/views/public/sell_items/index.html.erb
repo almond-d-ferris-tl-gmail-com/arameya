@@ -1,0 +1,43 @@
+<!--<h1>Public::SellItems#index</h1>-->
+<!--<p>Find me in app/views/public/sell_items/index.html.erb</p>-->
+<br>
+<table style="display:flex; justify-content:center">
+  <tr>
+    <th width="400"><h1><span style="background-color:lightgray" class="m-5">　商品一覧　</span></h1></th>
+    <th width="150"></th>
+    <th width="150"></th>
+    <th width="150"></th>
+    <th width="150"><%= link_to "商品新規登録", new_admin_item_path, class: "btn btn-success" %></th><!--path:admin/items#new-->
+  </tr>
+
+</table>
+<br>
+<table style="display:flex; justify-content:center">
+  <tr bgcolor="lightgray" height="50">
+    <th width="150">商品ID</th>
+    <th width="350">商品名</th>
+    <th width="150">税抜価格(円)</th>
+    <th width="150">ジャンル</th>
+    <th width="150">ステータス</th>
+  </tr>
+
+<% @page.each do |page| %>
+    <tr height="50">
+      <td><%= page.id %></td>
+      <td><%=link_to page.name, admin_item_path(page.id) %></td><!--show画面に遷移-->
+      <td><%= page.price %></td>
+      <td><%= page.genre.name %></td>
+      
+      <% if page.is_active == true %><!---->
+        <td><font color="green">販売中</font></td>
+      <% else %>
+        <td><font color="gray">販売停止中</font></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+
+<!--ページネーション-->
+<!--https://getbootstrap.jp/→ドキュメント→検索-->
+<div class="d-flex justify-content-center"><%= paginate @page %></div>
+<br>
