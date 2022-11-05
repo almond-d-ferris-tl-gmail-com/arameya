@@ -3,13 +3,12 @@ class Admin::MemberSellsController < ApplicationController
   # except→ログイン画面への遷移を除外する→今回は除外するものがない
   before_action :authenticate_admin!
 
-  def index
+  def index #会員の販売商品一覧画面
     #ページネーション
-    #@index_admin_item = Item.page(params[:page])
-    @page = Item.all.page(params[:page]).per(10)
+    @items = Item.all.page(params[:page]).per(10)
   end
 
-  def show
-    @show_admin_item = Item.find(params[:id])
+  def show #会員の販売商品詳細画面
+    @item = Item.find(params[:id])
   end
 end

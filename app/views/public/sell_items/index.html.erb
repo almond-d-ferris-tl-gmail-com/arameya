@@ -21,14 +21,14 @@
     <th width="150">ステータス</th>
   </tr>
 
-<% @page.each do |page| %>
+<% @items.each do |item| %>
     <tr height="50">
-      <td><%= page.id %></td>
-      <td><%=link_to page.name, admin_item_path(page.id) %></td><!--show画面に遷移-->
-      <td><%= page.price %></td>
-      <td><%= page.genre.name %></td>
+      <td><%= item.id %></td>
+      <td><%=link_to item.name, admin_item_path(item.id) %></td><!--show画面に遷移-->
+      <td><%= item.price %></td>
+      <td><%= item.genre.name %></td>
       
-      <% if page.is_active == true %><!---->
+      <% if item.is_active == true %><!---->
         <td><font color="green">販売中</font></td>
       <% else %>
         <td><font color="gray">販売停止中</font></td>
@@ -39,5 +39,5 @@
 
 <!--ページネーション-->
 <!--https://getbootstrap.jp/→ドキュメント→検索-->
-<div class="d-flex justify-content-center"><%= paginate @page %></div>
+<div class="d-flex justify-content-center"><%= paginate @items %></div>
 <br>

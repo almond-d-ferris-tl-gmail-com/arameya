@@ -1,33 +1,35 @@
 <!--<h1>Admin::Homes#top</h1>-->
 <!--<p>Find me in app/views/admin/homes/top.html.erb</p>-->
 <br>
-<!--/nagano_cake/config/locales/ja.yml-->
+<!--/nagano_cake/config/locales/ja.yml★★★★★-->
 <%= notice %><!--ログインに成功したらメッセージを表示する-->
-<h1><span style="background-color:lightgray" class="m-5">　注文履歴一覧　</span></h1>
+
+<h1><span style="background-color:lightgray" class="m-5">　会員一覧　</span></h1>
 <br>
 <table class="table" style="display:flex; justify-content:center">
   <tr bgcolor="lightgray" height="50">
-    <th width="250">購入日時</th>
-    <th width="300">購入者</th>
-    <th width="200">購入個数</th>
-    <th width="200">注文ステータス</th>
+    <th width="150">会員ID</th>
+    <th width="150">氏名</th>
+    <th width="350">メールアドレス</th>
+    <th width="150">会員ステータス</th>
   </tr>
   
-<% @orders.each do |order| %>
+  <% @page.each do |page| %>
     <tr height="50">
-      <!--購入日時--><!--admin/orders#show画面に遷移-->
-      <td><%=link_to order.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S"), admin_order_path(order.id) %></td>
-      <!--.in_time_zone('Tokyo')→UTC(協定世界時刻のデフォルト値)をJST(日本時間)に換算する-->
-      <!--.strftime("%Y-%m-%d %H:%M:%S")→UTCを消して時刻のフォーマットに変更する-->
-      <td><%= order.name %></td>
-      <!--order.amountだとorderテーブルのamountカラムになってしまう。その注文に紐づいている注文商品数-->
-      <td><%= order.order_details.sum(:amount) %></td><!--個人の注文数量総計-->
-      <td><%= order.status_i18n %></td><!--i18n→日本語に変換する-->
+      <td><%= page.id %></td>
+      <td><%=link_to page.last_name+page.first_name, admin_customer_path(page.id) %></td><!--show画面に遷移-->
+      <td><%= page.email %></td>
+
+        <% if page.is_deleted == false %>
+      <td><font color="green">有効</font></td>
+        <% else %>
+      <td><font color="gray">退会</font></td>
+        <% end %>
     </tr>
-<% end %>
+  <% end %>
 </table>
-<br>
+
 <!--ページネーション-->
 <!--https://getbootstrap.jp/→ドキュメント→検索-->
-<div class="d-flex justify-content-center"><%= paginate @orders %></div>
+<div class="d-flex justify-content-center"><%= paginate @page %></div>
 <br>

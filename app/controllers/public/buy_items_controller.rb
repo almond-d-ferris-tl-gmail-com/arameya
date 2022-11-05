@@ -4,8 +4,6 @@ class Public::BuyItemsController < ApplicationController
   before_action :authenticate_customer!, except: [:index]#customer→テーブル名
 
   def index#商品一覧
-    #サイドバー
-    @genres = Genre.all
     #商品一覧　idを新着順に並び替える
     @items = Item.where(is_active:true).order('id DESC').page(params[:page]).per(8)
     #where→()内の条件が合っていればデータを持ってくる、今回は販売中の商品(is_active:true)のみデータを表示させる
@@ -15,7 +13,7 @@ class Public::BuyItemsController < ApplicationController
   end
 
   def show
-    @show_public_item = Item.find(params[:id])
+    @item = Item.find(params[:id])
     @cart_item = CartItem.new#新規注文
   end
 end

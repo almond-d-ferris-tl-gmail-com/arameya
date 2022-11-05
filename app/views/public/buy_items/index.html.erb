@@ -1,43 +1,23 @@
 <!--<h1>Public::BuyItems#index</h1>-->
 <!--<p>Find me in app/views/public/buy_items/index.html.erb</p>-->
 <br>
-<div class="container">
-<!--<p id="notice"><%#= notice %></p>-->
-  <div class="row">
-      
-<!--サイドバー-->
-    <div class="col-lg-2">
-      <table class="table" style="display:flex; justify-content:center">
-        <tr bgcolor="lightgray" style="text-align:center" height="50">
-          <th>ジャンル検索</th>
-        </tr>
-        <% @genres.each do |genre| %>
-        <tr height="50">
-          <td width="150"><%= genre.name %></td>
-        </tr>
+<span style="font-size:40px">商品一覧</span><span style="font-size:24px">(全<%= @items_max %>件)</span>
+<br><br>
+  <div class="d-flex flex-wrap"><!--flex-wrap→改行する-->
+    <% @items.each do |item| %>
+      <%= link_to item_path(item.id) do %><!--画像、商品名、金額に商品詳細(public/items#show)へのリンク-->
+        <% if item.image.attached? %>
+          <%= image_tag item.image, size: "300x200" %><br>
+        <% else %>
+          <%= image_tag 'no_image', size: "300x300" %><br><!--画像４枚-->
         <% end %>
-      </table>
-    </div>
-    
-<!--メイン-->
-    <div class="col-lg-10">
-      <span style="font-size:40px">商品一覧</span><span style="font-size:24px">(全<%= @items_max %>件)</span>
-      <br><br>
-        <div class="d-flex flex-wrap"><!--flex-wrap→改行する-->
-          <% @items.each do |item| %>
-            <%= link_to item_path(item.id) do %><!--画像、商品名、金額に商品詳細(public/items#show)へのリンク-->
-              <% if item.image.attached? %>
-                <%= image_tag item.image, size: "300x200" %><br>
-              <% else %>
-                <%= image_tag 'no_image', size: "300x300" %><br><!--画像４枚-->
-              <% end %>
-              <%= item.name %><br><!--商品名-->
-              税抜
-              <%= item.price %><!--金額-->
-              円<br>
-            <% end %>
-          <% end %>
-        </div>
+        <%= item.name %><br><!--商品名-->
+        税抜
+        <%= item.price %><!--金額-->
+        円<br>
+      <% end %>
+    <% end %>
+  </div>
 <br><br>
 <div class="d-flex justify-content-center"><%= paginate @items %></div>
 <br>

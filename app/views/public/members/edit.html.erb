@@ -1,10 +1,10 @@
 <!--<h1>Public::Members#edit</h1>-->
 <!--<p>Find me in app/views/public/members/edit.html.erb</p>-->
 <br>
-<% if @edit_public_customer.errors.any? %>
-  <%= @edit_public_customer.errors.count %>error prohibited this obj from being saved:
+<% if @member.errors.any? %>
+  <%= @member.errors.count %>error prohibited this obj from being saved:
   <ul>
-    <% @edit_public_customer.errors.full_messages.each do |message| %>
+    <% @member.errors.full_messages.each do |message| %>
       <li><%= message %></li>
     <% end %>
   </ul>
@@ -12,7 +12,7 @@
 
 <h1><span style="background-color:lightgray" class="m-5">　会員情報編集　</span></h1>
     <!--url(遷移先):public/customers#update(変更mメソッドはpatch)-->
-  <%= form_with model: @edit_public_customer, url: customers_information_path , method: :patch do |f| %>
+  <%= form_with model: @member, url: customers_information_path , method: :patch do |f| %>
 <br>
     <table border="0" class="mx-auto">
       <tr><!--autofocus: true：カーソルが移動して入力状態になる→なし-->
@@ -62,7 +62,8 @@
       <tr>
         <td></td>
         <td><br><%= f.submit "編集内容を保存", class: "btn btn-success" %></td>
-    <% end %>
+  <% end %>
+
         <!--path(遷移先):public/customers#unsubscribe(退会確認画面)-->
         <td><br><%= link_to "退会する", customers_unsubscribe_path, class: "btn btn-danger" %></td>
       </tr>

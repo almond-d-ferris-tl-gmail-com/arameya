@@ -17,13 +17,13 @@
       </thead>
   
       <tbody>
-        <% @comfirm_public_order.each do |order| %>
-        <% @total_payment = @total_payment + order.subtotal_price %><!--小計を足していく-->
+        <% @cart_items.each do |cart_item| %>
+        <% @total_payment = @total_payment + cart_item.subtotal_price %><!--小計を足していく-->
           <tr height="100">
-            <td><%= image_tag order.item.get_image %><%= order.item.name %></td><!--商品画像--><!--商品名-->
-            <td><%= order.item.tax_included_price.to_s(:delimited) %></td><!--税込--><!--to_s(:delimited)→文字列に変換してカンマをつける-->
-            <td><%= order.amount %></td><!--数量-->
-            <td><%= order.subtotal_price.to_s(:delimited) %></td><!--小計-->
+            <td><%= image_tag cart_item.item.get_image %><%= cart_item.item.name %></td><!--商品画像--><!--商品名-->
+            <td><%= cart_item.item.tax_included_price.to_s(:delimited) %></td><!--税込--><!--to_s(:delimited)→文字列に変換してカンマをつける-->
+            <td><%= cart_item.amount %></td><!--数量-->
+            <td><%= cart_item.subtotal_price.to_s(:delimited) %></td><!--小計-->
           </tr>      
         <% end %>
       </tbody>

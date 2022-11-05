@@ -1,7 +1,7 @@
 <!--<h1>Admin::Genres#index</h1>-->
 <!--<p>Find me in app/views/admin/genres/index.html.erb</p>-->
 <br>
-<h1><span style="background-color:lightgray" class="m-5">　ジャンル一覧・追加　</span></h1>
+<h1><span style="background-color:lightgray" class="m-5">　ジャンル一覧・追加・削除　</span></h1>
 <br>
   <%= form_with model: @genre, url: admin_genres_path do |f| %><!--url(遷移先):admin/genres#create-->
     <table border="0" style="display:flex; justify-content:center">
@@ -12,7 +12,6 @@
       </tr>
     </table>
   <% end %>
-
 <br><br>
   <table class="table" style="display:flex; justify-content:center">
     <tr bgcolor="lightgray" style="text-align:center" height="50">
@@ -20,13 +19,14 @@
       <th></th>
     </tr>
   
-    <% @index_admin_genre.each do |genre| %>
-    <tr height="50">
-      <td width="200" class="align-middle"><%= genre.name %></td>
-      <!--admin/genres#edit(ジャンル編集)に遷移-->
-      <td><%= link_to "編集する", edit_admin_genre_path(genre.id), class: "btn btn-success" %></td>
-      <td></td>
-    </tr>
+    <% @genres.each do |genre| %>
+      <tr height="50">
+        <td width="200" class="align-middle"><%= genre.name %></td>
+        <!--遷移先：admin/genres#edit(ジャンル編集)-->
+        <td><%= link_to "編集する", edit_admin_genre_path(genre.id), class: "btn btn-success" %></td>
+        <!--遷移先：admin/genres#destroy-->
+        <td><%= link_to "削除する", admin_genre_path(address.id), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
+      </tr>
     <% end %>
   </table>
 <br>

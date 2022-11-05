@@ -33,8 +33,8 @@
                   <% end %>
                 </li>
                 
-                <li><!--admin/customers#index-->
-                  <%= link_to admin_customers_path, class: "nav-link text-light" do %>
+                <li><!--admin/members#index-->
+                  <%= link_to admin_members_path, class: "nav-link text-light" do %>
                     <button type="button" class="btn btn-outline-secondary">会員一覧</button>
                   <% end %>
                 </li>
@@ -57,18 +57,18 @@
                   <% end %>
                 </li>
                 
-              <% elsif customer_signed_in? %><!--顧客側ログイン後 customer→テーブル名-->
+              <% elsif member_signed_in? %><!--顧客側ログイン後 member→テーブル名-->
 
                 <li><!--検索窓-->
                   <%= render "/searches/form" %>
                 </li>
 
                 <li class="d-flex align-items-center justify-content-center">
-                  ようこそ、<%= current_customer.last_name %> <%= current_customer.first_name %>さん！
+                  ようこそ、<%= current_member.last_name %> <%= current_member.first_name %>さん！
                 </li>
                 
-                <li><!--public/customers#show　(current_user.id)-->
-                  <%= link_to customers_my_page_path, class: "nav-link text-light" do %>
+                <li><!--public/members#show　(current_user.id)-->
+                  <%= link_to members_my_page_path, class: "nav-link text-light" do %>
                     <button type="button" class="btn btn-outline-secondary">マイページ</button>
                   <% end %>
                 </li>
@@ -86,7 +86,7 @@
                 </li>
                 
                 <li><!--public/sessions#destroy-->
-                  <%= link_to destroy_customer_session_path, method: :delete, class: "nav-link text-light" do %>
+                  <%= link_to destroy_member_session_path, method: :delete, class: "nav-link text-light" do %>
                     <button type="button" class="btn btn-outline-secondary">ログアウト</button>
                   <% end %>
                 </li>
@@ -110,13 +110,13 @@
                 </li>
                 
                 <li><!--public/registrations#new-->
-                  <%= link_to new_customer_registration_path, class: "nav-link text-light" do %>
+                  <%= link_to new_member_registration_path, class: "nav-link text-light" do %>
                     <button type="button" class="btn btn-outline-secondary">新規登録</button>
                   <% end %>
                 </li>
                 
                 <li><!--public/sessions#new-->
-                  <%= link_to new_customer_session_path, class: "nav-link text-light" do %>
+                  <%= link_to new_member_session_path, class: "nav-link text-light" do %>
                     <button type="button" class="btn btn-outline-secondary">ログイン</button>
                   <% end %>
                 </li>

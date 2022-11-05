@@ -3,8 +3,8 @@ class Admin::HomesController < ApplicationController
   # except→ログイン画面への遷移を除外する→今回は除外するものがない
   before_action :authenticate_admin!
   
-  def top
+  def top #管理者トップページ画面(会員一覧)
     #ページネーション、10件表示
-    @page = Customer.all.page(params[:page]).per(10)
+    @page = Member.all.page(params[:page]).per(10)
   end
 end

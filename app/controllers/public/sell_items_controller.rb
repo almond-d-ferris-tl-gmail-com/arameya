@@ -5,29 +5,28 @@ class Public::SellItemsController < ApplicationController
 
   def index#商品一覧
     #ページネーション
-    #@index_admin_item = Item.page(params[:page])
-    @page = Item.all.page(params[:page]).per(10)
+    @items = Item.all.page(params[:page]).per(10)
   end
 
   def new#商品新規登録
     # Viewへ渡すためのインスタンス変数に空のModelオブジェクトを生成する。
-    @new_admin_item = Item.new
+    @item_new = Item.new
   end
 
   def show#同じアクション内で同じメソッドは使えない
-    @show_admin_item = Item.find(params[:id])
+    @item = Item.find(params[:id])
   end
 
   def edit
-    @edit_admin_item = Item.find(params[:id])
+    @item = Item.find(params[:id])
   end
   
   def create
     #newで新規登録後、商品編集ページ(edit)に遷移する
-    @new_admin_item = Item.new(admin_item_params)#updateのパラメータ
-    if @new_admin_item.save
+    @item_new = Item.new(admin_item_params)#updateのパラメータ
+    if @item_new.save
       flash[:notice] ="商品新規登録が完了しました"
-      redirect_to admin_item_path(@new_admin_item)#(admin/items#show)
+      redirect_to admin_item_path(@item_new)#(admin/items#show)
     else
       render :new
     end
@@ -37,8 +36,8 @@ class Public::SellItemsController < ApplicationController
     #editで編集後、商品詳細(show)に遷移する
     #@の変数は↑のeditに合わせているのではなく、render(失敗)したときの遷移先がedit画面なので、
     #そちらで使用されている@edit~と合わせる必要があり、結果的に↑と同じ変数名になる
-    @edit_admin_item = Item.find(params[:id])
-    if @edit_admin_item.update(admin_item_params)#updateのパラメータ
+    @item = Item.find(params[:id])
+    if @item.update(admin_item_params)#updateのパラメータ
       redirect_to admin_item_path#admin/items#show
     else
       render :edit

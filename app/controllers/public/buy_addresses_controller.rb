@@ -1,23 +1,23 @@
 class Public::BuyAddressesController < ApplicationController
   # ログインしていない場合、ヘッダーのボタンをクリックしたら強制的にログイン画面に移動する
   # except→ログイン画面への遷移を除外する→今回は除外するものがない
-  before_action :authenticate_customer!
+  before_action :authenticate_member!
 
   def index#配送先登録/一覧
     #新規作成
     @address = Address.new
     #一覧表示
-    @index_public_address = current_customer.addresses.all
+    @addresses = current_member.addresses.all
   end
 
   def edit#配送先編集
-    @edit_public_address = Address.find(params[:id])
+    @edit_address = Address.find(params[:id])
   end
 
   def create
     #indexで新規登録後、配送先登録/一覧ページ(index)に遷移する
     @address = Address.new(address_params)#updateのパラメータ
-    @address.customer_id = current_customer.id
+    @address.member_id = current_member.id
     if @address.save
       redirect_to addresses_path#indexのパス
     else
@@ -38,8 +38,8 @@ class Public::BuyAddressesController < ApplicationController
   end
 
   def destroy
-    @destroy_public_address = Address.find(params[:id])
-    @destroy_public_address.destroy
+    @destroy = Address.find(params[:id])
+    @destroy.destroy
     redirect_to '/addresses'#indexへのURL
   end
   

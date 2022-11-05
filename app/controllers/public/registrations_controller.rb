@@ -68,7 +68,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
     end
     
     def after_sign_up_path_for(resource)
-      customers_my_page_path#サインアップ・ログインしたらpublic/customers#showに遷移する
+     members_my_page_path#サインアップ・ログインしたらpublic/customers#showに遷移する
     end
     
 end

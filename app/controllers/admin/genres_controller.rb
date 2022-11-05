@@ -3,25 +3,25 @@ class Admin::GenresController < ApplicationController
   # except→ログイン画面への遷移を除外する→今回は除外するものがない
   before_action :authenticate_admin!
   
-  def index#ジャンル一覧・追加画面
+  def index #ジャンル一覧・追加・削除画面
     #新規作成
     @genre = Genre.new
     #一覧表示
-    @index_admin_genre = Genre.all
+    @genres = Genre.all
   end
 
-  def edit#ジャンル編集画面
-    @edit_admin_genre = Genre.find(params[:id])
+  def edit #ジャンル編集画面
+    @edit_genre = Genre.find(params[:id])
   end
   
   def destroy # nagano_cake public Address、cart_item参考
-    @destroy_public_address = Genre.find(params[:id]).destroy
+    @destroy = Genre.find(params[:id]).destroy
 		flash[:notice] = "ジャンル項目を削除しました"
     redirect_to '/admin/genres/index' #indexへのURL
   end
 
   def create
-    #indexで新規登録後、ジャンル一覧・追加ページ(index)に遷移する
+    #indexで新規登録後、ジャンル一覧・追加・削除画面(index)に遷移する
     @genre = Genre.new(admin_genre_params)#updateのパラメータ
     if @genre.save
       redirect_to admin_genres_path#indexのパス
@@ -31,12 +31,12 @@ class Admin::GenresController < ApplicationController
   end
   
   def update
-    #editで編集後、ジャンル一覧・追加(index)に遷移する
+    #editで編集後、ジャンル一覧・追加・削除画面(index)に遷移する
     #@の変数は↑のeditに合わせているのではなく、render(失敗)したときの遷移先がedit画面なので、
     #そちらで使用されている@edit~と合わせる必要があり、結果的に↑と同じ変数名になる
-    @edit_admin_genre = Genre.find(params[:id])
-    if @edit_admin_genre.update(admin_genre_params)#updateのパラメータ
-      redirect_to admin_genres_path#index
+    @edit_genre = Genre.find(params[:id])
+    if @edit_genre.update(admin_genre_params)#updateのパラメータ
+      redirect_to admin_genres_path#indexのパス
     else
       render :edit
     end

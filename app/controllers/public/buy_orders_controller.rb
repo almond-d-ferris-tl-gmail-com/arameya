@@ -1,21 +1,21 @@
 class Public::BuyOrdersController < ApplicationController
   # ログインしていない場合、ヘッダーのボタンをクリックしたら強制的にログイン画面に移動する
   # except→ログイン画面への遷移を除外する→今回は除外するものがない
-  before_action :authenticate_customer!
+  before_action :authenticate_member!
 
   def new#注文情報入力
-    @new_public_order = Order.new
-    @customer = current_customer
-    @addresses = current_customer.addresses
+    @order_new = Order.new
+    @member = current_member
+    @addresses = current_member.addresses
   end
 
-  def comfirm# 注文情報確認#new:注文情報入力→comfirm:注文情報確認→create→complete:注文確定(サンクス)
+  def comfirm # 注文情報確認#new:注文情報入力→comfirm:注文情報確認→create→complete:注文確定(サンクス)
     #binding.pry#rails sをするとここで処理が一旦止まる→確認のためのコマンドを入力する
     if params[:order][:select_address] == "0"#自身の住所
       @order = Order.new(order_params)
-      @order.postal_code = current_customer.postal_code
-      @order.address = current_customer.address
-      @order.name = current_customer.last_name + current_customer.first_name#姓・名
+      @order.postal_code = current_member.postal_code
+      @order.address = current_member.address
+      @order.name = current_member.last_name + current_member.first_name#姓・名
 
     elsif params[:order][:select_address] == "1"#登録済み住所
       @order = Order.new(order_params)
@@ -28,7 +28,7 @@ class Public::BuyOrdersController < ApplicationController
       @order = Order.new(order_params)
     end
     
-    @comfirm_public_order = current_customer.cart_items#current_customer(1):cart_items(多)
+    @cart_items = current_member.cart_items#current_member(1):cart_items(多)
     @shipping_cost = 800#送料
     @order.shipping_cost = @shipping_cost
     @total_payment = 0#商品合計→請求額
@@ -38,19 +38,19 @@ class Public::BuyOrdersController < ApplicationController
   end
 
   def index
-    @index_public_order = current_customer.orders.all
+    @orders = current_member.orders.all
   end
 
   def show
-    @show_public_order = Order.find(params[:id])
+    @order = Order.find(params[:id])
   end
   
   def create#new:注文情報入力→comfirm:注文情報確認→create→complete:注文確定(サンクス)
-    cart_items = current_customer.cart_items.all
+    cart_items = current_member.cart_items.all
     # ログインユーザーのカートアイテムをすべて取り出して cart_items に入れる
-    @create_public_order = current_customer.orders.new(order_params)
-      # 渡ってきた値を @create_public_order に入れる
-      if @create_public_order.save
+    @create_order = current_member.orders.new(order_params)
+      # 渡ってきた値を @create_order に入れる
+      if @create_order.save
       # ここに至るまでの間にチェックは済んでいるが、念の為IF文で分岐させる
           cart_items.each do |cart|
           # 取り出したカートアイテムの数分繰り返す
@@ -58,7 +58,7 @@ class Public::BuyOrdersController < ApplicationController
           # 購入が完了したらカート情報は削除するのでこちらに保存する
           order_item = OrderDetail.new
           order_item.item_id = cart.item_id
-          order_item.order_id = @create_public_order.id
+          order_item.order_id = @create_order.id
           order_item.price = cart.item.price#税込 cart.priceだとカートに税込カラムがないといけない→item_idがある→アソシエーションでつなげる
           order_item.amount = cart.amount#数量
           # カート情報を削除するので item との紐付けが切れる前に保存する
@@ -68,7 +68,7 @@ class Public::BuyOrdersController < ApplicationController
         redirect_to orders_complete_path#public/orders#complete(注文確定(サンクス))
         # ユーザーに関連するカートのデータ(購入したデータ)をすべて削除(カートを空にする)
       else
-        @create_public_order = Order.new(order_params)
+        @create_order = Order.new(order_params)
         render :new
       end
   end

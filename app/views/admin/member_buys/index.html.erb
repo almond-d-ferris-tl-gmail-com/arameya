@@ -1,8 +1,9 @@
 <!--<h1>Admin::MemberBuys#index</h1>-->
 <!--<p>Find me in app/views/admin/member_buys/index.html.erb</p>-->
 <br>
-<!--/nagano_cake/config/locales/ja.yml-->
+<!--/nagano_cake/config/locales/ja.yml★★★★★-->
 <%= notice %><!--ログインに成功したらメッセージを表示する-->
+
 <h1><span style="background-color:lightgray" class="m-5">　注文履歴一覧　</span></h1>
 <br>
 <table class="table" style="display:flex; justify-content:center">
@@ -13,7 +14,7 @@
     <th width="200">注文ステータス</th>
   </tr>
   
-<% @orders.each do |order| %>
+<% @items.each do |order| %>
     <tr height="50">
       <!--購入日時--><!--admin/orders#show画面に遷移-->
       <td><%=link_to order.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S"), admin_order_path(order.id) %></td>
@@ -29,5 +30,5 @@
 <br>
 <!--ページネーション-->
 <!--https://getbootstrap.jp/→ドキュメント→検索-->
-<div class="d-flex justify-content-center"><%= paginate @orders %></div>
+<div class="d-flex justify-content-center"><%= paginate @items %></div>
 <br>

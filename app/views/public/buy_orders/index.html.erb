@@ -16,7 +16,7 @@
     </thead>
   <!---->
     <tbody>
-    <% @index_public_order.each do |order| %>
+    <% @orders.each do |order| %>
         <tr height="80">
           <td width="100"><%= order.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td><!--注文日-->
           <!--.in_time_zone('Tokyo')→UTC(協定世界時刻のデフォルト値)をJST(日本時間)に換算する-->
