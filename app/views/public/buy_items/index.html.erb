@@ -5,7 +5,7 @@
 <br><br>
   <div class="d-flex flex-wrap"><!--flex-wrap→改行する-->
     <% @items.each do |item| %>
-      <%= link_to item_path(item.id) do %><!--画像、商品名、金額に商品詳細(public/items#show)へのリンク-->
+      <%= link_to sell_item_path(item.id) do %><!--画像、商品名、金額に商品詳細(public/sell_items#show)へのリンク-->
         <% if item.image.attached? %>
           <%= image_tag item.image, size: "300x200" %><br>
         <% else %>
@@ -16,6 +16,7 @@
         <%= item.price %><!--金額-->
         円<br>
       <% end %>
+      　　
     <% end %>
   </div>
 <br><br>

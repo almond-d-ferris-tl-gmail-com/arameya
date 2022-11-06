@@ -64,8 +64,8 @@ class Public::BuyOrdersController < ApplicationController
           # カート情報を削除するので item との紐付けが切れる前に保存する
           order_item.save
           end
-          cart_items.destroy_all#データ削除の遷移先(public/cart_items#destroy_all)
-        redirect_to orders_complete_path#public/orders#complete(注文確定(サンクス))
+          # cart_items.destroy_all#データ削除の遷移先(public/cart_items#destroy_all)
+        redirect_to buy_orders_complete_path#public/buy_orders#complete(注文確定(サンクス))
         # ユーザーに関連するカートのデータ(購入したデータ)をすべて削除(カートを空にする)
       else
         @create_order = Order.new(order_params)
@@ -74,7 +74,7 @@ class Public::BuyOrdersController < ApplicationController
   end
   
   private
-  def order_params#新しいお届け先(支払方法、郵便番号、住所、名前)
+  def buy_order_params#public/buy_orders#show 新しいお届け先(支払方法、郵便番号、住所、名前)
   #permitメソッド:paramsで取得したパラメーターに対し保存の許可を行う
     params.require(:order).permit(:postal_code, :address, :name, :shipping_cost, :total_payment, :payment_method, :status)
   end

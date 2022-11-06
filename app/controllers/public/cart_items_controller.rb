@@ -1,7 +1,7 @@
 class Public::CartItemsController < ApplicationController
   # ログインしていない場合、ヘッダーのボタンをクリックしたら強制的にログイン画面に移動する
   # except→ログイン画面への遷移を除外する→今回は除外するものがない
-  before_action :authenticate_customer!
+  before_action :authenticate_member!
 
   def index
     @cart_item = current_customer.cart_items#current_customer(1):cart_items(多)
@@ -11,7 +11,7 @@ class Public::CartItemsController < ApplicationController
   def destroy
     current_customer.cart_items.find(params[:id]).destroy
 			flash[:notice] = "カート内の商品が削除されました"
-      redirect_to '/cart_items'#indexへのURL
+      redirect_to '/cart_items'#public/cart_items#indexへのURL
   end
 
   def create

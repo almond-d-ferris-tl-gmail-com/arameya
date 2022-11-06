@@ -3,7 +3,7 @@
 <br>
 <h1><span style="background-color:lightgray" class="m-5">　配送先登録/一覧　</span></h1>
 <br>
-  <%= form_with model: @address, url: addresses_path do |f| %><!--url(遷移先):public/addresses#create-->
+  <%= form_with model: @address_new, url: buy_addresses_path do |f| %><!--url(遷移先):public/buy_addresses#create-->
     <table border="0" style="display:flex; justify-content:center">
       <tr height="50">
         <td width="200">郵便番号(ハイフンなし)</td>
@@ -32,16 +32,16 @@
       <th></th>
     </tr>
   
-    <% @addresses.each do |address| %>
+    <% @address_new.each do |address| %>
     <tr height="80">
       <td width="100"><%= address.postal_code %></td>
       <td width="400"><%= address.address %></td>
       <td width="200"><%= address.name %></td>
       <td width="300" align="center">
-        <!--遷移先：public/addresses#edit(配送先編集)-->
-        <%= link_to "編集する", edit_address_path(address.id), class: "btn btn-success" %>　　
-        <!--遷移先：public/addresses#destroy-->
-        <%= link_to "削除する", address_path(address.id), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
+        <!--遷移先：public/buy_addresses#edit(配送先編集)-->
+        <%= link_to "編集する", edit_buy_address_path(address.id), class: "btn btn-success" %>　　
+        <!--遷移先：public/buy_addresses#destroy-->
+        <%= link_to "削除する", buy_address_path(address.id), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
       </td>
     </tr>
     <% end %>

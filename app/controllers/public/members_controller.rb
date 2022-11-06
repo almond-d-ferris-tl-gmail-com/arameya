@@ -22,9 +22,9 @@ class Public::MembersController < ApplicationController
     #@の変数は↑のeditに合わせているのではなく、render(失敗)したときの遷移先がedit画面なので、
     #そちらで使用されている@edit~と合わせる必要があり、結果的に↑と同じ変数名になる
     @member = current_member
-    if @member.update(members_information_params)#updateのパラメータ
+    if @member.update(members_information_params)#public/members#updateのパラメータ
       flash[:success] = "会員情報を更新しました"
-      redirect_to members_my_page_path#show
+      redirect_to members_my_page_path#public/members#show
     else
       render :edit
     end
@@ -36,7 +36,7 @@ class Public::MembersController < ApplicationController
     @member.update(is_deleted: true)
     reset_session
     flash[:notice] = "退会処理が完了しました"
-    redirect_to top_path#top画面
+    redirect_to root_path#public/homes#top
   end
 
   #投稿データのストロングパラメータ(セキュリティに関係する)

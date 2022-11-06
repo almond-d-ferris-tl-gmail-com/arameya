@@ -10,9 +10,9 @@
 </div>
 <br>
 <div class="text-center">
-    <!--遷移先：public/customers#show(マイページ)-->
-    <%= link_to "退会しない", customers_my_page_path, class: "btn btn-primary" %>　　　
-    <!--遷移先：public/customers#withdraw(顧客の退会処理)-->
-    <%= link_to "退会する", customers_withdraw_path, class: "btn btn-danger", method: :PATCH, "data-confirm" => "本当に退会しますか？" %>
+    <!--遷移先：public/members#show(マイページ)-->
+    <%= link_to "退会しない", members_my_page_path, class: "btn btn-primary" %>　　　
+    <!--遷移先：public/members#withdraw(顧客の退会処理)-->
+    <%= link_to "退会する", members_withdraw_path, class: "btn btn-danger", method: :PATCH, "data-confirm" => "本当に退会しますか？" %>
 </div>
 <br>

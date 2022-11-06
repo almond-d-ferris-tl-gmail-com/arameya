@@ -5,21 +5,21 @@ class Public::BuyAddressesController < ApplicationController
 
   def index#配送先登録/一覧
     #新規作成
-    @address = Address.new
+    @address_new = Address.new
     #一覧表示
     @addresses = current_member.addresses.all
   end
 
   def edit#配送先編集
-    @edit_address = Address.find(params[:id])
+    @address = Address.find(params[:id])
   end
 
   def create
     #indexで新規登録後、配送先登録/一覧ページ(index)に遷移する
-    @address = Address.new(address_params)#updateのパラメータ
-    @address.member_id = current_member.id
-    if @address.save
-      redirect_to addresses_path#indexのパス
+    @address_new = Address.new(buy_address_params)#updateのパラメータ
+    @address_new.member_id = current_member.id
+    if @address_new.save
+      redirect_to buy_addresses_path#indexのパス
     else
       render :index
     end
@@ -29,22 +29,22 @@ class Public::BuyAddressesController < ApplicationController
     #editで編集後、配送先登録/一覧(index)に遷移する
     #@の変数は↑のeditに合わせているのではなく、render(失敗)したときの遷移先がedit画面なので、
     #そちらで使用されている@edit~と合わせる必要があり、結果的に↑と同じ変数名になる
-    @edit_public_address = Address.find(params[:id])
-    if @edit_public_address.update(address_params)#updateのパラメータ
-      redirect_to addresses_path#index
+    @address = Address.find(params[:id])
+    if @address.update(buy_address_params)#updateのパラメータ
+      redirect_to buy_addresses_path #public/buy_addresses#index
     else
       render :edit
     end
   end
 
   def destroy
-    @destroy = Address.find(params[:id])
-    @destroy.destroy
-    redirect_to '/addresses'#indexへのURL
+    @address = Address.find(params[:id])
+    @address.destroy
+    redirect_to '/buy_addresses'#indexへのURL
   end
   
   private#editで編集可能部分
-  def address_params#updateのパラメータ
+  def buy_address_params#updateのパラメータ
     params.require(:address).permit(:postal_code, :address, :name)
   end
 

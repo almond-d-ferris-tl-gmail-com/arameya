@@ -5,6 +5,15 @@ class Public::RegistrationsController < Devise::RegistrationsController
 
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  
+  private
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.permit(:sign_up,keys:[:last_name, :first_name, :last_name_kana, :first_name_kana, :company, :department, :postal_code, :address, :telephone_number])
+    end
+    
+    def after_sign_up_path_for(resource)
+     root_path#サインアップ・ログインしたらpublic/homes#topに遷移する
+    end
 
   # GET /resource/sign_up
   # def new
@@ -62,13 +71,4 @@ class Public::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
   
-  private
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up,keys:[:last_name, :first_name, :last_name_kana, :first_name_kana, :postal_code, :address, :telephone_number])
-    end
-    
-    def after_sign_up_path_for(resource)
-     members_my_page_path#サインアップ・ログインしたらpublic/customers#showに遷移する
-    end
-    
 end

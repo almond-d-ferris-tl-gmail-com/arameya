@@ -5,6 +5,6 @@ class Admin::HomesController < ApplicationController
   
   def top #管理者トップページ画面(会員一覧)
     #ページネーション、10件表示
-    @page = Member.all.page(params[:page]).per(10)
+    @members = Member.all.page(params[:page]).per(10)
   end
 end

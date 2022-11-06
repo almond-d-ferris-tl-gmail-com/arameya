@@ -14,13 +14,13 @@
     <th width="150">会員ステータス</th>
   </tr>
   
-  <% @page.each do |page| %>
+  <% @members.each do |member| %>
     <tr height="50">
-      <td><%= page.id %></td>
-      <td><%=link_to page.last_name+page.first_name, admin_customer_path(page.id) %></td><!--show画面に遷移-->
-      <td><%= page.email %></td>
+      <td><%= member.id %></td>
+      <td><%=link_to member.last_name+member.first_name, admin_member_path(member.id) %></td><!--遷移先:admin/members#show-->
+      <td><%= member.email %></td>
 
-        <% if page.is_deleted == false %>
+        <% if member.is_deleted == false %>
       <td><font color="green">有効</font></td>
         <% else %>
       <td><font color="gray">退会</font></td>
@@ -31,5 +31,5 @@
 
 <!--ページネーション-->
 <!--https://getbootstrap.jp/→ドキュメント→検索-->
-<div class="d-flex justify-content-center"><%= paginate @page %></div>
+<div class="d-flex justify-content-center"><%= paginate @members %></div>
 <br>

@@ -14,21 +14,22 @@
     <th width="200">注文ステータス</th>
   </tr>
   
-<% @items.each do |order| %>
+  <% @items.each do |item| %>
     <tr height="50">
-      <!--購入日時--><!--admin/orders#show画面に遷移-->
-      <td><%=link_to order.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S"), admin_order_path(order.id) %></td>
+      <!--購入日時--><!--遷移先:admin/member_buys#show-->
+      <td><%=link_to item.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S"), admin_member_buy_path(item.id) %></td>
       <!--.in_time_zone('Tokyo')→UTC(協定世界時刻のデフォルト値)をJST(日本時間)に換算する-->
       <!--.strftime("%Y-%m-%d %H:%M:%S")→UTCを消して時刻のフォーマットに変更する-->
-      <td><%= order.name %></td>
-      <!--order.amountだとorderテーブルのamountカラムになってしまう。その注文に紐づいている注文商品数-->
-      <td><%= order.order_details.sum(:amount) %></td><!--個人の注文数量総計-->
-      <td><%= order.status_i18n %></td><!--i18n→日本語に変換する-->
+      <td><%= item.name %></td>
+      <!--item.amountだとitemテーブルのamountカラムになってしまう。その注文に紐づいている注文商品数-->
+      <td><%= item.item_details.sum(:amount) %></td><!--個人の注文数量総計-->
+      <td><%= item.status_i18n %></td><!--i18n→日本語に変換する-->
     </tr>
-<% end %>
+  <% end %>
 </table>
+
 <br>
-<!--ページネーション-->
-<!--https://getbootstrap.jp/→ドキュメント→検索-->
-<div class="d-flex justify-content-center"><%= paginate @items %></div>
+  <!--ページネーション-->
+  <!--https://getbootstrap.jp/→ドキュメント→検索-->
+  <div class="d-flex justify-content-center"><%= paginate @items %></div>
 <br>

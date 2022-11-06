@@ -7,11 +7,11 @@
     <th width="150"></th>
     <th width="150"></th>
     <th width="150"></th>
-    <th width="150"><%= link_to "商品新規登録", new_admin_item_path, class: "btn btn-success" %></th><!--path:admin/items#new-->
+    <th width="150"><%= link_to "商品新規登録", new_sell_item_path, class: "btn btn-success" %></th><!--遷移先:public/sell_items#new-->
   </tr>
-
 </table>
 <br>
+
 <table style="display:flex; justify-content:center">
   <tr bgcolor="lightgray" height="50">
     <th width="150">商品ID</th>
@@ -21,10 +21,10 @@
     <th width="150">ステータス</th>
   </tr>
 
-<% @items.each do |item| %>
+  <% @items.each do |item| %>
     <tr height="50">
       <td><%= item.id %></td>
-      <td><%=link_to item.name, admin_item_path(item.id) %></td><!--show画面に遷移-->
+      <td><%=link_to item.name, sell_item_path(item.id) %></td><!--遷移先:public/sell_items#show-->
       <td><%= item.price %></td>
       <td><%= item.genre.name %></td>
       

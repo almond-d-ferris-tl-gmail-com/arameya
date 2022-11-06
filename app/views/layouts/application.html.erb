@@ -11,7 +11,7 @@
     <!-- FontAwesomeの読み込み log in→account→kits→cb~→copy-->
     <script src="https://kit.fontawesome.com/cb9c23a1e6.js" crossorigin="anonymous"></script>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -27,21 +27,9 @@
             
               <% if admin_signed_in? %><!--管理者側ログイン後 admin→テーブル名-->
               
-                <li><!--admin/items#index　(current_user.id)-->
-                  <%= link_to admin_items_path, class: "nav-link text-light" do %>
-                    <button type="button" class="btn btn-outline-secondary">商品一覧</button>
-                  <% end %>
-                </li>
-                
                 <li><!--admin/members#index-->
                   <%= link_to admin_members_path, class: "nav-link text-light" do %>
                     <button type="button" class="btn btn-outline-secondary">会員一覧</button>
-                  <% end %>
-                </li>
-                
-                <li><!--admin/homes#top-->
-                  <%= link_to admin_root_path, class: "nav-link text-light" do %>
-                    <button type="button" class="btn btn-outline-secondary">注文履歴一覧</button>
                   <% end %>
                 </li>
                 
@@ -57,10 +45,10 @@
                   <% end %>
                 </li>
                 
-              <% elsif member_signed_in? %><!--顧客側ログイン後 member→テーブル名-->
+              <% elsif member_signed_in? %><!--会員側ログイン後 member→テーブル名-->
 
                 <li><!--検索窓-->
-                  <%= render "/searches/form" %>
+                  <%#= render "/searches/form" %>
                 </li>
 
                 <li class="d-flex align-items-center justify-content-center">
@@ -75,13 +63,31 @@
                 
                 <li><!--public/items#index-->
                   <%= link_to items_path, class: "nav-link text-light" do %>
-                    <button type="button" class="btn btn-outline-secondary">商品一覧</button>
+                    <button type="button" class="btn btn-outline-secondary">[購入]商品一覧</button>
                   <% end %>
                 </li>
                 
                 <li><!--public/cart_items#index-->
                   <%= link_to cart_items_path, class: "nav-link text-light" do %>
-                    <button type="button" class="btn btn-outline-secondary">カート</button>
+                    <button type="button" class="btn btn-outline-secondary">[購入]カート</button>
+                  <% end %>
+                </li>
+                
+                <li><!--public/cart_items#index-->
+                  <%= link_to cart_items_path, class: "nav-link text-light" do %>
+                    <button type="button" class="btn btn-outline-secondary">[購入]注文履歴一覧</button>
+                  <% end %>
+                </li>
+                
+                <li><!--public/cart_items#index-->
+                  <%= link_to cart_items_path, class: "nav-link text-light" do %>
+                    <button type="button" class="btn btn-outline-secondary">[販売]商品一覧</button>
+                  <% end %>
+                </li>
+                
+                <li><!--public/cart_items#index-->
+                  <%= link_to cart_items_path, class: "nav-link text-light" do %>
+                    <button type="button" class="btn btn-outline-secondary">[販売]注文履歴一覧</button>
                   <% end %>
                 </li>
                 
@@ -94,7 +100,7 @@
               <% else %><!--ログイン前-->
 
                 <li><!--検索窓-->
-                  <%= render "/searches/form" %>
+                  <%#= render "/searches/form" %>
                 </li>
 
                 <li class="nav-item"><!--public/homes#about-->
@@ -103,9 +109,9 @@
                   <% end %>
                 </li>
                 
-                <li><!--public/items#index-->
-                  <%= link_to items_path, class: "nav-link text-light" do %>
-                    <button type="button" class="btn btn-outline-secondary">商品一覧</button>
+                <li><!--public/sell_items#index-->
+                  <%= link_to sell_items_path, class: "nav-link text-light" do %>
+                    <button type="button" class="btn btn-outline-secondary">[購入]商品一覧</button>
                   <% end %>
                 </li>
                 
@@ -132,7 +138,8 @@
       <%= yield %>
     </main>
   
-    <footer align="center"><br>CopyRight Infratop.inc
+    <footer class="bg-dark text-white pt-5 pb-4" align="center">
+<br>©️2022 あらめ屋<br><br>
     </footer>
   </body>
 </html>

@@ -29,15 +29,9 @@
       <td><%= @order.payment_method_i18n %></td><!--i18n→日本語に変換する-->
     </tr>
     <tr>
-      <td height="50">注文ステータス</td><!--プルダウン-->
-      <td>
-          <%= form_with model: @order, url: admin_order_path(@order.id), method: :patch, local: true do |f| %>
-            <%= f.select :status, Order.statuses.keys.map {|k| [I18n.t("enums.order.status.#{k}"), k]} %>
-            <!--ブラウザには日本語で表示→英語でデータを渡すために、再度英語に変換する-->
-          <%= f.submit "更新" , class: "btn btn-success" %>
-          <% end %>
-      </td>
-          
+      <td height="50">注文ステータス</td>
+      <td><%= @order.order_status_i18n %></td><!--i18n→日本語に変換する-->
+<!--遷移先:-->
     </tr>
   </table>
   
@@ -53,7 +47,6 @@
           <th width="300">単価(税込)</th>
           <th width="150">数量</th>
           <th width="200">小計</th>
-          <th width="400">製作ステータス</th>
         </tr>
       </thead>
 
@@ -68,13 +61,6 @@
             <td><%= order_detail.amount %></td>
             <!--小計-->
             <td><%= order_detail.subtotal_price.to_s(:delimited) %></td>
-            <!--製作ステータス-->
-            <%= form_with model: order_detail, url: admin_order_detail_path(order_detail.id), method: :patch, local: true do |f| %><!--admin/order_details#update-->
-            <!--ブラウザには日本語で表示→英語でデータを渡すために、再度英語に変換する-->
-              <td><%= f.select :making_status, OrderDetail.making_statuses.keys.map {|k| [I18n.t("enums.order_detail.making_status.#{k}"), k]} %>
-                  <%= f.submit "更新", class: "btn btn-success" %>
-              </td>
-            <% end %>
           </tr>
         <% end %>
       </tbody>

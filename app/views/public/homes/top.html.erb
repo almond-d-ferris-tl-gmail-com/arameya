@@ -22,7 +22,7 @@
       <tr height="50">
       <% @items.each do |item| %>
         <td>
-          <%= link_to item_path(item.id) do %><!--画像、商品名、金額に商品詳細(public/items#show)へのリンク-->
+          <%= link_to buy_item_path(item.id) do %><!--画像、商品名、金額に商品詳細(public/buy_items#show)へのリンク-->
             <% if item.image.attached? %>
               <%= image_tag item.image, size: "200x150" %><br>
             <% else %>
@@ -40,6 +40,6 @@
 <br>
 
 <div align="right" class="pr-5">
-<%= link_to "全ての商品を見る＞", items_path %><!--index画面に遷移-->
+<%= link_to "全ての商品を見る＞", buy_items_path %><!--遷移先:public/buy_items#index-->
 </div>
 <br>

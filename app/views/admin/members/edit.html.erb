@@ -1,14 +1,14 @@
 <!--<h1>Admin::Members#edit</h1>-->
 <!--<p>Find me in app/views/admin/members/edit.html.erb</p>-->
 <br>
-<h1><span style="background-color:lightgray" class="m-5">　<%= @edit_member.last_name %><%= @edit_member.first_name %>さんの会員情報編集　</span></h1>
+<h1><span style="background-color:lightgray" class="m-5">　<%= @member.last_name %><%= @member.first_name %>さんの会員情報編集　</span></h1>
 <br>
-  <%= form_with model: @edit_member, url: admin_customer_path(@edit_member.id) do |f| %><!--url(遷移先):update-->
+  <%= form_with model: @member, url: admin_member_path(@member.id) do |f| %><!--url(遷移先):admin/members#update-->
 
     <table border="0" class="mx-auto">
       <tr>
         <td height="50" width="200">会員ID</td>
-        <td><%= @edit_member.id %></td>
+        <td><%= @member.id %></td>
       </tr>
 
       <tr>

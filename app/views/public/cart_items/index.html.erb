@@ -10,7 +10,7 @@
       <td width="150"></td>
       <td width="150"></td>
       <!--遷移先：cart_items_destroy_all-->
-      <td width="200"><%= link_to "カートを空にする", cart_items_destroy_all_path, class: "btn btn-danger", method: :delete, "data-confirm" => "本当に全て空にしますか？" %></td>
+      <td width="200"><%#= link_to "カートを空にする", cart_items_destroy_all_path, class: "btn btn-danger", method: :delete, "data-confirm" => "本当に全て空にしますか？" %></td>
     </tr>
   </table>
 <br>
@@ -36,7 +36,6 @@
             <%= form_with model: item, url: cart_item_path(item.id), method: :patch do |f| %><!--url遷移先:public/cart_items#update-->
               <%= f.select :amount, [['1',1],['2',2],['3',3],['4',4],['5',5],['6',6],['7',7],['8',8],['9',9]] %>
               <%= f.hidden_field :item_id, :value => item.id %>
-              <!--ショッピングカート画面(public/cart_items#index)に遷移-->
               <%= f.submit "変更", class: "btn btn-success" %>
             <% end %>
           </td>
@@ -51,7 +50,7 @@
   <table class="mx-auto">
     <tr height="50">
       <!--遷移先：public/homes#top-->
-      <td width="400"><%= link_to "買い物を続ける", top_path, class: "btn btn-primary" %></td>
+      <td width="400"><%= link_to "買い物を続ける", root_path, class: "btn btn-primary" %></td>
       <td width="150"></td>
       <td width="150"></td>
       <td class="border border-dark" width="150" bgcolor="lightgray">合計金額</td>
@@ -60,9 +59,9 @@
   </table>
 <br><br>
     <div class="text-center">
-        <!--遷移先：public/orders#new(注文情報入力画面)-->
+        <!--遷移先：public/buy_orders#new(注文情報入力画面)-->
         <% if @cart_item.any? %><!--カートが空ならボタンを表示させない-->
-           <%= link_to "情報入力に進む", new_order_path, class: "btn btn-success" %>
+           <%= link_to "情報入力に進む", new_buy_order_path, class: "btn btn-success" %>
         <% end %>
     </div>
 <br>

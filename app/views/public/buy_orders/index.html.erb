@@ -5,18 +5,18 @@
 <br>
   <table border="1" width="1200" class="mx-auto"><!--ボーダーを入れるときは←の設定する(widthはtdの総計)-->
     <thead>
-        <tr bgcolor="lightgray" style="text-align:center" height="50">
-          <th>注文日</th>
-          <th>配送先</th>
-          <th>注文商品</th>
-          <th>支払金額</th>
-          <th>ステータス</th>
-          <th>注文詳細</th>
-        </tr>
+      <tr bgcolor="lightgray" style="text-align:center" height="50">
+        <th>注文日</th>
+        <th>配送先</th>
+        <th>注文商品</th>
+        <th>支払金額</th>
+        <th>ステータス</th>
+        <th>注文詳細</th>
+      </tr>
     </thead>
-  <!---->
+
     <tbody>
-    <% @orders.each do |order| %>
+      <% @orders.each do |order| %>
         <tr height="80">
           <td width="100"><%= order.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td><!--注文日-->
           <!--.in_time_zone('Tokyo')→UTC(協定世界時刻のデフォルト値)をJST(日本時間)に換算する-->
@@ -32,11 +32,11 @@
           <td width="100"><%= order.total_payment.to_s(:delimited) %></td><!--支払金額--><!--to_s(:delimited)→文字列に変換してカンマをつける-->
           <td width="150"><%= order.status_i18n %></td><!--ステータス--><!--i18n→日本語に変換する-->
           <td width="150" align="center"><!--注文詳細-->
-            <!--遷移先：public/orders#show(注文履歴詳細)-->
-            <%= link_to "表示する", order_path(order.id), class: "btn btn-primary" %>　　
+            <!--遷移先：public/buy_orders#show(注文履歴詳細)-->
+            <%= link_to "表示する", buy_order_path(order.id), class: "btn btn-primary" %>　　
           </td>
         </tr>
-    <% end %>
+      <% end %>
     </tbody>
   </table>
 <br>

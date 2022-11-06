@@ -23,3 +23,15 @@ ActiveStorage.start()
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+// ブートストラップ導入
+import "channels"
+
+import "jquery";
+import "popper.js";
+import "bootstrap";
+import "../stylesheets/application" 
+
+Rails.start()
+Turbolinks.start()
+ActiveStorage.start()

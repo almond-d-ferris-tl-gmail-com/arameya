@@ -10,7 +10,7 @@
 
     <table border="0" class="mx-auto">
       <tr>
-        <td height="50" width="250"><%= f.label :"名前" %></td>
+        <td height="50" width="250"><%= f.label :"氏名" %></td>
         <td height="50"><%= f.label :"(姓)" %></td>
         <!--autofocus: true：カーソルが移動して入力状態になる→htmlに１つだけ設定できる-->
         <td width="250"><%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %></td>
@@ -27,13 +27,19 @@
       </tr>
       
       <tr>
-        <td height="50"><%= f.label :"メールアドレス" %></td>
+        <td height="50"><%= f.label :"会社名" %></td>
         <td></td>
-        <td><%= f.email_field :email, autocomplete: "email" %></td>
+        <td colspan="3"><%= f.text_field :company, autocomplete: "company", size: "50" %></td>
       </tr>
 
       <tr>
-        <td height="50"><%= f.label :"郵便番号(ハイフンなし)" %></td>
+        <td height="50"><%= f.label :"役職・部署名" %></td>
+        <td></td>
+        <td colspan="3"><%= f.text_field :department, autocomplete: "department", size: "50" %></td>
+      </tr>
+
+      <tr>
+        <td height="50"><%= f.label :"郵便番号" %></td>
         <td></td>
         <td><%= f.text_field :postal_code, autocomplete: "postal_code" %></td>
       </tr>
@@ -41,13 +47,19 @@
       <tr>
         <td height="50"><%= f.label :"住所" %></td>
         <td></td>
-        <td colspan="3"><%= f.text_area :address, autocomplete: "address", size: "54" %></td>
+        <td colspan="3"><%= f.text_area :address, autocomplete: "address", size: "50" %></td>
       </tr>
 
       <tr>
-        <td height="50"><%= f.label :"電話番号(ハイフンなし)" %></td>
+        <td height="50"><%= f.label :"電話番号" %></td>
         <td></td>
         <td><%= f.text_field :telephone_number, autocomplete: "telephone_number" %></td>
+      </tr>
+
+      <tr>
+        <td height="50"><%= f.label :"メールアドレス" %></td>
+        <td></td>
+        <td colspan="3"><%= f.email_field :email, autocomplete: "email", size: "50" %></td>
       </tr>
 
       <tr>
@@ -78,36 +90,5 @@
 <h1><span style="background-color:lightgray" class="m-5">　既に登録済みの方　</span></h1>
 <p class="m-3 pl-5"><%= render "public/shared/links" %>からログインしてください。</p>
 <!--m-3→マージン、pl-5→左側パディング-->
-<!--設定→/nagano_cake/app/views/public/shared/_links.html.erb-->
+<!--設定→/arameya/app/views/public/shared/_links.html.erb-->
 <br>
-
-<!---->
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "public/shared/links" %>

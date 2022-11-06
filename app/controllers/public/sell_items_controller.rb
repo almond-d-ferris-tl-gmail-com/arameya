@@ -1,7 +1,7 @@
 class Public::SellItemsController < ApplicationController
   # ログインしていない場合、ヘッダーのボタンをクリックしたら強制的にログイン画面に移動する
   # except→ログイン画面への遷移を除外する→今回は除外するものがない
-  before_action :authenticate_admin!
+  before_action :authenticate_member!
 
   def index#商品一覧
     #ページネーション
@@ -23,10 +23,10 @@ class Public::SellItemsController < ApplicationController
   
   def create
     #newで新規登録後、商品編集ページ(edit)に遷移する
-    @item_new = Item.new(admin_item_params)#updateのパラメータ
+    @item_new = Item.new(sell_item_params)#public/sell_items#updateのパラメータ
     if @item_new.save
       flash[:notice] ="商品新規登録が完了しました"
-      redirect_to admin_item_path(@item_new)#(admin/items#show)
+      redirect_to sell_item_path(@item_new) #public/sell_items#show
     else
       render :new
     end
@@ -37,8 +37,8 @@ class Public::SellItemsController < ApplicationController
     #@の変数は↑のeditに合わせているのではなく、render(失敗)したときの遷移先がedit画面なので、
     #そちらで使用されている@edit~と合わせる必要があり、結果的に↑と同じ変数名になる
     @item = Item.find(params[:id])
-    if @item.update(admin_item_params)#updateのパラメータ
-      redirect_to admin_item_path#admin/items#show
+    if @item.update(sell_item_params)#updateのパラメータ
+      redirect_to sell_item_path #public/sell_items#show
     else
       render :edit
     end
@@ -49,7 +49,7 @@ class Public::SellItemsController < ApplicationController
   #require(パラメータ群).permit(:変更可能なパラメータ名)
   #商品編集(edit)をした後、updateに遷移する
   private
-  def admin_item_params#updateのパラメータ
+  def sell_item_params#updateのパラメータ
     params.require(:item).permit(:image, :name, :introduction, :genre_id, :price, :is_active)
   end
 
