@@ -1,24 +1,17 @@
 <!--<h1>Public::Homes#top</h1>-->
 <!--<p>Find me in app/views/public/homes/top.html.erb</p>-->
-<br>
 <p id="notice"><%= notice %></p>
-　<div class="main-container">
-    <div class="mx-auto bd-color pl-5 pr-5">
-    <!--mx-auto→ブロック中央寄せ、bd-color→画像透過、pl-5→左側パディング、pr-5→右側パディング-->
-    <!--画像サイズ、透過設定→/nagano_cake/app/javascript/stylesheets/application.scss-->
-    　<b>
-        <h4>ようこそ、ながのCAKEへ！</h4>
-      　<h4>このサイトは、ケーキ販売のECサイトになります。</h4>
-      　<h4>会員でない方も商品の閲覧はできますが、</h4>
-      　<h4>購入には会員登録が必要になります。</h4>
-    　</b>
-    </div><!--mx-autoここまで-->
-  </div><!--main-containerここまで-->
+
+<% unless member_signed_in? %><!--会員がサインインしていなかったら表示させる-->
+  <div class="text-center">
+    　<p>こちらは、法人・個人の方が売買ができる通信販売サイトとなっております。<br>
+        会員でない方も商品の閲覧はできますが、売買をするには会員登録が必要になります。</p>
+  </div>
+<% end %>
 <br>
 
+<h2><span style="background-color:lightgray" class="m-5">　[購入]新着商品　</span></h2>
   <table>
-    <h3>新着商品</h3>
-
       <tr height="50">
       <% @items.each do |item| %>
         <td>
@@ -39,7 +32,7 @@
   </table>
 <br>
 
-<div align="right" class="pr-5">
-<%= link_to "全ての商品を見る＞", buy_items_path %><!--遷移先:public/buy_items#index-->
-</div>
+  <div align="right" class="pr-5">
+    <%= link_to "全ての商品を見る＞", buy_items_path %><!--遷移先:public/buy_items#index-->
+  </div>
 <br>

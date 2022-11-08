@@ -1,7 +1,7 @@
 class Admin::GenresController < ApplicationController
   # ログインしていない場合、ヘッダーのボタンをクリックしたら強制的にログイン画面に移動する
   # except→ログイン画面への遷移を除外する→今回は除外するものがない
-  before_action :authenticate_admin!
+  # before_action :authenticate_admin!
   
   def index #ジャンル一覧・追加・削除画面
     #新規作成
@@ -15,9 +15,10 @@ class Admin::GenresController < ApplicationController
   end
   
   def destroy # nagano_cake public Address、cart_item参考
-    @destroy = Genre.find(params[:id]).destroy
+    @destroy = Genre.find(params[:id])
+    @destroy.destroy
 		flash[:notice] = "ジャンル項目を削除しました"
-    redirect_to '/admin/genres/index' #indexへのURL
+    redirect_to '/admin/genres' #admin/genres#indexへのURL
   end
 
   def create

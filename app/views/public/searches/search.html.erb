@@ -3,6 +3,6 @@
 
 <% if @model == 'genre' %>
   <%= render 'users/index', users: @records %>
-<%# elsif @model == 'book' %>
-  <%#= render 'books/index', books: @records %>
+<% elsif @model == 'book' %>
+  <%= render 'books/index', books: @records %>
 <% end %>

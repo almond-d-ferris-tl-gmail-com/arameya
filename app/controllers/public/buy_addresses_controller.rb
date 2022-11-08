@@ -1,7 +1,7 @@
 class Public::BuyAddressesController < ApplicationController
   # ログインしていない場合、ヘッダーのボタンをクリックしたら強制的にログイン画面に移動する
   # except→ログイン画面への遷移を除外する→今回は除外するものがない
-  before_action :authenticate_member!
+  # before_action :authenticate_member!
 
   def index#配送先登録/一覧
     #新規作成

@@ -60,3 +60,6 @@ gem 'devise'
 
 # メール送信
 gem 'net-smtp'
+
+# ページネーション
+gem 'kaminari','~> 1.2.1'

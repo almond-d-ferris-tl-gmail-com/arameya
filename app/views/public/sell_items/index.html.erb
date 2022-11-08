@@ -1,9 +1,9 @@
-<!--<h1>Public::SellItems#index</h1>-->
+<!--<h2>Public::SellItems#index</h2>-->
 <!--<p>Find me in app/views/public/sell_items/index.html.erb</p>-->
 <br>
 <table style="display:flex; justify-content:center">
   <tr>
-    <th width="400"><h1><span style="background-color:lightgray" class="m-5">　商品一覧　</span></h1></th>
+    <th width="600"><h2><span style="background-color:lightgray" class="m-5">　[販売]商品一覧　</span><span style="font-size:20px">(全<%= @items_max %>件)</span></h2></th>
     <th width="150"></th>
     <th width="150"></th>
     <th width="150"></th>
@@ -15,21 +15,23 @@
 <table style="display:flex; justify-content:center">
   <tr bgcolor="lightgray" height="50">
     <th width="150">商品ID</th>
-    <th width="350">商品名</th>
-    <th width="150">税抜価格(円)</th>
     <th width="150">ジャンル</th>
+    <th width="350">商品名</th>
+    <th width="150">単価(税抜)</th>
     <th width="150">ステータス</th>
   </tr>
 
   <% @items.each do |item| %>
     <tr height="50">
       <td><%= item.id %></td>
+      <td><%= item.genre.name %></td>
       <td><%=link_to item.name, sell_item_path(item.id) %></td><!--遷移先:public/sell_items#show-->
       <td><%= item.price %></td>
-      <td><%= item.genre.name %></td>
       
       <% if item.is_active == true %><!---->
         <td><font color="green">販売中</font></td>
+      <% elseif %>
+        <td><font color="orange">下書き</font></td>
       <% else %>
         <td><font color="gray">販売停止中</font></td>
       <% end %>

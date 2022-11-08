@@ -1,40 +1,38 @@
 <!--ログイン時にnameを使用する場合、nameカラムを追加する必要がある-->
 <!--参考：https://qiita.com/yuki82511988/items/73659af9d1049bd1b256-->
 <br>
-<h1><span style="background-color:lightgray" class="m-5">　ログイン　</span></h1>
+<h2><span style="background-color:lightgray" class="m-5">　会員ログイン　</span></h2>
 <br>
-<h3><span style="background-color:lightgray" class="m-5">　会員の方はこちらからログイン　</span></h3>
   <!--form_forのままでOK-->
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-
     <table border="0" class="mx-auto">
       <tr>
         <td height="50" width="150"><%= f.label :メールアドレス %></td>
-        <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
+        <td><%= f.email_field :email, autofocus: true, autocomplete: "email", size: "30" %></td>
       </tr>
-      
       <tr>
         <td height="50"><%= f.label :パスワード %></td>
-        <td><%= f.password_field :password, autocomplete: "current-password" %></td>
+        <td><%= f.password_field :password, autocomplete: "current-password", size: "30" %></td>
       </tr>
-      
       <tr>
         <td height="50"></td>
         <td><%= f.submit "ログイン", class: "btn btn-primary" %></td>
       </tr>
+      <tr>
+        <!--パスワード記憶-->
+        <% if devise_mapping.rememberable? %>
+          <div class="field">
+            <td colspan="2">
+              <%= f.check_box :remember_me %> <%= f.label :パスワードを保存しますか？ %>
+            </td>
+          </div>
+        <% end %>
+      </tr>
     </table>
-
-    <!--パスワード記憶-->
-    <% if devise_mapping.rememberable? %>
-      <div class="field">
-        <%= f.check_box :remember_me %>
-        <%= f.label :パスワードを保存しますか？ %>
-      </div>
-    <% end %>
   <% end %>
 
 <br><br>
-<h1><span style="background-color:lightgray" class="m-5">　会員登録がお済みでない方　</span></h1>
+<h2><span style="background-color:lightgray" class="m-5">　会員登録がお済みでない方　</span></h2>
 <p class="m-3 pl-5"><%= render "public/shared/links" %>から新規登録を行ってください。</p>
 <!--m-3→マージン、pl-5→左側パディング-->
 <!--設定→/arameya/app/views/public/shared/_links.html.erb-->

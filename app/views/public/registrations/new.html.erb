@@ -3,7 +3,7 @@
 <!--/nagano_cake/app/controllers/public/sessions_controller.rb-->
 <%= notice %><!--退会済みアカウントでログインしようとした場合、メッセージを表示する-->
 
-<h1><span style="background-color:lightgray" class="m-5">　新規会員登録　</span></h1><!--m-5→マージン-->
+<h2><span style="background-color:lightgray" class="m-5">　新規会員登録　</span></h2><!--m-5→マージン-->
   <!--form_forのままでOK-->
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 <br>
@@ -87,7 +87,7 @@
 <%= render "public/shared/error_messages", resource: resource %>
 
 <!---->
-<h1><span style="background-color:lightgray" class="m-5">　既に登録済みの方　</span></h1>
+<h2><span style="background-color:lightgray" class="m-5">　既に登録済みの方　</span></h2>
 <p class="m-3 pl-5"><%= render "public/shared/links" %>からログインしてください。</p>
 <!--m-3→マージン、pl-5→左側パディング-->
 <!--設定→/arameya/app/views/public/shared/_links.html.erb-->

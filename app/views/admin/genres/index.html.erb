@@ -25,7 +25,7 @@
         <!--遷移先：admin/genres#edit(ジャンル編集)-->
         <td><%= link_to "編集する", edit_admin_genre_path(genre.id), class: "btn btn-success" %></td>
         <!--遷移先：admin/genres#destroy-->
-        <td><%= link_to "削除する", admin_genre_path(genre.id), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
+        <td><%#= link_to "削除する", admin_genre_path(genre.id), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
       </tr>
     <% end %>
   </table>
