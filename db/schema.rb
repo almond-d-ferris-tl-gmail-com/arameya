@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 2022_11_03_030034) do
 
   create_table "items", force: :cascade do |t|
     t.integer "genre_id", null: false
-    t.integer "review_id", null: false
+    t.integer "review_id"
     t.string "name", null: false
     t.boolean "used_condition", default: false, null: false
     t.text "introduction", null: false
@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 2022_11_03_030034) do
   end
 
   create_table "members", force: :cascade do |t|
-    t.integer "review_id", null: false
+    t.integer "review_id"
     t.integer "business_message_id", null: false
     t.integer "information_message_id", null: false
     t.string "last_name", null: false
@@ -105,13 +105,6 @@ ActiveRecord::Schema.define(version: 2022_11_03_030034) do
     t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.index ["email"], name: "index_members_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true
   end
 
   create_table "order_details", force: :cascade do |t|

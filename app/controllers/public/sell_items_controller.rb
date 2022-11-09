@@ -6,6 +6,8 @@ class Public::SellItemsController < ApplicationController
   def index#商品一覧
     #ページネーション
     @items = Item.all.page(params[:page]).per(10)
+    #商品の最大値を取得
+    @items_max = Item.maximum(:id)
   end
 
   def new#商品新規登録
@@ -24,6 +26,7 @@ class Public::SellItemsController < ApplicationController
   def create
     #newで新規登録後、商品編集ページ(edit)に遷移する
     @item_new = Item.new(sell_item_params)#public/sell_items#updateのパラメータ
+    # byebug
     if @item_new.save
       flash[:notice] ="商品新規登録が完了しました"
       redirect_to sell_item_path(@item_new) #public/sell_items#show
@@ -50,7 +53,7 @@ class Public::SellItemsController < ApplicationController
   #商品編集(edit)をした後、updateに遷移する
   private
   def sell_item_params#updateのパラメータ
-    params.require(:item).permit(:image, :name, :introduction, :genre_id, :price, :is_active)
+    params.require(:item).permit(:image, :genre_id, :name, :used_condition, :introduction, :price, :postage, :sell_status)
   end
 
 end

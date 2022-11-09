@@ -1,32 +1,53 @@
-<!--<h1>Public::BuyItems#show</h1>-->
+<!--<h2>Public::BuyItems#show</h2>-->
 <!--<p>Find me in app/views/public/buy_items/show.html.erb</p>-->
 <br>
-<table border="0" style="display:flex; justify-content:center">
-  <tr>
-    <td rowspan="6"  width="350"><!--セル結合:colspan(列の長さ)、rowspan(行の長さ)-->
+<table border="0" class="mx-auto" width="1200">
+  <tr class="align-top">
+    <td rowspan="9"  width="300" class="align-middle"><!--セル結合:colspan(列の長さ)、rowspan(行の長さ)-->
       <% if @item.image.attached? %>
-        <%= image_tag @item.image, size: "300x200" %>
+        <%= image_tag @item.image, width: '250px', height: 'auto' %>
       <% else %>
         <%= image_tag 'no_image', size: "300x300" %>
       <% end %>
     </td>
   </tr>
-  <tr><!--ジャンル、税抜不要-->
-    <td height="50"><h3><%= @item.name %></h3></td><!--商品名-->
+  <tr>
+    <th height="50" width="180">ジャンル</th>
+    <td><%= @item.genre.name %></td>
   </tr>
   <tr>
-    <td height="100"><%= @item.introduction %></td><!--説明文-->
+    <th>商品名</th>
+    <td><h4><b><%= @item.name %></b></h4></td>
   </tr>
   <tr>
+    <th height="60">状態</th>
+      <% if @item.used_condition == false %>
+        <td>新品</td>
+      <% else %>
+        <td>中古</td>
+      <% end %>
+  </tr>
+  <tr class="align-top">
+    <th>商品説明</th>
+    <td><%= safe_join(@item.introduction.split("\n"),tag(:br)) %></td>
+  </tr>
+  <tr>
+    <th height="70">税込価格(税抜価格)</th>
     <!--税込価格の計算式/nagano_cake/app/models/item.rb-->
-    <td height="50"><h4>￥ <%= @item.tax_included_price %>(税込)</h4></td><!--税込価格-->
+    <td><h4><%= @item.tax_included_price.to_s(:delimited) %>円<span style="font-size:16px">(<%= @item.price.to_s(:delimited) %>円)</span></span></h4></td><!--to_s(:delimited)→文字列に変換してカンマをつける-->
+  </tr>
+  <tr>
+    <th height="50">送料</th>
+    <td><%= @item.postage.to_s(:delimited) %>円</td><!--to_s(:delimited)→文字列に変換してカンマをつける-->
   </tr>
   <tr>
     <!--プルダウンの実装-->
-    <td>
+    <th>
       <%= form_with model: @cart_item, url: cart_items_path do |f| %><!--遷移先:public/cart_items#create-->
-        <%= f.select :amount, [['1',1],['2',2],['3',3],['4',4],['5',5],['6',6],['7',7],['8',8],['9',9]] %>　　　
+        数量　<%= f.select :amount, [['1',1],['2',2],['3',3],['4',4],['5',5],['6',6],['7',7],['8',8],['9',9]] %>　　　
         <%= f.hidden_field :item_id, :value => @item.id %>
+    </th>
+    <td>
         <%= f.submit "カートに入れる", class: "btn btn-success" %>
       <% end %>
     </td>

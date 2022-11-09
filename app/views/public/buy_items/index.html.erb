@@ -1,19 +1,19 @@
-<!--<h1>Public::BuyItems#index</h1>-->
+<!--<h2>Public::BuyItems#index</h2>-->
 <!--<p>Find me in app/views/public/buy_items/index.html.erb</p>-->
 <br>
 <h2><span style="background-color:lightgray" class="m-5">　[購入]商品一覧　</span><span style="font-size:20px">(全<%= @items_max %>件)</span></h2>
-<br><br>
-  <div class="d-flex flex-wrap"><!--flex-wrap→改行する-->
+
+  <div class="m-5 d-flex flex-wrap"><!--flex-wrap→改行する-->
     <% @items.each do |item| %>
-      <%= link_to sell_item_path(item.id) do %><!--画像、商品名、金額に商品詳細(public/sell_items#show)へのリンク-->
+      <%= link_to buy_item_path(item.id) do %><!--画像、商品名、金額に商品詳細(遷移先:public/buy_items#show)-->
         <% if item.image.attached? %>
-          <%= image_tag item.image, size: "300x200" %><br>
+          <%= image_tag item.image, width: '150px', height: 'auto' %><br>
         <% else %>
           <%= image_tag 'no_image', size: "300x300" %><br><!--画像４枚-->
         <% end %>
         <%= item.name %><br><!--商品名-->
         税抜
-        <%= item.price %><!--金額-->
+        <%= item.price.to_s(:delimited) %><!--金額--><!--to_s(:delimited)→文字列に変換してカンマをつける-->
         円<br>
       <% end %>
       　　
