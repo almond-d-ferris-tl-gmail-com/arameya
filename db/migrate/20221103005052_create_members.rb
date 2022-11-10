@@ -4,8 +4,8 @@ class CreateMembers < ActiveRecord::Migration[6.1]
       # 追加
       #id→自動作成(表示されない),email,encrypted_password,created_at,updated_at→自動作成
       t.integer :review_id             , null: true # レビューID	
-      t.integer :business_message_id   , null: false # 会員ー会員メッセージID	
-      t.integer :information_message_id, null: false # 管理者ー会員メッセージID	
+      t.integer :business_message_id   , null: true # 会員ー会員メッセージID	
+      t.integer :information_message_id, null: true # 管理者ー会員メッセージID	
       t.string  :last_name             , null: false # 姓	
       t.string  :first_name            , null: false # 名	
       t.string  :last_name_kana        , null: false # 姓カナ	

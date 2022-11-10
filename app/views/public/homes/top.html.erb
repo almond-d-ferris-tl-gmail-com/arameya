@@ -11,19 +11,19 @@
 <br>
 
 <h2><span style="background-color:lightgray" class="m-5">　[購入]新着商品　</span></h2>
-  <table>
+  <table  class="m-5 d-flex flex-wrap">
       <tr height="50">
       <% @items.each do |item| %>
         <td>
           <%= link_to buy_item_path(item.id) do %><!--画像、商品名、金額に商品詳細(public/buy_items#show)へのリンク-->
             <% if item.image.attached? %>
-              <%= image_tag item.image, size: "200x150" %><br>
+              <%= image_tag item.image, width: '150px', height: 'auto' %><br>
             <% else %>
               <%= image_tag 'no_image', size: "200x150" %><br><!--画像４枚-->
             <% end %>
               <%= item.name %><br><!--商品名-->
               税抜
-              <%= item.price %><!--金額-->
+              <%= item.price.to_s(:delimited) %><!--金額--><!--to_s(:delimited)→文字列に変換してカンマをつける-->
               円
           <% end %>
         </td>

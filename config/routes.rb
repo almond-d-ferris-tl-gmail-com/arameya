@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     
     resources :sell_orders, only: [:index, :show, :update]
     
-    resources :sell_items, only: [:index, :new, :show, :edit, :create, :update]
+    resources :sell_items, only: [:index, :new, :show, :edit, :create, :update, :destroy]
     
     # orders#showよりも上に記述しないとcompleteがid扱いされる
     get 'buy_orders/comfirm'

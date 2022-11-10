@@ -47,6 +47,12 @@ class Public::SellItemsController < ApplicationController
     end
   end
 
+  def destroy
+    @item = Item.find(params[:id])
+    @item.destroy
+    redirect_to sell_items_path #public/sell_items#index
+  end
+
   #投稿データのストロングパラメータ(セキュリティに関係する)
   #require/permitメソッド:DBの更新時、不要なパラメータを取り除く(必要なパラメータだけに絞り込む)
   #require(パラメータ群).permit(:変更可能なパラメータ名)

@@ -3,23 +3,24 @@
 class Public::SessionsController < Devise::SessionsController
   before_action :member_state, only: [:create]
 
-protected
-  # 退会しているかを判断するメソッド、退会後は同じアカウントで利用できない
-  def member_state
-    # 【処理内容1】 入力されたemailからアカウントを1件取得
-    @member = Member.find_by(email: params[:member][:email])
-    # アカウントを取得できなかった場合、このメソッドを終了する
-    return if !@member
-    # 【処理内容2】 取得したアカウントのパスワードと入力されたパスワードが一致してるかを判別
-    if @member.valid_password?(params[:member][:password])
-    # 【処理内容3】 「1」と「2」の処理が真(true)+そのアカウントのis_deletedカラムに格納されている値が
-    #   trueなら退会済→サインアップ画面に遷移、falseなら未退会→そのままcreateアクションを実行
-      if (@member.is_deleted == true)
-        #public/registrations#new(顧客ログイン画面)
-        redirect_to new_member_registration_path, notice:"退会済みのアカウントです。新規登録をしてください。"
+  protected
+    # 退会しているかを判断するメソッド、退会後は同じアカウントで利用できない
+    def member_state
+      # 【処理内容1】 入力されたemailからアカウントを1件取得
+      @member = Member.find_by(email: params[:member][:email])
+      # アカウントを取得できなかった場合、このメソッドを終了する
+      return if !@member
+      # 【処理内容2】 取得したアカウントのパスワードと入力されたパスワードが一致してるかを判別
+      if @member.valid_password?(params[:member][:password])
+      # 【処理内容3】 「1」と「2」の処理が真(true)+そのアカウントのis_deletedカラムに格納されている値が
+      #   trueなら退会済→サインアップ画面に遷移、falseなら未退会→そのままcreateアクションを実行
+        if (@member.is_deleted == true)
+          #public/registrations#new(会員ログイン画面)
+          redirect_to new_member_registration_path, notice:"退会済みのアカウントです。新規登録をしてください。"
+        end
       end
     end
-  end
+
 
   #ログイン後に表示する画面
   def after_sign_in_path_for(resource)

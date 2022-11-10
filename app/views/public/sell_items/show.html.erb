@@ -54,7 +54,11 @@
     <% end %>
   </tr>
   <tr><!--遷移先:public/sell_items#edit-->
-    <td height="100" colspan="3" style="text-align: center"><%= link_to "編集する", edit_sell_item_path(@item.id), class: "btn btn-success" %></td>
+    <td height="100" colspan="3" style="text-align: center"><%= link_to "編集する", edit_sell_item_path(@item.id), class: "btn btn-success" %>　　　　　
+      <!--遷移先：public/sell_items#destroy-->
+    <%= link_to "削除する", sell_item_path(@item.id), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
+    
+    
   </tr>
 </table>
 <br>
