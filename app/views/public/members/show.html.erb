@@ -1,38 +1,49 @@
-<!--<h1>Public::Members#show</h1>-->
+<!--<h2>Public::Members#show</h2>-->
 <!--<p>Find me in app/views/public/members/show.html.erb</p>-->
 <br>
-<h1><span style="background-color:lightgray" class="m-5">　マイページ　</span></h1>
+<h2><span style="background-color:lightgray" class="m-5">　マイページ　</span></h2>
 <br>
     <!--url(遷移先):public/members#edit(会員情報編集)-->
-  <h3 class="pl-5">登録情報　　<%= link_to '編集するボタン', members_information_edit_path, class: "btn btn-success" %></h3>
+  <h3 class="pl-5">登録情報　　</h3>
     
-    <table border="1" width="800" class="mx-auto">
+    <table border="0" width="800" class="mx-auto">
       <tr>
-        <td height="50" width="100" bgcolor="lightgray">氏名</td>
+        <th height="50" width="100">氏名</th>
         <td width="300"><%= @member.last_name %> <%= @member.first_name %></td>
       </tr>
       <tr>
-        <td height="50" bgcolor="lightgray">カナ</td>
+        <th height="50">カナ</th>
         <td><%= @member.last_name_kana %> <%= @member.first_name_kana %></td>
       </tr>
       <tr>
-        <td height="50" bgcolor="lightgray">郵便番号</td>
+        <th height="50">会社名</th>
+        <td><%= @member.company %></td>
+      </tr>
+      <tr>
+        <th height="50">役職・部署名</th>
+        <td><%= @member.department %></td>
+      </tr>
+      <tr>
+        <th height="50">郵便番号</th>
         <td><%= @member.postal_code %></td>
       </tr>
       <tr>
-        <td height="50" bgcolor="lightgray">住所</td>
+        <th height="50">住所</th>
         <td><%= @member.address %></td>
       </tr>
       <tr>
-        <td height="50" bgcolor="lightgray">電話番号</td>
+        <th height="50">電話番号</th>
         <td><%= @member.telephone_number %></td>
       </tr>
       <tr>
-        <td height="50" bgcolor="lightgray">メールアドレス</td>
+        <th height="50">メールアドレス</th>
         <td><%= @member.email %></td>
       </tr>
+      <tr>
+        <th></th>
+        <td><%= link_to '編集するボタン', members_information_edit_path, class: "btn btn-success" %></td>
+      </tr>
     </table>
-
 <br>
   <!--path:public/buy_addresses#index-->
   <h3 class="pl-5">配送先　　　<%= link_to '一覧を見るボタン', buy_addresses_path, class: "btn btn-primary" %></h3>

@@ -1,8 +1,6 @@
-# frozen_string_literal: true
-
-class AddDeviseToAdmins < ActiveRecord::Migration[6.1]
-  def self.up
-    change_table :admins do |t|
+class DeviseCreateAdmins < ActiveRecord::Migration[6.1]
+  def change
+    create_table :admins do |t|
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
@@ -13,6 +11,10 @@ class AddDeviseToAdmins < ActiveRecord::Migration[6.1]
 
       ## Rememberable
       t.datetime :remember_created_at
+
+      # 追加		
+      #id→自動作成(表示されない),email,encrypted_password,created_at,updated_at→自動作成		
+      t.integer :information_message_id, null: true # 管理者ー会員メッセージID		
 
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false
@@ -34,18 +36,12 @@ class AddDeviseToAdmins < ActiveRecord::Migration[6.1]
 
 
       # Uncomment below if timestamps were not included in your original model.
-      # t.timestamps null: false
+      t.timestamps null: false
     end
-
+    
     add_index :admins, :email,                unique: true
     add_index :admins, :reset_password_token, unique: true
     # add_index :admins, :confirmation_token,   unique: true
     # add_index :admins, :unlock_token,         unique: true
-  end
-
-  def self.down
-    # By default, we don't want to make any assumption about how to roll back a migration when your
-    # model already existed. Please edit below which fields you would like to remove in this migration.
-    raise ActiveRecord::IrreversibleMigration
   end
 end

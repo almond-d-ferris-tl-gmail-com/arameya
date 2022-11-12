@@ -2,7 +2,7 @@
 <!--<p>Find me in app/views/public/searches/search.html.erb</p>-->
 
 <% if @model == 'genre' %>
-  <%= render 'users/index', users: @records %>
-<% elsif @model == 'book' %>
-  <%= render 'books/index', books: @records %>
+  <%= render '/buy_items', genres: @records %><!--public/buy_items#index-->
+<% elsif @model == 'item' %>
+  <%= render '/buy_items', items: @records %><!--public/buy_items#index-->
 <% end %>

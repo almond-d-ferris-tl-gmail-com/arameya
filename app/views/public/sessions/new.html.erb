@@ -4,7 +4,9 @@
 <h2><span style="background-color:lightgray" class="m-5">　会員ログイン　</span></h2>
 <br>
   <!--form_forのままでOK-->
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%#= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%= form_with model: @member, url: member_session_path, id: 'new_member', class: 'new_member', local: true do |f| %>
+  
     <table border="0" class="mx-auto">
       <tr>
         <td height="50" width="150"><%= f.label :メールアドレス %></td>

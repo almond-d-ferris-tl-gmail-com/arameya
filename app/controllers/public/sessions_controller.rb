@@ -29,7 +29,7 @@ class Public::SessionsController < Devise::SessionsController
 
   #ログアウト後に表示する画面
   def after_sign_out_path_for(resource)
-      top_path#public/homes#top
+      root_path#public/homes#top
   end
 
   # before_action :configure_sign_in_params, only: [:create]

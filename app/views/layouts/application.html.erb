@@ -27,8 +27,8 @@
             
               <% if admin_signed_in? %><!--管理者側ログイン後 admin→テーブル名-->
               
-                <li><!--admin/members#index-->
-                  <%= link_to admin_members_path, class: "nav-link text-light" do %>
+                <li><!--admin/homes#top-->
+                  <%= link_to admin_path, class: "nav-link text-light" do %>
                     <button type="button" class="btn btn-outline-info">会員一覧</button>
                   <% end %>
                 </li>
@@ -48,52 +48,52 @@
               <% elsif member_signed_in? %><!--会員側ログイン後 member→テーブル名-->
 
                 <li><!--検索窓-->
-                  <%= render "/searches/form" %>
+                  <%#= render "/searches/form" %>
                 </li>
 
-                <li class="d-flex align-items-center justify-content-center">
+                <li class="d-flex align-items-center justify-content-center text-white">
                   ようこそ、<%= current_member.last_name %> <%= current_member.first_name %>さん！
                 </li>
                 
                 <li><!--public/members#show　(current_user.id)-->
                   <%= link_to members_my_page_path, class: "nav-link text-light" do %>
-                    <button type="button" class="btn btn-outline-info">マイページ</button>
+                    <button type="button" class="btn btn-outline-info">マイ<br>ページ</button>
                   <% end %>
                 </li>
                 
-                <li><!--public/items#index-->
-                  <%= link_to items_path, class: "nav-link text-light" do %>
-                    <button type="button" class="btn btn-outline-info">[購入]商品一覧</button>
-                  <% end %>
-                </li>
-                
-                <li><!--public/cart_items#index-->
-                  <%= link_to cart_items_path, class: "nav-link text-light" do %>
-                    <button type="button" class="btn btn-outline-info">[購入]カート</button>
+                <li><!--public/buy_items#index-->
+                  <%= link_to buy_items_path, class: "nav-link text-light" do %>
+                    <button type="button" class="btn btn-outline-info">[購入]<br>商品一覧</button>
                   <% end %>
                 </li>
                 
                 <li><!--public/cart_items#index-->
                   <%= link_to cart_items_path, class: "nav-link text-light" do %>
-                    <button type="button" class="btn btn-outline-info">[購入]注文履歴一覧</button>
+                    <button type="button" class="btn btn-outline-info">[購入]<br>カート</button>
                   <% end %>
                 </li>
                 
-                <li><!--public/cart_items#index-->
-                  <%= link_to cart_items_path, class: "nav-link text-light" do %>
-                    <button type="button" class="btn btn-outline-info">[販売]商品一覧</button>
+                <li><!--public/buy_orders#index-->
+                  <%= link_to buy_orders_path, class: "nav-link text-light" do %>
+                    <button type="button" class="btn btn-outline-info">[購入]<br>注文履歴一覧</button>
                   <% end %>
                 </li>
                 
-                <li><!--public/cart_items#index-->
-                  <%= link_to cart_items_path, class: "nav-link text-light" do %>
-                    <button type="button" class="btn btn-outline-info">[販売]注文履歴一覧</button>
+                <li><!--public/sell_items#index-->
+                  <%= link_to sell_items_path, class: "nav-link text-light" do %>
+                    <button type="button" class="btn btn-outline-info">[販売]<br>商品一覧</button>
+                  <% end %>
+                </li>
+                
+                <li><!--public/sell_orders#index-->
+                  <%= link_to sell_orders_path, class: "nav-link text-light" do %>
+                    <button type="button" class="btn btn-outline-info">[販売]<br>注文履歴一覧</button>
                   <% end %>
                 </li>
                 
                 <li><!--public/sessions#destroy-->
                   <%= link_to destroy_member_session_path, method: :delete, class: "nav-link text-light" do %>
-                    <button type="button" class="btn btn-outline-info">ログアウト</button>
+                    <button type="button" class="btn btn-outline-info">ログ<br>アウト</button>
                   <% end %>
                 </li>
                 

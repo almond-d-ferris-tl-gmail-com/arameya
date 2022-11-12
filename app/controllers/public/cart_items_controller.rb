@@ -4,23 +4,23 @@ class Public::CartItemsController < ApplicationController
   # before_action :authenticate_member!
 
   def index
-    @cart_item = current_customer.cart_items#current_customer(1):cart_items(多)
+    @cart_item = current_member.cart_items#current_member(1):cart_items(多)
     @total = 0
   end
   
   def destroy
-    current_customer.cart_items.find(params[:id]).destroy
+    current_member.cart_items.find(params[:id]).destroy
 			flash[:notice] = "カート内の商品が削除されました"
       redirect_to '/cart_items'#public/cart_items#indexへのURL
   end
 
   def create
     @create_cart_item = CartItem.new(cart_item_params)#updateのパラメータ
-    @create_cart_item.customer_id = current_customer.id#顧客idと現在ログインしている顧客idを結びつける
+    @create_cart_item.member_id = current_member.id#顧客idと現在ログインしている顧客idを結びつける
     #注文の追加(追加した商品がカート内に存在するかの判別)
-		if current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id]).present?
+		if current_member.cart_items.find_by(item_id: params[:cart_item][:item_id]).present?
 		  #存在した場合
-		  cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
+		  cart_item = current_member.cart_items.find_by(item_id: params[:cart_item][:item_id])
 		  #カート内の個数をフォームから送られた個数分追加する
 		  cart_item.amount += params[:cart_item][:amount].to_i
 		  cart_item.save

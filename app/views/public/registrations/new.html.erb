@@ -1,75 +1,74 @@
 <!--セル結合:colspan=""(列の長さ)、rowspan=""(行の長さ)-->
 <br>
-<!--/nagano_cake/app/controllers/public/sessions_controller.rb-->
+<!--/arameya/app/controllers/public/sessions_controller.rbで判定-->
 <%= notice %><!--退会済みアカウントでログインしようとした場合、メッセージを表示する-->
 
 <h2><span style="background-color:lightgray" class="m-5">　新規会員登録　</span></h2><!--m-5→マージン-->
-  <!--form_forのままでOK-->
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= form_with model: @member, url: member_registration_path, id: 'new_member', class: 'new_member', local: true do |f| %>
 <br>
 
     <table border="0" class="mx-auto">
       <tr>
-        <td height="50" width="250"><%= f.label :"氏名" %></td>
-        <td height="50"><%= f.label :"(姓)" %></td>
+        <th height="50" width="250"><%= f.label :"氏名" %></th>
+        <th height="50"><%= f.label :"(姓)" %></th>
         <!--autofocus: true：カーソルが移動して入力状態になる→htmlに１つだけ設定できる-->
         <td width="250"><%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %></td>
-        <td height="50"><%= f.label :"(名)" %></td>
+        <th height="50"><%= f.label :"(名)" %></th>
         <td><%= f.text_field :first_name, autocomplete: "first_name" %></td>
       </tr>
       
       <tr>
-        <td height="50"><%= f.label :"フリガナ" %></td>
-        <td height="50"><%= f.label :"(セイ)" %></td>
+        <th height="50"><%= f.label :"フリガナ" %></th>
+        <th height="50"><%= f.label :"(セイ)" %></th>
         <td width="250"><%= f.text_field :last_name_kana, autocomplete: "last_name_kana" %></td>
-        <td height="50"><%= f.label :"(メイ)" %></td>
+        <th height="50"><%= f.label :"(メイ)" %></th>
         <td><%= f.text_field :first_name_kana, autocomplete: "first_name_kana" %></td>
       </tr>
       
       <tr>
-        <td height="50"><%= f.label :"会社名" %></td>
+        <th height="50"><%= f.label :"会社名" %></th>
         <td></td>
         <td colspan="3"><%= f.text_field :company, autocomplete: "company", size: "50" %></td>
       </tr>
 
       <tr>
-        <td height="50"><%= f.label :"役職・部署名" %></td>
+        <th height="50"><%= f.label :"役職・部署名" %></th>
         <td></td>
         <td colspan="3"><%= f.text_field :department, autocomplete: "department", size: "50" %></td>
       </tr>
 
       <tr>
-        <td height="50"><%= f.label :"郵便番号" %></td>
+        <th height="50"><%= f.label :"郵便番号" %></th>
         <td></td>
         <td><%= f.text_field :postal_code, autocomplete: "postal_code" %></td>
       </tr>
 
       <tr>
-        <td height="50"><%= f.label :"住所" %></td>
+        <th height="50"><%= f.label :"住所" %></th>
         <td></td>
         <td colspan="3"><%= f.text_area :address, autocomplete: "address", size: "50" %></td>
       </tr>
 
       <tr>
-        <td height="50"><%= f.label :"電話番号" %></td>
+        <th height="50"><%= f.label :"電話番号" %></th>
         <td></td>
         <td><%= f.text_field :telephone_number, autocomplete: "telephone_number" %></td>
       </tr>
 
       <tr>
-        <td height="50"><%= f.label :"メールアドレス" %></td>
+        <th height="50"><%= f.label :"メールアドレス" %></th>
         <td></td>
         <td colspan="3"><%= f.email_field :email, autocomplete: "email", size: "50" %></td>
       </tr>
 
       <tr>
-        <td height="50"><%= f.label :"パスワード(6文字以上)" %></td>
+        <th height="50"><%= f.label :"パスワード(6文字以上)" %></th>
         <td></td>
         <td><%= f.password_field :password, autocomplete: "new-password" %></td>
       </tr>
 
       <tr>
-        <td height="50"><%= f.label :"パスワード(確認用)" %></td><!--パスワード確認-->
+        <th height="50"><%= f.label :"パスワード(確認用)" %></th><!--パスワード確認-->
         <td></td>
         <td><%= f.password_field :password_confirmation, autocomplete: "new-password" %></td>
       </tr>

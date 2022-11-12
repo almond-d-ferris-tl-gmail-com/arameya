@@ -1,4 +1,4 @@
-<!--<h1>Public::Members#edit</h1>-->
+<!--<h2>Public::Members#edit</h2>-->
 <!--<p>Find me in app/views/public/members/edit.html.erb</p>-->
 <br>
 <% if @member.errors.any? %>
@@ -10,41 +10,62 @@
   </ul>
 <% end %>
 
-<h1><span style="background-color:lightgray" class="m-5">　会員情報編集　</span></h1>
+<h2><span style="background-color:lightgray" class="m-5">　登録情報編集　</span></h2>
     <!--url(遷移先):public/members#update(変更メソッドはpatch)-->
   <%= form_with model: @member, url: members_information_path , method: :patch do |f| %>
 <br>
     <table border="0" class="mx-auto">
-      <tr><!--autofocus: true：カーソルが移動して入力状態になる→なし-->
-        <td height="50" width="250"><%= f.label :"氏名" %></td>
-        <td width="250"><%= f.text_field :last_name, autocomplete: "last_name" %></td>
+      <tr>
+        <th height="50" width="250"><%= f.label :"氏名" %></th>
+        <th height="50"><%= f.label :"(姓)" %></th>
+        <!--autofocus: true：カーソルが移動して入力状態になる→htmlに１つだけ設定できる-->
+        <td width="250"><%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %></td>
+        <th height="50"><%= f.label :"(名)" %></th>
         <td><%= f.text_field :first_name, autocomplete: "first_name" %></td>
       </tr>
       
       <tr>
-        <td height="50"><%= f.label :"フリガナ" %></td>
+        <th height="50"><%= f.label :"フリガナ" %></th>
+        <th height="50"><%= f.label :"(セイ)" %></th>
         <td width="250"><%= f.text_field :last_name_kana, autocomplete: "last_name_kana" %></td>
+        <th height="50"><%= f.label :"(メイ)" %></th>
         <td><%= f.text_field :first_name_kana, autocomplete: "first_name_kana" %></td>
       </tr>
       
       <tr>
-        <td height="50"><%= f.label :"郵便番号(ハイフンなし)" %></td>
+        <th height="50"><%= f.label :"会社名" %></th>
+        <td></td>
+        <td colspan="3"><%= f.text_field :company, autocomplete: "company", size: "50" %></td>
+      </tr>
+
+      <tr>
+        <th height="50"><%= f.label :"役職・部署名" %></th>
+        <td></td>
+        <td colspan="3"><%= f.text_field :department, autocomplete: "department", size: "50" %></td>
+      </tr>
+
+      <tr>
+        <th height="50"><%= f.label :"郵便番号" %></th>
+        <td></td>
         <td><%= f.text_field :postal_code, autocomplete: "postal_code" %></td>
       </tr>
 
       <tr>
-        <td height="50"><%= f.label :"住所" %></td>
-        <td colspan="3"><%= f.text_area :address, autocomplete: "address", size: "54" %></td>
+        <th height="50"><%= f.label :"住所" %></th>
+        <td></td>
+        <td colspan="3"><%= f.text_area :address, autocomplete: "address", size: "50" %></td>
       </tr>
 
       <tr>
-        <td height="50"><%= f.label :"電話番号(ハイフンなし)" %></td>
+        <th height="50"><%= f.label :"電話番号" %></th>
+        <td></td>
         <td><%= f.text_field :telephone_number, autocomplete: "telephone_number" %></td>
       </tr>
-      
+
       <tr>
-        <td height="50"><%= f.label :"メールアドレス" %></td>
-        <td><%= f.email_field :email, autocomplete: "email" %></td>
+        <th height="50"><%= f.label :"メールアドレス" %></th>
+        <td></td>
+        <td colspan="3"><%= f.email_field :email, autocomplete: "email", size: "50" %></td>
       </tr>
 
       <!--<tr>-->
@@ -61,9 +82,10 @@
       
       <tr>
         <td></td>
+        <td></td>
         <td><br><%= f.submit "編集内容を保存", class: "btn btn-success" %></td>
   <% end %>
-
+        <td></td>
         <!--遷移先:public/members#unsubscribe(退会確認画面)-->
         <td><br><%= link_to "退会する", members_unsubscribe_path, class: "btn btn-danger" %></td>
       </tr>

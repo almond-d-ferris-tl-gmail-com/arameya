@@ -24,10 +24,10 @@ class Public::SellItemsController < ApplicationController
   end
   
   def create
-    #newで新規登録後、商品編集ページ(edit)に遷移する
+    #newで新規登録後、商品詳細ページ(show)に遷移する
     @item_new = Item.new(sell_item_params)#public/sell_items#updateのパラメータ
     # byebug
-    if @item_new.save
+    if @item_new.save!
       flash[:notice] ="商品新規登録が完了しました"
       redirect_to sell_item_path(@item_new) #public/sell_items#show
     else

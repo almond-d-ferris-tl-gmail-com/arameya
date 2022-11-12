@@ -16,4 +16,12 @@ class Public::BuyItemsController < ApplicationController
     @item = Item.find(params[:id])
     @cart_item = CartItem.new#新規注文
   end
+  
+  private
+  def ensure_correct_user
+    @item = Item.find(params[:id])
+    unless @item.member == current_member
+      redirect_to buy_items_path # public/buy_items#index
+    end  
+  end
 end

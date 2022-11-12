@@ -14,7 +14,7 @@ class Admin::GenresController < ApplicationController
     @edit_genre = Genre.find(params[:id])
   end
   
-  def destroy # nagano_cake public Address、cart_item参考
+  def destroy
     @destroy = Genre.find(params[:id])
     @destroy.destroy
 		flash[:notice] = "ジャンル項目を削除しました"
@@ -43,9 +43,8 @@ class Admin::GenresController < ApplicationController
     end
   end
   
-   private#editで編集可能部分
+  private#editで編集可能部分
   def admin_genre_params#update
     params.require(:genre).permit(:name)
   end
-  
 end
