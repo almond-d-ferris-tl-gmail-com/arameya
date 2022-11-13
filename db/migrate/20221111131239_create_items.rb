@@ -5,7 +5,8 @@ class CreateItems < ActiveRecord::Migration[6.1]
       # 追加	
       #id→自動作成(表示されない),email,encrypted_password,created_at,updated_at→自動作成	
       t.integer :genre_id	     , null: false # ジャンルID
-      t.integer :review_id	   , null: true # レビューID
+      t.integer :review_id	   #, null: true # レビューID
+      t.integer :member_id     , null: false # 会員ID
       t.string  :name          , null: false # 商品名	
       t.boolean :used_condition, null: false, default: false # 商品状態	
       t.text    :introduction  , null: false # 商品説明文	

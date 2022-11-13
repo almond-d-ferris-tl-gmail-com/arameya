@@ -1,12 +1,12 @@
-<!--<h1>Public::BuyAddresses#index</h1>-->
+<!--<h2>Public::BuyAddresses#index</h2>-->
 <!--<p>Find me in app/views/public/buy_addresses/index.html.erb</p>-->
 <br>
-<h1><span style="background-color:lightgray" class="m-5">　配送先登録/一覧　</span></h1>
+<h2><span style="background-color:lightgray" class="m-5">　配送先登録/一覧　</span></h2>
 <br>
   <%= form_with model: @address_new, url: buy_addresses_path do |f| %><!--url(遷移先):public/buy_addresses#create-->
     <table border="0" style="display:flex; justify-content:center">
       <tr height="50">
-        <td width="200">郵便番号(ハイフンなし)</td>
+        <td width="100">郵便番号</td>
         <td width="250"><%= f.text_field :postal_code %></td>
       </tr>
       
@@ -24,7 +24,7 @@
   <% end %>
 
 <br><br>
-  <table border="1" width="1000" class="mx-auto"><!--ボーダーを入れるときは←の設定する(widthはtdの総計)-->
+  <table border="0" width="1000" class="mx-auto"><!--ボーダーを入れるときは←の設定する(widthはtdの総計)-->
     <tr bgcolor="lightgray" style="text-align:center" height="50">
       <th>郵便番号</th>
       <th>住所</th>
@@ -32,18 +32,18 @@
       <th></th>
     </tr>
   
-    <% @address_new.each do |address| %>
-    <tr height="80">
-      <td width="100"><%= address.postal_code %></td>
-      <td width="400"><%= address.address %></td>
-      <td width="200"><%= address.name %></td>
-      <td width="300" align="center">
-        <!--遷移先：public/buy_addresses#edit(配送先編集)-->
-        <%= link_to "編集する", edit_buy_address_path(address.id), class: "btn btn-success" %>　　
-        <!--遷移先：public/buy_addresses#destroy-->
-        <%= link_to "削除する", buy_address_path(address.id), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
-      </td>
-    </tr>
+    <% @addresses.each do |address| %>
+      <tr height="80">
+        <td width="100" align="center"><%= address.postal_code %></td>
+        <td width="400"><%= address.address %></td>
+        <td width="200" align="center"><%= address.name %></td>
+        <td width="300" align="center">
+          <!--遷移先：public/buy_addresses#edit(配送先編集)-->
+          <%= link_to "編集する", edit_buy_address_path(address.id), class: "btn btn-success" %>　　
+          <!--遷移先：public/buy_addresses#destroy-->
+          <%= link_to "削除する", buy_address_path(address.id), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
+        </td>
+      </tr>
     <% end %>
   </table>
 <br>

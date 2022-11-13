@@ -1,11 +1,12 @@
 class Public::SellItemsController < ApplicationController
   # ログインしていない場合、ヘッダーのボタンをクリックしたら強制的にログイン画面に移動する
   # except→ログイン画面への遷移を除外する→今回は除外するものがない
-  # before_action :authenticate_member!
+  before_action :authenticate_member!
 
   def index#商品一覧
+    # ログインしている会員が販売している商品のみを表示させる
     #ページネーション
-    @items = Item.all.page(params[:page]).per(10)
+    @items = Item.where(member_id: current_member.id).includes(:member).page(params[:page]).per(10)#.order("created_at DESC")
     #商品の最大値を取得
     @items_max = Item.maximum(:id)
   end
@@ -25,7 +26,8 @@ class Public::SellItemsController < ApplicationController
   
   def create
     #newで新規登録後、商品詳細ページ(show)に遷移する
-    @item_new = Item.new(sell_item_params)#public/sell_items#updateのパラメータ
+    @item_new = Item.new(sell_item_params) #public/sell_items#updateのパラメータ
+    @item_new.member_id = current_member.id # 商品登録者とログインユーザを紐づける
     # byebug
     if @item_new.save!
       flash[:notice] ="商品新規登録が完了しました"

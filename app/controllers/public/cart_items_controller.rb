@@ -1,10 +1,10 @@
 class Public::CartItemsController < ApplicationController
   # ログインしていない場合、ヘッダーのボタンをクリックしたら強制的にログイン画面に移動する
   # except→ログイン画面への遷移を除外する→今回は除外するものがない
-  # before_action :authenticate_member!
+  before_action :authenticate_member!
 
   def index
-    @cart_item = current_member.cart_items#current_member(1):cart_items(多)
+    @cart_items = current_member.cart_items #current_member(1):cart_items(多)
     @total = 0
   end
   
@@ -15,6 +15,7 @@ class Public::CartItemsController < ApplicationController
   end
 
   def create
+    # binding.irb
     @create_cart_item = CartItem.new(cart_item_params)#updateのパラメータ
     @create_cart_item.member_id = current_member.id#顧客idと現在ログインしている顧客idを結びつける
     #注文の追加(追加した商品がカート内に存在するかの判別)
@@ -52,6 +53,7 @@ class Public::CartItemsController < ApplicationController
   end
 
   private
+  
   def cart_item_params#updateのパラメータ
     params.require(:cart_item).permit(:item_id, :amount)#permitメソッド:paramsで取得したパラメーターに対し保存の許可を行う
   end

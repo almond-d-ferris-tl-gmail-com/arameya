@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 2022_11_12_080004) do
   create_table "items", force: :cascade do |t|
     t.integer "genre_id", null: false
     t.integer "review_id"
+    t.integer "member_id", null: false
     t.string "name", null: false
     t.boolean "used_condition", default: false, null: false
     t.text "introduction", null: false

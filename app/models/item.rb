@@ -1,6 +1,12 @@
 class Item < ApplicationRecord
     # 商品画像を扱う
     has_one_attached :image
+
+    #member1:item多(n)の関係
+    #itemから見てmemberは1→「belongs_to :member」(属する)を記述する
+    #memberから見てitemは多(n)→「has_many :items, dependent: :destroy」を記述する
+    #has_many:・・・テーブル同士を関連付ける、dependent(依存): :destroy・・・親モデルの削除時に、紐づいている子モデルも一緒に削除される
+    belongs_to :member
     
     #genre1:item多(n)の関係
     #itemから見てgenreは1→「belongs_to :genre」(属する)を記述する

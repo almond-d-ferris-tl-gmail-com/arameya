@@ -15,6 +15,7 @@
         税抜
         <%= item.price.to_s(:delimited) %><!--金額--><!--to_s(:delimited)→文字列に変換してカンマをつける-->
         円<br>
+        <%#= item.member.name %><br><!--販売者名-->
       <% end %>
       　　
     <% end %>
