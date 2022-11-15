@@ -1,25 +1,37 @@
 <!--<h2>Public::BuyAddresses#edit</h2>-->
 <!--<p>Find me in app/views/public/buy_addresses/edit.html.erb</p>-->
+
+<!--会員マイページサイドメニューバー グリッドシステム設定はそれぞれの本体部分で行う-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="offset-xl-1"></div>
+    <div class="col-xl-2">
+      <%= render "/layouts/member_mypage", member:current_member %>
+    </div>
+    <div class="col-xl-9">
 <br>
-<h2><span style="background-color:lightgray" class="m-5">　配送先編集　</span></h2>
+      <h2><span style="background-color:lightgray" class="m-5">　配送先編集　</span></h2>
 <br>
-  <%= form_with model: @address, url: buy_address_path do |f| %><!--url(遷移先):public/buy_addresses#update-->
-    <table border="0" style="display:flex; justify-content:center">
-      <tr height="50">
-        <th width="100">郵便番号</th>
-        <td width="400"><%= f.text_field :postal_code%></td>
-      </tr>
-      
-      <tr height="50">
-        <th>住所</th>
-        <td><%= f.text_area :address, size: "50" %></td>
-      </tr>
-      
-      <tr height="50">
-        <th>宛名</th>
-        <td><%= f.text_field :name %></td>
-        <td><%= f.submit '変更内容を保存', class: "btn btn-success" %></td>
-      </tr>
-    </table>
-  <% end %>
+        <%= form_with model: @address, url: buy_address_path do |f| %><!--url(遷移先):public/buy_addresses#update-->
+          <table border="0" width="900" class="mx-auto">
+            <tr height="50">
+              <th width="100">郵便番号</th>
+              <td width="400"><%= f.text_field :postal_code%></td>
+            </tr>
+            
+            <tr height="50">
+              <th>住所</th>
+              <td><%= f.text_area :address, size: "50" %></td>
+            </tr>
+            
+            <tr height="50">
+              <th>宛名</th>
+              <td><%= f.text_field :name %></td>
+              <td><%= f.submit '変更内容を保存', class: "btn btn-success" %></td>
+            </tr>
+          </table>
+        <% end %>
+    </div>
+  </div>
+</div>
 <br>

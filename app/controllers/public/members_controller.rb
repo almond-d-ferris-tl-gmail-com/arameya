@@ -35,8 +35,8 @@ class Public::MembersController < ApplicationController
     # is_deletedカラムをtrueに変更することにより削除フラグを立てる
     @member.update(is_deleted: true)
     reset_session
-    flash[:notice] = "退会処理が完了しました"
-    redirect_to root_path#public/homes#top
+    # flash[:notice] = "退会処理が完了しました"
+    redirect_to members_complete_path #public/members#complete
   end
 
   #投稿データのストロングパラメータ(セキュリティに関係する)

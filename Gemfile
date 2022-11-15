@@ -63,3 +63,6 @@ gem 'net-smtp'
 
 # ページネーション
 gem 'kaminari','~> 1.2.1'
+
+# enum
+gem "enum_help"
