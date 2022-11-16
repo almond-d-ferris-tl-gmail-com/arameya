@@ -4,28 +4,26 @@ ja:
       payment_method:
         credit_card: "クレジットカード"
         transfer: "銀行振込"
-      status:
+      order_status:
         waiting: "入金待ち"
-        confirming: "入金確認"
-        making: "製作中"
+        confirming: "入金確認済み"
         preparing: "発送準備中"
         sent: "発送済み"
     order_detail:
-      making_status:
-        ban_making: "製作不可"
-        waiting: "製作待ち"
-        making: "製作中"
-        made: "製作完了"
+      arranging_status:
+        ban_preparing: "商品準備不可"
+        preparing: "商品準備中"
+        prepared: "商品準備完了"
   devise:
     sessions:
-      customer:
+      member:
         signed_in: "ログインに成功しました"
         signed_out: "ログアウトに成功しました"
       admin:
         signed_in: "管理者ログインに成功しました"
         signed_out: "管理者ログアウトに成功しました"
     registrations:
-      customer:
+      member:
         signed_up: "サインインに成功しました"
   errors:
     messages:
@@ -33,7 +31,7 @@ ja:
   activerecord:
     errors:
       models:
-        customer:
+        member:
           attributes:
             email:
               taken: "はすでに使われています"

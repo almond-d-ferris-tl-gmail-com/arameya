@@ -27,7 +27,7 @@ resources :sell_orders, only: [:index, :show, :update]
 resources :sell_items, only: [:index, :new, :show, :edit, :create, :update, :destroy]
 
 # orders#showよりも上に記述しないとcompleteがid扱いされる
-get 'buy_orders/comfirm'
+post 'buy_orders/comfirm'
 get 'buy_orders/complete'
 resources :buy_orders, only: [:new, :index, :show, :create]
 

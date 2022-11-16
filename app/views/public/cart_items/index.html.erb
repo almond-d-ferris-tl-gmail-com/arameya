@@ -21,8 +21,8 @@
       <% @cart_items.each do |cart_item| %>
       <% @total = @total + cart_item.subtotal_price %><!--小計を足していく-->
         <tr height="80">
-          <td><%= cart_item.item.member.last_name %><%= cart_item.item.member.first_name %></td>
-          <td><%= image_tag cart_item.item.get_image, width: '80px', height: 'auto' %>　<%= cart_item.item.name %></td>
+          <td><%= cart_item.item.member.last_name %><%= cart_item.item.member.first_name %></td><!--販売元-->
+          <td><%= image_tag cart_item.item.get_image, width: '80px', height: 'auto' %>　<%= cart_item.item.name %></td><!--商品画像--><!--商品名-->
           <td class="text-right"><%= cart_item.item.tax_included_price.to_s(:delimited) %></td><!--税込--><!--to_s(:delimited)→文字列に変換してカンマをつける-->
           
         <!--プルダウンの実装-->
@@ -42,8 +42,8 @@
       <% end %>
       
       <tr height="50">
-        <th class="text-center" bgcolor="lightgray" width="150" colspan="5">合計金額</th>
-        <td class="text-right" width="200"><%= @total.to_s(:delimited) %></td><!--22行目で計算済-->
+        <th class="text-center" bgcolor="lightgray" colspan="5">合計金額</th>
+        <td class="text-right"><b><%= @total.to_s(:delimited) %></td></b><!--22行目で計算済-->
         <td></td>
       </tr>
     </tbody>

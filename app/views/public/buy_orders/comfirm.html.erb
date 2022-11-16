@@ -1,53 +1,39 @@
-<!--<h1>Public::BuyOrders#comfirm</h1>-->
+<!--<h2>Public::BuyOrders#comfirm</h2>-->
 <!--<p>Find me in app/views/public/buy_orders/comfirm.html.erb</p>-->
 <br>
-<h1><span style="background-color:lightgray" class="m-5">　注文情報確認　</span></h1>
+<h2><span style="background-color:lightgray" class="m-5">　注文情報確認　</span></h2>
 <br>
-<div class="container">
-  <div class="row">
-    <div class="col-9"><!--左側-->
-    <table border="1" class="mx-auto">
-      <thead>
-        <tr bgcolor="lightgray" height="50">
-          <th width="800">商品名</th>
-          <th width="150">単価(税込)</th>
-          <th width="150">数量</th>
-          <th width="150">小計</th>
-        </tr>
-      </thead>
-  
-      <tbody>
-        <% @cart_items.each do |cart_item| %>
-        <% @total_payment = @total_payment + cart_item.subtotal_price %><!--小計を足していく-->
-          <tr height="100">
-            <td><%= image_tag cart_item.item.get_image %><%= cart_item.item.name %></td><!--商品画像--><!--商品名-->
-            <td><%= cart_item.item.tax_included_price.to_s(:delimited) %></td><!--税込--><!--to_s(:delimited)→文字列に変換してカンマをつける-->
-            <td><%= cart_item.amount %></td><!--数量-->
-            <td><%= cart_item.subtotal_price.to_s(:delimited) %></td><!--小計-->
-          </tr>      
-        <% end %>
-      </tbody>
-    </table>
-    </div><!--col-9-->
+  <table border="1" class="mx-auto">
+    <thead>
+      <tr bgcolor="lightgray" height="50">
+        <th class="text-center" width="200">販売元</th>
+        <th class="text-center" width="500">商品名</th>
+        <th class="text-center" width="100">単価(税込)</th>
+        <th class="text-center" width="100">数量</th>
+        <th class="text-center" width="100">送料</th>
+        <th class="text-center" width="100">小計</th>
+      </tr>
+    </thead>
 
-    <div class="col-3"><!--右側-->
-      <table border="1">
-          <tr height="50">
-            <td bgcolor="lightgray" width="150"><b>送料</b></td>
-            <td width="150"><%= @shipping_cost %></td>
-          </tr>
-          <tr height="50">
-            <td bgcolor="lightgray"><b>商品合計</b></td>
-            <td><%= @total_payment.to_s(:delimited) %></td>
-          </tr>
-          <tr height="50">
-            <td bgcolor="lightgray"><b>請求金額</b></td>
-            <td><%= (@total_payment + @shipping_cost).to_s(:delimited) %></td>
-          </tr>      
-      </table>
-    </div><!--col-3-->
-  </div><!--row-->
-</div><!--container-->
+    <tbody>
+      <% @cart_items.each do |cart_item| %>
+      <% @total_payment = @total_payment + cart_item.subtotal_price %><!--小計を足していく-->
+        <tr height="80">
+          <td><%= cart_item.item.member.last_name %><%= cart_item.item.member.first_name %></td><!--販売元-->
+          <td><%= image_tag cart_item.item.get_image %>　<%= cart_item.item.name %></td><!--商品画像--><!--商品名-->
+          <td class="text-right"><%= cart_item.item.tax_included_price.to_s(:delimited) %></td><!--税込--><!--to_s(:delimited)→文字列に変換してカンマをつける-->
+          <td class="text-right"><%= cart_item.amount %></td><!--数量-->
+          <td class="text-right"><%= cart_item.item.postage.to_s(:delimited) %></td><!--送料-->
+          <td class="text-right"><%= cart_item.subtotal_price.to_s(:delimited) %></td><!--小計-->
+        </tr>      
+      <% end %>
+        
+        <tr height="50">
+          <th class="text-center" bgcolor="lightgray" colspan="5">合計金額</th>
+          <td class="text-right"><b><%= @total_payment.to_s(:delimited) %></b></td><!--23行目で計算済-->
+        </tr>
+    </tbody>
+  </table>
 <br>
 
   <table border="0" style="display:flex; justify-content:center">
@@ -57,7 +43,7 @@
       </tr>
 
       <tr>
-        <td height="50"><h3><b>お届け先</b></h3></td>
+        <td height="50"><h3><b>配送先</b></h3></td>
         <td>　　〒<%= @order.postal_code %>　<%= @order.address %></td>
       </tr>
       
@@ -79,6 +65,6 @@
     <%= f.hidden_field :shipping_cost %>
     <%= f.hidden_field :total_payment, value: @total_payment %>
     <%= f.hidden_field :payment_method %>
-    <%= f.hidden_field :status %>
+    <%= f.hidden_field :order_status %>
   <% end %>
 <br>

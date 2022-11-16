@@ -1,7 +1,7 @@
-<!--<h1>Public::BuyOrders#new</h1>-->
+<!--<h2>Public::BuyOrders#new</h2>-->
 <!--<p>Find me in app/views/public/buy_orders/new.html.erb</p>-->
 <br>
-<h1><span style="background-color:lightgray" class="m-5">　注文情報入力　</span></h1>
+<h2><span style="background-color:lightgray" class="m-5">　注文情報入力　</span></h2>
 <br>
 
 <%= form_with model: @order_new, url: buy_orders_comfirm_path do |f| %><!--url(遷移先):public/buy_orders#comfirm-->
@@ -15,7 +15,7 @@
       <td><!--ラジオボタン-->
           <!--クレジットカード-->
           　　<%= f.radio_button :payment_method, Order.payment_methods.key(0), {:checked => true} %><!--{:checked => true}→初期選択-->
-              <%= f.label :payment_method, Order.payment_methods_i18n[:credit_card] %><!--i18n→日本語に変換する-->
+          <b><%= f.label :payment_method, Order.payment_methods_i18n[:credit_card] %></b><!--i18n→日本語に変換する-->
       </td>
     </tr>
       
@@ -23,18 +23,18 @@
       <td>
           <!--銀行振込-->
           　　<%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
-              <%= f.label :payment_method, Order.payment_methods_i18n[:transfer]%><!--i18n→日本語に変換する-->
+          <b><%= f.label :payment_method, Order.payment_methods_i18n[:transfer]%></b><br><br><!--i18n→日本語に変換する-->
       </td>
     </tr>
     
     <tr>
-      <td height="50"><h3><b>お届け先</b></h3></td>
+      <td height="50"><h3><b>配送先</b></h3></td>
     </tr>
     
     <tr>
       <td><!--ラジオボタン-->
         　　<%= f.radio_button :select_address, 0, {:checked => true} %><!--{:checked => true}→初期選択-->
-          <%= f.label :select_address, "ご自身の住所" %>
+          <b><%= f.label :select_address, "ご自身の住所" %></b>
       </td>
     </tr>
 
@@ -46,27 +46,27 @@
 
      <tr>
       <td><!--カスタマー氏名-->
-          　　　　<%= @member.last_name %> <%= @member.first_name %>
+          　　　　<%= @member.last_name %> <%= @member.first_name %><br><br>
       </td>
     </tr>
    
     <tr>
       <td>
         　　<%= f.radio_button :select_address, 1 %>
-          <%= f.label :select_address, "登録済住所から選択" %>
+          <b><%= f.label :select_address, "登録済住所から選択" %></b>
       </td>
     </tr>
-      
+
     <tr>
       <td colspan="2"><!--プルダウン-->
-          　　　　<%= f.select :address_id, options_from_collection_for_select(@addresses, :id, :address_display) %>
+          　　　　<%= f.select :address_id, options_from_collection_for_select(@addresses, :id, :address_display) %><br><br>
       </td>
     </tr>
-    
+
     <tr>
       <td>
         　　<%= f.radio_button :select_address, 2 %>
-          <%= f.label :select_address, "新しいお届け先" %>
+          <b><%= f.label :select_address, "新しいお届け先" %></b>
       </td>
     </tr>
     
