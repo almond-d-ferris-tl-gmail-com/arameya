@@ -23,7 +23,7 @@
           <td><%= order.name %></td>
           <!--order.amountだとorderテーブルのamountカラムになってしまう。その注文に紐づいている注文商品数-->
           <td><%= order.order_details.sum(:amount) %></td><!--個人の注文数量総計-->
-          <td><%= order.status_i18n %></td><!--i18n→日本語に変換する-->
+          <td><%= order.order_status_i18n %></td><!--i18n→日本語に変換する-->
         </tr>
     <% end %>
   </table>

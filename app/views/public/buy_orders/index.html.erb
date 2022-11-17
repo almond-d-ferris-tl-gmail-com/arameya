@@ -30,7 +30,7 @@
           </td>
           
           <td width="100"><%= order.total_payment.to_s(:delimited) %></td><!--支払金額--><!--to_s(:delimited)→文字列に変換してカンマをつける-->
-          <td width="150"><%= order.status_i18n %></td><!--ステータス--><!--i18n→日本語に変換する-->
+          <td width="150"><%= order.order_status_i18n %></td><!--ステータス--><!--i18n→日本語に変換する-->
           <td width="150" align="center"><!--注文詳細-->
             <!--遷移先：public/buy_orders#show(注文履歴詳細)-->
             <%= link_to "表示する", buy_order_path(order.id), class: "btn btn-primary" %>　　

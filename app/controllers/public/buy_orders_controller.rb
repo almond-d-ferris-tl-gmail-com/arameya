@@ -54,17 +54,17 @@ class Public::BuyOrdersController < ApplicationController
       # ここに至るまでの間にチェックは済んでいるが、念の為IF文で分岐させる
           cart_items.each do |cart|
           # 取り出したカートアイテムの数分繰り返す
-          # order_itemにも一緒にデータを保存する必要があるのでここで保存する
+          # order_detailにも一緒にデータを保存する必要があるのでここで保存する
           # 購入が完了したらカート情報は削除するのでこちらに保存する
           # /arameya/db/schema.rbのorder_detailsテーブルと合わせる
-          order_item = OrderDetail.new
-          order_item.item_id = cart.item_id
-          order_item.order_id = @create_order.id
-          order_item.price = cart.item.price#税込 cart.priceだとカートに税込カラムがないといけない→item_idがある→アソシエーションでつなげる
-          order_item.amount = cart.amount#数量
-          #order_item.arranging_status = cart.arranging_status#準備ステータス
+          order_detail = OrderDetail.new
+          order_detail.item_id = cart.item_id
+          order_detail.order_id = @create_order.id
+          order_detail.price = cart.item.price#税込 cart.priceだとカートに税込カラムがないといけない→item_idがある→アソシエーションでつなげる
+          order_detail.amount = cart.amount#数量
+          order_detail.arranging_status = 0#準備ステータス
           # カート情報を削除するので item との紐付けが切れる前に保存する
-          order_item.save
+          order_detail.save
           end
           # cart_items.destroy_all#データ削除の遷移先(public/cart_items#destroy_all)
         redirect_to buy_orders_complete_path#public/buy_orders#complete(注文確定(サンクス))

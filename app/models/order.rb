@@ -17,8 +17,8 @@ class Order < ApplicationRecord
     enum payment_method: { credit_card: 0, transfer: 1 }
     
     #/arameya/config/locales/ja.yml
-    #受注ステータス(入金待ち: 0, 入金確認: 1, 製作中: 2, 発送準備中: 3, 発送済み: 4)
-    enum status: { waiting: 0, confirming: 1, making: 2, preparing: 3, sent: 4}
+    #受注ステータス(入金待ち: 0, 入金確認済み: 1, 発送準備中: 2, 発送済み: 3)
+    enum order_status: { waiting: 0, confirming: 1, preparing: 2, sent: 3}
     
     def subtotal_price#小計の計算　.to_i→整数に変換して小数点を切り捨てる
         (item.tax_included_price * amount).to_i
