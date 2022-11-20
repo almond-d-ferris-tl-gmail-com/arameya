@@ -18,11 +18,10 @@ class Public::BuyItemsController < ApplicationController
   end
   
   private
-  
-  def ensure_correct_user
+    def ensure_correct_member # 検索機能
     @item = Item.find(params[:id])
-    unless @item.member == current_member
-      redirect_to buy_items_path # public/buy_items#index
-    end  
-  end
+      unless @item.member == current_member
+        redirect_to buy_items_path # public/buy_items#index
+      end  
+    end
 end

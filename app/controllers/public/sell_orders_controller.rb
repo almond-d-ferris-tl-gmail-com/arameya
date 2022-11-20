@@ -10,7 +10,7 @@ class Public::SellOrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @item = Item.find(params[:id])
+    # @item = Item.find(params[:id])
     @order_details = @order.order_details
   end
   

@@ -47,4 +47,11 @@ class Admin::GenresController < ApplicationController
   def admin_genre_params#update
     params.require(:genre).permit(:name)
   end
+  
+  def ensure_correct_member # 検索機能
+    @genre = Genre.find(params[:id])
+    unless @genre.member == current_member
+      redirect_to buy_items_path # public/buy_items#index
+    end  
+  end
 end

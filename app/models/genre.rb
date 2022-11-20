@@ -5,5 +5,18 @@ class Genre < ApplicationRecord
     #genreから見てitemは多(n)→「has_many :items, dependent: :destroy」を記述する
     #has_many:・・・テーブル同士を関連付ける、dependent(依存): :destroy・・・親モデルの削除時に、紐づいている子モデルも一緒に削除される
     has_many :items, dependent: :destroy
+
+# 検索機能
+  def self.search_for(content, method)
+    if method == 'perfect'
+      Genre.where(title: content)
+    elsif method == 'forward'
+      Genre.where('title LIKE ?', content+'%')
+    elsif method == 'backward'
+      Genre.where('title LIKE ?', '%'+content)
+    else
+      Genre.where('title LIKE ?', '%'+content+'%')
+    end
+  end
     
 end

@@ -8,7 +8,7 @@
   <table border="0" class="mx-auto">
     <tr>
       <td height="50" width="200">購入者</td>
-      <td width="300"><%= @order.customer.last_name %> <%= @order.customer.first_name %></td>
+      <td width="300"><%= @order.member.last_name %> <%= @order.member.first_name %></td>
     </tr>
     <tr>
       <td height="50">注文日</td>
@@ -31,7 +31,7 @@
       <td height="50">注文ステータス</td><!--プルダウン-->
       <td><!--遷移先:public/sell_orders#update-->
           <%= form_with model: @order, url: sell_order_path(@order.id), method: :patch, local: true do |f| %>
-            <%= f.select :status, Order.statuses.keys.map {|k| [I18n.t("enums.order.status.#{k}"), k]} %>
+            <%= f.select :order_status, Order.order_statuses.keys.map {|k| [I18n.t("enums.order.status.#{k}"), k]} %>
             <!--ブラウザには日本語で表示→英語でデータを渡すために、再度英語に変換する-->
           <%= f.submit "更新" , class: "btn btn-success" %>
           <% end %>
@@ -69,7 +69,7 @@
               <!--製作ステータス-->
               <%= form_with model: order_detail, url: sell_order_detail_path(order_detail.id), method: :patch, local: true do |f| %><!--public/sell_order_details#update-->
               <!--ブラウザには日本語で表示→英語でデータを渡すために、再度英語に変換する-->
-                <td><%= f.select :making_status, OrderDetail.making_statuses.keys.map {|k| [I18n.t("enums.order_detail.making_status.#{k}"), k]} %>
+                <td><%= f.select :arranging_status, OrderDetail.arranging_statuses.keys.map {|k| [I18n.t("enums.order_detail.making_status.#{k}"), k]} %>
                     <%= f.submit "更新", class: "btn btn-success" %>
                 </td>
               <% end %>
