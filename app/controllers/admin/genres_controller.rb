@@ -45,7 +45,7 @@ class Admin::GenresController < ApplicationController
   
   private#editで編集可能部分
   def admin_genre_params#update
-    params.require(:genre).permit(:name)
+    params.require(:genre).permit(:name)# (:name, genre_ids: [])
   end
   
   def ensure_correct_member # 検索機能

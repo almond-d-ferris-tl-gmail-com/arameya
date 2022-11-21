@@ -48,7 +48,7 @@
               <% elsif member_signed_in? %><!--会員側ログイン後 member→テーブル名-->
 
                 <li><!--検索窓-->
-                  <%= render "/searches/form" %>
+                  <%= render "/public/searches/form" %>
                 </li>
 
                 <li class="d-flex align-items-center justify-content-center text-white">
@@ -100,7 +100,7 @@
               <% else %><!--ログイン前-->
 
                 <li><!--検索窓-->
-                  <%= render "/searches/form" %>
+                  <%= render "/public/searches/form" %>
                 </li>
 
                 <li class="nav-item"><!--public/homes#about-->

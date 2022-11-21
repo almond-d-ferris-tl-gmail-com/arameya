@@ -1,8 +1,5 @@
 <!--<h1>Public::Searches#search</h1>-->
 <!--<p>Find me in app/views/public/searches/search.html.erb</p>-->
 
-<% if @model == 'genre' %>
-  <%= render '/buy_items', genres: @records %><!--public/buy_items#index-->
-<% elsif @model == 'item' %>
-  <%= render '/buy_items', items: @records %><!--public/buy_items#index-->
-<% end %>
+<!--genre/itemどちらで検索しても結果内容は同じなのでif文で分けなくてOK-->
+<%= render '/public/buy_items/index', items: @records %><!--検索結果を表示する画面-->

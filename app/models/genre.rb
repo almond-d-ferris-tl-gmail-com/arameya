@@ -7,16 +7,16 @@ class Genre < ApplicationRecord
     has_many :items, dependent: :destroy
 
 # 検索機能
+# Itemとgenreを左外部結合する(itemにgenreを繋げてgenreの名前を検索する)
   def self.search_for(content, method)
     if method == 'perfect'
-      Genre.where(title: content)
+      Item.left_joins(:genre).where(genre:{name: content})
     elsif method == 'forward'
-      Genre.where('title LIKE ?', content+'%')
+      Item.left_joins(:genre).where('genres.name LIKE ?', content+'%')
     elsif method == 'backward'
-      Genre.where('title LIKE ?', '%'+content)
+      Item.left_joins(:genre).where('genres.name LIKE ?', '%'+content)
     else
-      Genre.where('title LIKE ?', '%'+content+'%')
+      Item.left_joins(:genre).where('genres.name LIKE ?', '%'+content+'%')
     end
   end
-    
 end

@@ -1,8 +1,9 @@
 <br>
-<h2><span style="background-color:lightgray" class="m-5">　[購入]商品一覧　</span><span style="font-size:20px">(全<%= @items_max %>件)</span></h2>
+<h2><span style="background-color:lightgray" class="m-5">　[購入]商品一覧　</span><span style="font-size:20px"></span></h2>
 
   <div class="m-5 d-flex flex-wrap"><!--flex-wrap→改行する-->
-    <% @items.each do |item| %>
+    <!--genreとitemの検索結果(共通ページ)-->
+    <% items.each do |item| %>
       <%= link_to buy_item_path(item.id) do %><!--画像、商品名、金額に商品詳細(遷移先:public/buy_items#show)-->
         <% if item.image.attached? %>
           <%= image_tag item.image, width: '150px', height: 'auto' %><br>
@@ -15,9 +16,8 @@
         円<br>
         <%#= item.member.name %><br><!--販売者名-->
       <% end %>
-      　　
     <% end %>
   </div>
-<br><br>
-<div class="d-flex justify-content-center"><%= paginate @items %></div>
+<!--<br><br>-->
+<!--<div class="d-flex justify-content-center"><%#= paginate item %></div>-->
 <br>
