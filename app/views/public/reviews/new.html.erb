@@ -1,0 +1,70 @@
+<!--<h1>Public::Reviews#new</h1>-->
+<!--<p>Find me in app/views/public/reviews/new.html.erb</p>-->
+<br>
+<h2><span style="background-color:lightgray" class="m-5">　レビュー・評価新規作成　</span></h2>
+<br>
+<table border="0" class="mx-auto" width="1200">
+  <tr>
+    <th height="50" width="180">購入元</th>
+    <td><%#= @order.item.member.last_name %> <%#= @order.item.member.first_name %></td>
+  </tr>
+  <tr>
+    <th>購入商品</th>
+    <%# @order.order_details.each do |order| %>
+    <td><%#= order.item.name %><br></td><!--商品名-->
+    <%# end %>
+  </tr>
+
+<%= form_with model: @review_new, url: reviews_path , method: :patch do |f| %><!--遷移先:public/reviews#create-->
+  <tr>
+    <th height="60">件名</th>
+    <td><%= f.text_field :review_title, autocomplete: "review_title", size: "50" %></td>
+  </tr>
+  <tr>
+    <th>評価</th>
+    <td>
+        <!--star.form-group-->
+       <%= f.label :rate %>
+       <%= f.hidden_field :rate, id: :review_star %>
+        <!--star がポイントです(jsを呼ぶ)-->
+
+        javascript:
+         $('#star').raty({
+           size: 36,
+           starOff: "#{asset_path('star-off.png')}",
+           starOn: "#{asset_path('star-on.png')}",
+           starHalf: "#{asset_path('star-half.png')}",
+           scoreName: 'review[rate]',<!--reviewカラムに保存するので忘れないように-->
+           half: true, <!--★の半分の入力を行う-->
+         });
+        <!--ダブルクオーテーションで囲む-->
+        
+        <!--評価機能追加-->
+    <div id="rate_<%= book.id %>"></div>
+    <script>
+    $(document).on('turbolinks:load', function() {
+        let raty_<%= book.id %> = document.querySelector('#rate_<%= book.id %>');
+        rate_<%= book.id %>.innerHTML = ""
+        let option_<%= book.id %> = {  
+            starOn: "<%= asset_path('star-on.png') %>",
+            starOff: "<%= asset_path('star-off.png') %>",
+            starHalf: "<%= asset_path('star-half.png') %>",
+            score: "<%= book.rate %>",
+            readOnly: true,
+          };
+        raty(raty_<%= book.id %> ,option_<%= book.id %>);
+    });
+    </script>
+  </td>
+  </tr>
+  <tr>
+    <th>レビュー内容</th>
+    <td><%= f.text_area :review_body, autocomplete: "review_body", size: "80×500" %></td>
+  </tr>
+  <tr>
+    <th></th>
+    <td><%= f.submit '投稿する', class: "btn btn-success" %></td>
+  </tr>
+</table>
+<% end %>
+<br>

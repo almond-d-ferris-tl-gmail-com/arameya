@@ -18,6 +18,8 @@ scope module: :public do
 #namespace→scope moduleに変更
 #URLは変えず、ファイル構成だけ指定のパスにする(フォルダ名にはpublicをつけて、URLにはつけない)
 
+resources :reviews, only: [:index, :new, :show, :edit, :create, :update, :destroy]
+
 get '/search', to: 'searches#search'
 
 resources :sell_order_details, only: [:update]
