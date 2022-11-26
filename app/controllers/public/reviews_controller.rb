@@ -20,7 +20,7 @@ class Public::ReviewsController < ApplicationController
     #newで新規登録後、一覧(index)に遷移する
     @review_new = Review.new(review_params)#updateのパラメータ
     @review_new.member_id = current_member.id
-    if @review_new.save
+    if @review_new.save!
       redirect_to reviews_path#indexのパス
     else
       render :index
@@ -47,7 +47,7 @@ class Public::ReviewsController < ApplicationController
   
   private#editで編集可能部分
   def review_params #updateのパラメータ
-    params.require(:review).permit(:review_title, :review_body, :reviews, :rate)
+    params.require(:review).permit(:review_title, :review_body, :star)
   end
 
 end

@@ -3,6 +3,7 @@
 <br>
 <h2><span style="background-color:lightgray" class="m-5">　レビュー・評価新規作成　</span></h2>
 <br>
+<%= form_with model: @review_new, url: reviews_path do |f| %><!--遷移先:public/reviews#create-->
 <table border="0" class="mx-auto" width="1200">
   <tr>
     <th height="50" width="180">購入元</th>
@@ -15,7 +16,6 @@
     <%# end %>
   </tr>
 
-<%= form_with model: @review_new, url: reviews_path , method: :patch do |f| %><!--遷移先:public/reviews#create-->
   <tr>
     <th height="60">件名</th>
     <td><%= f.text_field :review_title, autocomplete: "review_title", size: "50" %></td>
@@ -23,38 +23,23 @@
   <tr>
     <th>評価</th>
     <td>
-        <!--star.form-group-->
-       <%= f.label :rate %>
-       <%= f.hidden_field :rate, id: :review_star %>
-        <!--star がポイントです(jsを呼ぶ)-->
-
-        javascript:
-         $('#star').raty({
-           size: 36,
-           starOff: "#{asset_path('star-off.png')}",
-           starOn: "#{asset_path('star-on.png')}",
-           starHalf: "#{asset_path('star-half.png')}",
-           scoreName: 'review[rate]',<!--reviewカラムに保存するので忘れないように-->
-           half: true, <!--★の半分の入力を行う-->
-         });
-        <!--ダブルクオーテーションで囲む-->
-        
         <!--評価機能追加-->
-    <div id="rate_<%= book.id %>"></div>
-    <script>
-    $(document).on('turbolinks:load', function() {
-        let raty_<%= book.id %> = document.querySelector('#rate_<%= book.id %>');
-        rate_<%= book.id %>.innerHTML = ""
-        let option_<%= book.id %> = {  
-            starOn: "<%= asset_path('star-on.png') %>",
+      <div class="form-group row" id="reviews">
+        <div id="star"></div>
+      </div>
+      <script>
+        $(document).on('turbolinks:load', function() {
+        let raty_elem = document.querySelector('#star');
+        raty_elem.innerHTML = ""  // scriptファイルをどのidの部分に配置するかを指定
+        let option = {  
+            starOn: "<%= asset_path('star-on.png') %>",  //星画像の指定などのオプションをここに記述,
             starOff: "<%= asset_path('star-off.png') %>",
             starHalf: "<%= asset_path('star-half.png') %>",
-            score: "<%= book.rate %>",
-            readOnly: true,
+            scoreName: "review[star]"
           };
-        raty(raty_<%= book.id %> ,option_<%= book.id %>);
-    });
-    </script>
+        raty(raty_elem,option);
+       });
+      </script>
   </td>
   </tr>
   <tr>

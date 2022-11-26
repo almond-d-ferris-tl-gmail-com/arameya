@@ -55,7 +55,6 @@ ActiveRecord::Schema.define(version: 2022_11_24_110008) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer "information_message_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
@@ -105,15 +104,12 @@ ActiveRecord::Schema.define(version: 2022_11_24_110008) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer "review_id"
-    t.integer "business_message_id"
-    t.integer "information_message_id"
     t.string "last_name", null: false
     t.string "first_name", null: false
     t.string "last_name_kana", null: false
     t.string "first_name_kana", null: false
-    t.string "company"
-    t.string "department"
+    t.string "company", null: false
+    t.string "department", null: false
     t.string "postal_code", null: false
     t.string "address", null: false
     t.string "telephone_number", null: false
@@ -148,10 +144,10 @@ ActiveRecord::Schema.define(version: 2022_11_24_110008) do
   end
 
   create_table "reviews", force: :cascade do |t|
+    t.integer "member_id", null: false
     t.string "review_title", null: false
     t.text "review_body", null: false
-    t.float "reviews", default: 0.0, null: false
-    t.float "rate", default: 0.0, null: false
+    t.float "star", default: 0.0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

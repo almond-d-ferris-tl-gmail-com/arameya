@@ -66,3 +66,9 @@ gem 'kaminari','~> 1.2.1'
 
 # enum
 gem "enum_help"
+
+# rails-i18n
+gem 'rails-i18n'
+
+# 評価機能
+gem 'jquery-rails'
