@@ -20,6 +20,7 @@ class Public::ReviewsController < ApplicationController
     #newで新規登録後、一覧(index)に遷移する
     @review_new = Review.new(review_params)#updateのパラメータ
     @review_new.member_id = current_member.id
+    binding.pry # ターミナルに「Review.create(review_params)」を入力する
     if @review_new.save!
       redirect_to reviews_path#indexのパス
     else

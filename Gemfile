@@ -72,3 +72,6 @@ gem 'rails-i18n'
 
 # 評価機能
 gem 'jquery-rails'
+
+# デバッグツール
+gem 'pry-rails'

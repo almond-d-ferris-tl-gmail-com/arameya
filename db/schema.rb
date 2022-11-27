@@ -86,7 +86,6 @@ ActiveRecord::Schema.define(version: 2022_11_24_110008) do
 
   create_table "items", force: :cascade do |t|
     t.integer "genre_id", null: false
-    t.integer "review_id"
     t.integer "member_id", null: false
     t.string "name", null: false
     t.boolean "used_condition", default: false, null: false
@@ -145,6 +144,7 @@ ActiveRecord::Schema.define(version: 2022_11_24_110008) do
 
   create_table "reviews", force: :cascade do |t|
     t.integer "member_id", null: false
+    t.integer "item_id", null: false
     t.string "review_title", null: false
     t.text "review_body", null: false
     t.float "star", default: 0.0, null: false
