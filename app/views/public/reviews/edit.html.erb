@@ -1,2 +1,69 @@
-<h1>Public::Reviews#edit</h1>
-<p>Find me in app/views/public/reviews/edit.html.erb</p>
+<!--<h1>Public::Reviews#edit</h1>-->
+<!--<p>Find me in app/views/public/reviews/edit.html.erb</p>-->
+<!--会員マイページサイドメニューバー グリッドシステム設定はそれぞれの本体部分で行う-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="offset-xl-1"></div>
+    <div class="col-xl-2">
+      <%= render "/layouts/member_mypage", member:current_member %>
+    </div>
+    <div class="col-xl-9">
+<br>
+
+<h2><span style="background-color:lightgray" class="m-5">　レビュー・評価編集　</span></h2>
+<br>
+<!--url(遷移先):public/reviews#update(変更メソッドはpatch)-->
+<%= form_with model: @review, url: review_path, method: :patch do |f| %>
+<table border="0" class="mx-auto" width="1200">
+  <tr>
+    <th height="50" width="180">購入元</th>
+    <td><%#= @order.item.member.last_name %> <%#= @order.item.member.first_name %></td>
+  </tr>
+  <tr>
+    <th>購入商品</th>
+    <% @order.order_details.each do |order| %>
+    <td>
+      <p><%#= @order.inspect %></p>
+      <p><%= order.item.name %></p>
+      <%= f.hidden_field :item_id, :value => order.item.id %>
+    </td><!--商品名-->
+    <% end %>
+  </tr>
+
+  <tr>
+    <th height="60">件名</th>
+    <td><%= f.text_field :review_title, autocomplete: "review_title", size: "50" %></td>
+  </tr>
+  <tr>
+    <th>評価</th>
+    <td>
+        <!--評価機能追加-->
+      <div class="form-group row" id="reviews">
+        <div id="star"></div>
+      </div>
+      <script>
+        $(document).on('turbolinks:load', function() {
+        let raty_elem = document.querySelector('#star');
+        raty_elem.innerHTML = ""  // scriptファイルをどのidの部分に配置するかを指定
+        let option = {  
+            starOn: "<%= asset_path('star-on.png') %>",  //星画像の指定などのオプションをここに記述,
+            starOff: "<%= asset_path('star-off.png') %>",
+            starHalf: "<%= asset_path('star-half.png') %>",
+            scoreName: "review[star]"
+          };
+        raty(raty_elem,option);
+       });
+      </script>
+  </td>
+  </tr>
+  <tr>
+    <th>レビュー内容</th>
+    <td><%= f.text_area :review_body, autocomplete: "review_body", size: "80×500" %></td>
+  </tr>
+  <tr>
+    <th></th>
+    <td><%= f.submit '編集内容を保存', class: "btn btn-success" %></td>
+  </tr>
+</table>
+<% end %>
+<br>

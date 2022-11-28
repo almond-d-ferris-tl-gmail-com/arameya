@@ -3,7 +3,7 @@
 <br>
 <h2><span style="background-color:lightgray" class="m-5">　注文履歴一覧　</span></h2>
 <br>
-  <table border="1" width="1200" class="mx-auto"><!--ボーダーを入れるときは←の設定する(widthはtdの総計)-->
+  <table border="1" width="1400" class="mx-auto"><!--ボーダーを入れるときは←の設定する(widthはtdの総計)-->
     <thead>
       <tr bgcolor="lightgray" style="text-align:center" height="50">
         <th>注文日</th>
@@ -12,7 +12,8 @@
         <th>支払金額</th>
         <th>ステータス</th>
         <th>注文詳細</th>
-        <th>レビュー</th>
+        <th colspan="2">レビュー</th>
+        <th></th>
       </tr>
     </thead>
 
@@ -36,9 +37,13 @@
             <!--遷移先：public/buy_orders#show(注文履歴詳細)-->
             <%= link_to "表示する", buy_order_path(order.id), class: "btn btn-primary" %>　　
           </td>
-          <td width="150" align="center"><!--レビュー-->
+          <td width="200" align="center"><!--レビュー-->
             <!--遷移先：public/reviews#new(レビュー新規作成)-->
-            <%= link_to "表示する", new_review_path, class: "btn btn-success" %>　　
+            <%= link_to "新規投稿する", new_review_path(order_id: order.id), class: "btn btn-success" %>
+          </td>
+          <td width="200" align="center"><!--レビュー-->
+            <!--遷移先：public/reviews#show(レビュー詳細)-->
+            <%#= link_to "投稿内容を見る", review_path(review.id), class: "btn btn-primary" %>
           </td>
         </tr>
       <% end %>

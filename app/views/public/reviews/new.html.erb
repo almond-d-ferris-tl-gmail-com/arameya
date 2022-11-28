@@ -11,9 +11,13 @@
   </tr>
   <tr>
     <th>購入商品</th>
-    <%# @order.order_details.each do |order| %>
-    <td><%#= order.item.name %><br></td><!--商品名-->
-    <%# end %>
+    <% @order.order_details.each do |order| %>
+    <td>
+      <p><%#= @order.inspect %></p>
+      <p><%= order.item.name %></p>
+      <%= f.hidden_field :item_id, :value => order.item.id %>
+    </td><!--商品名-->
+    <% end %>
   </tr>
 
   <tr>

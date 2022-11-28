@@ -1,6 +1,15 @@
 <!--<h1>Public::Reviews#index</h1>-->
 <!--<p>Find me in app/views/public/reviews/index.html.erb</p>-->
+<!--会員マイページサイドメニューバー グリッドシステム設定はそれぞれの本体部分で行う-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="offset-xl-1"></div>
+    <div class="col-xl-2">
+      <%= render "/layouts/member_mypage", member:current_member %>
+    </div>
+    <div class="col-xl-9">
 <br>
+
 <h2><span style="background-color:lightgray" class="m-5">　レビュー・評価一覧　</span></h2>
 <br>
   <table border="1" width="1200" class="mx-auto"><!--ボーダーを入れるときは←の設定する(widthはtdの総計)-->
@@ -23,7 +32,7 @@
           <!--.in_time_zone('Tokyo')→UTC(協定世界時刻のデフォルト値)をJST(日本時間)に換算する-->
           <!--.strftime("%Y-%m-%d %H:%M:%S")→UTCを消して時刻のフォーマットに変更する-->
           <%# byebug %>
-          <td width="300"><%#= review.item.member.last_name %><%#= review.item.member.first_name %></td><!--販売元-->
+          <td width="300"><%= review.item.member.last_name %><%= review.item.member.first_name %></td><!--販売元-->
           <td width="300"><%= link_to review.review_title, review_path(review.id) %></td><!--件名 path先:public/reviews#show-->
           
           <td width="170" align="center"><!--星評価-->

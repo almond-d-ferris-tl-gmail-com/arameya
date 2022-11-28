@@ -5,8 +5,8 @@ class Public::ReviewsController < ApplicationController
 
   def new #レビュー・評価新規作成
     @review_new = Review.new
-    # @order = Order.find(params[:id])
-  end  
+    @order = Order.find(params[:order_id])
+  end
     
   def index #レビュー・評価一覧
     @reviews = current_member.reviews.all
@@ -14,13 +14,20 @@ class Public::ReviewsController < ApplicationController
 
   def edit#レビュー・評価編集
     @review = Review.find(params[:id])
+    @order = Order.find(params[:id])
+  end
+
+  def show#レビュー・評価詳細
+    @review = Review.find(params[:id])
+    @order = Order.find(params[:id])
   end
 
   def create
     #newで新規登録後、一覧(index)に遷移する
     @review_new = Review.new(review_params)#updateのパラメータ
     @review_new.member_id = current_member.id
-    binding.pry # ターミナルに「Review.create(review_params)」を入力する
+    #byebug
+     #binding.pry # ターミナルに「Review.create(review_params)」を入力する
     if @review_new.save!
       redirect_to reviews_path#indexのパス
     else
@@ -48,7 +55,7 @@ class Public::ReviewsController < ApplicationController
   
   private#editで編集可能部分
   def review_params #updateのパラメータ
-    params.require(:review).permit(:review_title, :review_body, :star)
+    params.require(:review).permit(:review_title, :review_body, :star, :item_id)
   end
 
 end
