@@ -64,6 +64,8 @@ resources :genres, only: [:index, :edit, :create, :update, :destroy]
 resources :member_sells, only: [:index, :show]
 resources :member_buys, only: [:index, :show]
 resources :members, only: [:show, :edit, :update]
+resources :reviews, only: [:index, :show]
+
 get '/' => 'homes#top'
 end
 # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
