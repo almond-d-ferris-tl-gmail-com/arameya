@@ -1,7 +1,15 @@
-<!--<h1>Admin::Members#edit</h1>-->
+<!--<h2>Admin::Members#edit</h2>-->
 <!--<p>Find me in app/views/admin/members/edit.html.erb</p>-->
+<!--管理者側の会員サイドメニューバー グリッドシステム設定はそれぞれの本体部分で行う-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="offset-xl-1"></div>
+    <div class="col-xl-2">
+      <%= render "/layouts/admin_member_mypage" %>
+    </div>
+    <div class="col-xl-9">
 <br>
-<h1><span style="background-color:lightgray" class="m-5">　<%= @member.last_name %><%= @member.first_name %>さんの会員情報編集　</span></h1>
+<h2><span style="background-color:lightgray" class="m-5">　<%= @member.last_name %><%= @member.first_name %>さんの会員情報編集　</span></h2>
 <br>
   <%= form_with model: @member, url: admin_member_path(@member.id) do |f| %><!--url(遷移先):admin/members#update-->
 

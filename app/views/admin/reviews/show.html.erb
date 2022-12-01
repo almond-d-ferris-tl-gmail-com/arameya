@@ -1,2 +1,71 @@
-<h1>Admin::Reviews#show</h1>
-<p>Find me in app/views/admin/reviews/show.html.erb</p>
+<!--<h1>Admin::Reviews#show</h1>-->
+<!--<p>Find me in app/views/admin/reviews/show.html.erb</p>-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="offset-xl-1"></div>
+    <div class="col-xl-2">
+      <%= render "/layouts/admin_member_mypage" %>
+    </div>
+    <div class="col-xl-9">
+<br>
+      <h2><span class="m-5" style="background-color:lightgray">　<%= @member.last_name %><%= @member.first_name %>さんのレビュー・評価詳細　</span></h2>
+<br>
+        <table border="0" width="800" class="mx-auto">
+          <tr>
+            <th height="50" width="100">レビューID</th>
+            <td width="300"><%= @review.id %></td>
+          </tr>
+          <tr>
+            <th height="50">購入日時</th>
+            <td><%= @review.item.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
+                <!--.in_time_zone('Tokyo')→UTC(協定世界時刻のデフォルト値)をJST(日本時間)に換算する-->
+                <!--.strftime("%Y-%m-%d %H:%M:%S")→UTCを消して時刻のフォーマットに変更する-->
+          </tr>
+          <tr>
+            <th height="50">購入元</th>
+            <td><%= @review.item.member.last_name %><%= @review.item.member.first_name %></td>
+          </tr>
+          <tr>
+            <th height="50">購入商品</th>
+                <% @order.order_details.each do |order| %>
+                <td><%= order.item.name %></td>
+                  <%#= f.hidden_field :item_id, :value => order.item.id %>
+                <% end %>
+          </tr>
+          <tr>
+            <th height="50">件名</th>
+            <td><%= @review.review_title %></td>
+          </tr>
+          <tr>
+            <th height="50">レビュー投稿日時</th>
+            <td><%= @review.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
+                <!--.in_time_zone('Tokyo')→UTC(協定世界時刻のデフォルト値)をJST(日本時間)に換算する-->
+                <!--.strftime("%Y-%m-%d %H:%M:%S")→UTCを消して時刻のフォーマットに変更する-->
+          </tr>
+          <tr>
+            <th height="50">評価</th>
+            <td>
+                <div id="star-rate-<%= @review.id %>"></div>
+                <script>
+                    var elem = document.getElementById('star-rate-<%= @review.id %>');
+                    var opt = {  
+                    starOn: "<%= asset_path('star-on.png') %>",
+                    starOff: "<%= asset_path('star-off.png') %>",
+                    starHalf: "<%= asset_path('star-half.png') %>",
+                    half: true,
+                    readOnly: true,
+                    score: <%= @review.star %>,
+                    };
+                    raty(elem,opt);
+                </script>
+            </td>
+          </tr>
+          <tr>
+            <th height="50">レビュー内容</th>
+            <td><%= @review.review_body %></td>
+          </tr>
+        </table>
+    </div>
+  </div>
+</div>
+<br>

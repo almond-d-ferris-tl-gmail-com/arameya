@@ -1,2 +1,59 @@
-<h1>Admin::Reviews#index</h1>
-<p>Find me in app/views/admin/reviews/index.html.erb</p>
+<!--<h1>Admin::Reviews#index</h1>-->
+<!--<p>Find me in app/views/admin/reviews/index.html.erb</p>-->
+<!--管理者側の会員サイドメニューバー グリッドシステム設定はそれぞれの本体部分で行う-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="offset-xl-1"></div>
+    <div class="col-xl-2">
+      <%= render "/layouts/admin_member_mypage" %>
+    </div>
+    <div class="col-xl-9">
+<br>
+<h2><span style="background-color:lightgray" class="m-5">　<%= @member.last_name %><%= @member.first_name %>さんのレビュー・評価一覧　</span></h2>
+<br>
+  <table border="1" width="1200" class="mx-auto"><!--ボーダーを入れるときは←の設定する(widthはtdの総計)-->
+    <thead>
+      <tr bgcolor="lightgray" style="text-align:center" height="50">
+        <th>レビューID</th>
+        <th>レビュー投稿日時</th>
+        <th>購入元</th>
+        <th>件名</th>
+        <th>評価</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @reviews.each do |review| %>
+        <tr height="80">
+          <td width="100"><%= review.id %></td><!--レビューID-->
+          <td width="180"><%= review.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td><!--レビュー投稿日時-->
+          <!--.in_time_zone('Tokyo')→UTC(協定世界時刻のデフォルト値)をJST(日本時間)に換算する-->
+          <!--.strftime("%Y-%m-%d %H:%M:%S")→UTCを消して時刻のフォーマットに変更する-->
+          <%# byebug %>
+          <td width="300"><%= review.item.member.last_name %><%= review.item.member.first_name %></td><!--販売元-->
+          <td width="300"><%= link_to review.review_title, admin_member_review_path(@member.id, review.id) %></td><!--件名 path先:public/reviews#show-->
+          
+          <td width="170" align="center"><!--星評価-->
+           <div id="star-rate-<%= review.id %>"></div>
+             <script>
+            var elem = document.getElementById('star-rate-<%= review.id %>');
+            var opt = {  
+                starOn: "<%= asset_path('star-on.png') %>",
+                starOff: "<%= asset_path('star-off.png') %>",
+                starHalf: "<%= asset_path('star-half.png') %>",
+                half: true,
+                readOnly: true,
+                score: <%= review.star %>,
+              };
+              raty(elem,opt);
+            </script>
+          </td>
+
+          <!--遷移先：public/reviews#destroy-->
+          <td width="150" class="text-center"><%= link_to "削除する", admin_member_review_path(@member.id, review.id), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<br>
