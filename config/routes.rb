@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     scope module: :public do
         #namespace→scope moduleに変更
         #URLは変えず、ファイル構成だけ指定のパスにする(フォルダ名にはpublicをつけて、URLにはつけない)
+        resources :ad_mem_messages, only: [:index, :new, :show, :create, :update]
         
         resources :reviews, only: [:index, :new, :show, :edit, :create, :update, :destroy]
         
@@ -66,6 +67,7 @@ Rails.application.routes.draw do
         # 「会員個人が行なったレビュー・評価」を表示するためにmembersの中にreviewsを入れる(do-endで括る)
         # フォルダ構成はそのままだが、URLとprefixが変わる
         resources :members, only: [:show, :edit, :update] do
+            resources :ad_mem_messages, only: [:index, :new, :show, :create, :update]
             resources :reviews, only: [:index, :show, :destroy]
         end
         get '/' => 'homes#top'

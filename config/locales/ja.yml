@@ -14,6 +14,13 @@ ja:
         ban_preparing: "商品準備不可"
         preparing: "商品準備中"
         prepared: "商品準備完了"
+    ad_mem_message:
+      am_message_title:
+        option: "選択して下さい"
+        buy: "購入に関する問い合わせ"
+        sell: "販売に関する問い合わせ"
+        deal: "取引に関する問い合わせ"
+        others: "その他"
   devise:
     sessions:
       member:
