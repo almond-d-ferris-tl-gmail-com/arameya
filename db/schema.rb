@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_02_081256) do
+ActiveRecord::Schema.define(version: 2022_12_04_125741) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2022_12_02_081256) do
   create_table "ad_mem_messages", force: :cascade do |t|
     t.integer "member_id"
     t.integer "admin_id"
+    t.integer "room_id"
     t.integer "am_message_title", default: 0, null: false
     t.string "am_message_item", null: false
     t.text "am_message_body", null: false
@@ -159,6 +160,11 @@ ActiveRecord::Schema.define(version: 2022_12_02_081256) do
     t.string "review_title", null: false
     t.text "review_body", null: false
     t.float "star", default: 0.0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "rooms", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

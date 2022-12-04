@@ -14,7 +14,19 @@ class Public::AdMemMessagesController < ApplicationController
   end
 
   def show
-    @message = AdMemMessage.find(params[:id])
+    if current_member.id.to_i == params[:member_id].to_i
+      @admin_id = params[:admin_id]
+      @messages = Message.where(member_id: params[:member_id],admin_id: @admin_id).or(Message.where(member_id: params[:admin_id],admin_id: params[:member_id])).order(created_at: :asc)
+      unread_messages = Message.where(admin_opentime: nil,admin_id: current_member.id)
+      unread_messages.each do |unread_message|
+        unread_message.admin_opentime = Date.today.to_time
+        unread_message.save
+      end
+    else
+      flash[:notice] = "権限がありません"
+      redirect_to("/")
+    end
+    # @message = AdMemMessage.find(params[:id])
     # move_to_index_for_expired
     # @message = Message.new
     # @messages = Message.where(room_id: @room.id)
@@ -39,3 +51,46 @@ class Public::AdMemMessagesController < ApplicationController
   end
 
 end
+
+
+・・・
+
+  def index
+    # 送られたユーザーでないと表示できないように
+    if current_member.id.to_i == params[:id].to_i
+      @member = member.find_by(id: params[:id])
+　　　 # messageをしているユーザーのidを配列で取得その後に自分のは削除。これで一覧でどのユーザーに対してのDMかを表示させる
+      @message_member_ids = Message.where(admin_id: @member.id).or(Message.where(member_id: @member.id)).distinct.pluck(:member_id)
+      @message_member_ids.delete(@member.id)
+    else
+      flash[:notice] = "権限がありません"
+      redirect_to("/")
+    end
+  end
+  
+  def roomshow
+    if current_member.id.to_i == params[:member_id].to_i
+      @admin_id = params[:admin_id]
+      @messages = Message.where(member_id: params[:member_id],admin_id: @admin_id).or(Message.where(member_id: params[:admin_id],admin_id: params[:member_id])).order(created_at: :asc)
+      unread_messages = Message.where(admin_opentime: nil,admin_id: current_member.id)
+      unread_messages.each do |unread_message|
+        unread_message.admin_opentime = Date.today.to_time
+        unread_message.save
+      end
+    else
+      flash[:notice] = "権限がありません"
+      redirect_to("/")
+    end
+  end
+  def create
+    if current_member.id.to_i == params[:member_id].to_i
+      message = Message.new(content: params[:content],member_id: params[:member_id],admin_id: params[:admin_id])
+      if message.save
+        flash[:notice] = "送信しました！"
+        redirect_back(fallback_location: root_path)
+      else
+        redirect_to("/")
+        flash[:alert] = "投稿できませんでした"
+      end
+    end
+  end

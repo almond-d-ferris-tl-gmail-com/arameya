@@ -17,27 +17,19 @@ Rails.application.routes.draw do
     scope module: :public do
         #namespace→scope moduleに変更
         #URLは変えず、ファイル構成だけ指定のパスにする(フォルダ名にはpublicをつけて、URLにはつけない)
-        resources :ad_mem_messages, only: [:index, :new, :show, :create, :update]
-        
+        resources :rooms, only: [:index, :show]
+        resources :ad_mem_messages, only: [:create]
         resources :reviews, only: [:index, :new, :show, :edit, :create, :update, :destroy]
-        
         get '/search', to: 'searches#search'
-        
         resources :sell_order_details, only: [:update]
-        
         resources :sell_orders, only: [:index, :show, :update]
-        
         resources :sell_items, only: [:index, :new, :show, :edit, :create, :update, :destroy]
-        
         # orders#showよりも上に記述しないとcompleteがid扱いされる
         post 'buy_orders/comfirm'
         get 'buy_orders/complete'
         resources :buy_orders, only: [:new, :index, :show, :create]
-        
         resources :cart_items, only: [:index, :create, :update, :destroy]
-        
         resources :buy_items, only: [:index, :show]
-        
         resources :buy_addresses, only: [:index, :edit, :create, :update, :destroy]
         
         # membersはURLを変更するのでresourcesは使えない
@@ -67,11 +59,11 @@ Rails.application.routes.draw do
         # 「会員個人が行なったレビュー・評価」を表示するためにmembersの中にreviewsを入れる(do-endで括る)
         # フォルダ構成はそのままだが、URLとprefixが変わる
         resources :members, only: [:show, :edit, :update] do
-            resources :ad_mem_messages, only: [:index, :new, :show, :create, :update]
+            resources :rooms, only: [:index, :show]
+            resources :ad_mem_messages, only: [:create]
             resources :reviews, only: [:index, :show, :destroy]
         end
         get '/' => 'homes#top'
-    
     end
 # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
