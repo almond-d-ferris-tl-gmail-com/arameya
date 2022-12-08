@@ -1,0 +1,14 @@
+<!--<h1>Public::Rooms#show</h1>-->
+<!--<p>Find me in app/views/public/rooms/show.html.erb</p>-->
+<br>
+<h2><span style="background-color:lightgray" class="m-5">　メッセージルーム　</span></h2>
+<br>
+    <% unless @user.id == current_user.id %>
+        <% if @is_room == true %>
+            <%= link_to 'メッセージへ', room_path(@room_id), class: "btn btn-success" %>
+        <% else %>
+            <%= form_with model: @room do |f| %><!--model: @room, url: buy_address_path do url(遷移先):public/buy_addresses#update-->
+            <%= f.hidden_field :member_id, :value => @member.id %>
+            <%= f.submit 'メッセージを送る', class: "btn btn-success" %>
+        <% end %>
+    <% end %>

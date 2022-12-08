@@ -165,6 +165,9 @@ ActiveRecord::Schema.define(version: 2022_12_04_125741) do
   end
 
   create_table "rooms", force: :cascade do |t|
+    t.integer "member_id"
+    t.integer "admin_id"
+    t.integer "ad_mem_message_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
