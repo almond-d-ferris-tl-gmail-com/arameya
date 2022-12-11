@@ -1,29 +1,26 @@
 class Public::RoomsController < ApplicationController
 before_action :authenticate_member!
 
-  def create
-    room = Room.create
-    current_entry = Entry.create(member_id: current_member.id, room_id: room.id)
-    another_entry = Entry.create(member_id: params[:entry][:member_id], room_id: room.id)
-    redirect_to room_path(room)
-  end
-
-  def index
-    # ログインユーザー所属ルームID取得
-    current_entries = current_member.entries
-    my_room_id = []
-    current_entries.each do |entry|
-      my_room_id << entry.room.id
-    end
-    # 自分のroom_idでmember_idが自分じゃないのを取得
-    @another_entries = Entry.where(room_id: my_room_id).where.not(member_id: current_member.id)
-  end
-
   def show
+    #フォームに渡すために、モデルのインスタンスを作成
+    @message = AdMemMessage.new
+    #受け取ったパラメータでルームオブジェクトを取得
     @room = Room.find(params[:id])
-    @messages = @room.messages.all
-    @message = Message.new
-    @entries = @room.entries
-    @another_entry = @entries.where.not(member_id: current_member.id).first
+    #ルーム内のメッセージを全て表示する
+    @messages = @room.ad_mem_messages
+    #管理者(メッセージ相手)の取得
+    # /arameya/app/models/ad_mem_message.rbにてメッセージ発言者:true(管理者)を設定
+    @admin = @messages.admin_message
   end
+
+  def create
+    # 自身(会員)のroomがあるか判定
+     @room = Room.where(member_id: current_member.id, room_id: room.id)
+    # roomが存在しない場合、新規作成する
+     if @room.nil?
+       @room = Room.new(params[:id])
+     end
+     redirect_to rooms_path(room)# public/rooms#show
+  end
+
 end

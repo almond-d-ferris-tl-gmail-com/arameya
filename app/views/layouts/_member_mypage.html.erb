@@ -13,5 +13,5 @@
     <%= link_to "[会員宛]メッセージ一覧", members_my_page_path, class: "btn btn-primary btn-block" %><!--遷移先：public/members#show-->
 </div>
 <div class="text-center mt-5">
-    <%= link_to "[管理者宛]メッセージ一覧", members_my_page_path, class: "btn btn-primary btn-block" %><!--遷移先：public/members#show-->
+    <%= link_to "[管理者宛]メッセージ送信", room_path(@room.id), class: "btn btn-primary btn-block" %><!--遷移先：public/rooms#show-->
 </div>

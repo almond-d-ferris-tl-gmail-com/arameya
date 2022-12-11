@@ -4,6 +4,8 @@ class Public::MembersController < ApplicationController
   # before_action :authenticate_member!
 
   def show
+    # マイページをクリックしたらprivateのcreate_room(管理者ー会員メッセージルーム)を作成する
+    create_room
     @member = current_member
   end
 
@@ -46,6 +48,16 @@ class Public::MembersController < ApplicationController
   private
   def members_information_params#updateのパラメータ
     params.require(:member).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :email, :postal_code, :address, :telephone_number)
+  end
+  
+  def create_room
+    # 自身(会員)のroomがあるか判定
+    @room = Room.find_by_member_id(current_member.id)
+    # roomが存在しない場合、新規作成する
+    if @room.nil?
+      # 会員のIDと管理者のID(emailで判定)を取得する
+      @room = Room.create(member_id: current_member.id, admin_id: Admin.find_by_email("a@a").id)
+    end
   end
 
 end

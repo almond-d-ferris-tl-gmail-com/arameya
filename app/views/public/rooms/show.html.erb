@@ -3,12 +3,62 @@
 <br>
 <h2><span style="background-color:lightgray" class="m-5">　メッセージルーム　</span></h2>
 <br>
-    <% unless @user.id == current_user.id %>
-        <% if @is_room == true %>
-            <%= link_to 'メッセージへ', room_path(@room_id), class: "btn btn-success" %>
-        <% else %>
-            <%= form_with model: @room do |f| %><!--model: @room, url: buy_address_path do url(遷移先):public/buy_addresses#update-->
-            <%= f.hidden_field :member_id, :value => @member.id %>
-            <%= f.submit 'メッセージを送る', class: "btn btn-success" %>
-        <% end %>
+    <p>宛先：管理者</p>
+    <% @messages.each do |message| %>
+        <hr>
+        <div>
+            <li>内容：<%= message.content %></li>
+            <li><%= message.created_at %>に送信済み</li>
+            <li><%= message.user.username %>さんのメッセージ</li>
+        </div>
+        <hr>
     <% end %>
+
+    <%= form_with model: @message do |f| %>
+        <%= f.hidden_field :room_id, value: @room.id %>
+        <%= f.text_area :content %>
+        <%= f.submit '送信する', class: "btn btn-success" %>
+    <% end %>
+<!---->
+    <%# unless @user.id == current_user.id %>
+        <%# if @is_room == true %>
+            <%#= link_to 'メッセージへ', room_path(@room_id), class: "btn btn-success" %>
+        <%# else %>
+            <%#= form_with model: @room, url: buy_address_path do |f| %><!--model: @room, url: buy_address_path do url(遷移先):public/buy_addresses#update-->
+            <%#= f.hidden_field :member_id, :value => @member.id %>
+            <%#= f.submit 'メッセージを送る', class: "btn btn-success" %>
+        <%# end %>
+    <%# end %>
+
+  <table border="0" class="mx-auto">
+    <tr>
+      <td height="50" width="200">宛先</td>
+      <td width="300">管理者</td>
+    </tr>
+    <tr>
+      <td height="50">件名</td><!--プルダウン-->
+      <td><!--遷移先:admin/ad_mem_messages#create-->
+          <%= form_with model: @mess, url: sell_order_path(@mess.id), method: :post, local: true do |f| %>
+            <%= f.select :am_mess_title, AdMemMessage.am_mess_titles.keys.map {|k| [I18n.t("enums.am.mess.title.#{k}"), k]} %>
+            <!--ブラウザには日本語で表示→英語でデータを渡すために、再度英語に変換する-->
+          <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td height="50">注文日</td>
+      <td width="300"><%= @order.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d") %></td>
+      <!--.in_time_zone('Tokyo')→UTC(協定世界時刻のデフォルト値)をJST(日本時間)に換算する-->
+      <!--.strftime("%Y-%m-%d")→UTCを消して時刻のフォーマットに変更する-->
+    </tr>
+    <tr>
+      <td height="50">配送先</td>
+      <td colspan="2">
+          〒<%= @order.postal_code %>　<%= @order.address %><br>
+          <%= @order.name %>
+      </td>
+    </tr>
+    <tr>
+      <td height="50">支払方法</td>
+      <td><%= @order.payment_method_i18n %></td><!--i18n→日本語に変換する-->
+    </tr>
+  </table>

@@ -1,10 +1,9 @@
 class Room < ApplicationRecord
   #member1:rooms多(n)の関係
   #roomsから見てmemberは1→「belongs_to :member」(属する)を記述する
-  #memberから見てroomsは多(n)→「has_many :rooms, through: :room_connects」を記述する
-  #has_many:・・・テーブル同士を関連付ける、through・・・中間となるテーブル名(members→room_connects→rooms)
+  #memberから見てroomsは多(n)→「has_many :rooms」を記述する
   belongs_to :member
-  
+
   #admin1:rooms多(n)の関係
   #roomsから見てadminは1→「belongs_to :admin」(属する)を記述する
   #adminから見てroomsは多(n)→「has_many :rooms, through: :room_connects」を記述する

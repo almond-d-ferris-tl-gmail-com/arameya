@@ -13,6 +13,5 @@ class Admin < ApplicationRecord
   #admin1:ad_mem_messages多(n)の関係
   #ad_mem_messagesから見てadminは1→「belongs_to :admin」(属する)を記述する
   #adminから見てad_mem_messagesは多(n)→「has_many :ad_mem_messages, dependent: :destroy」を記述する
-  #has_many:・・・テーブル同士を関連付ける、dependent(依存): :destroy・・・親モデルの削除時に、紐づいている子モデルも一緒に削除される
   has_many :ad_mem_messages, dependent: :destroy
 end
