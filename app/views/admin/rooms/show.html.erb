@@ -1,11 +1,11 @@
-<!--<h1>Public::Rooms#show</h1>-->
-<!--<p>Find me in app/views/public/rooms/show.html.erb</p>-->
+<!--<h1>Admin::Rooms#show</h1>-->
+<!--<p>Find me in app/views/admin/rooms/show.html.erb</p>-->
 <br>
 <h2><span style="background-color:lightgray" class="m-5">　メッセージルーム　</span></h2>
 <br>
     <!--送信部分-->
-    <p>宛先：管理者</p>
-    <%= form_with model: @message, url: room_path do |f| %><!--public/rooms#show-->
+    <p>宛先：<%= @member.last_name %><%= @member.first_name %>さん</p>
+    <%= form_with model: @message, url: admin_member_ad_mem_messages_path do |f| %><!--admin/rooms#show-->
         <%= f.hidden_field :room_id, value: @room.id %>
         <%= f.text_area :am_mess_body %>
         <%= f.submit '送信する', class: "btn btn-success" %>

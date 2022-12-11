@@ -69,7 +69,7 @@
               <!--製作ステータス-->
               <%= form_with model: order_detail, url: sell_order_detail_path(order_detail.id), method: :patch, local: true do |f| %><!--public/sell_order_details#update-->
               <!--ブラウザには日本語で表示→英語でデータを渡すために、再度英語に変換する-->
-                <td><%= f.select :arranging_status, OrderDetail.arranging_statuses.keys.map {|k| [I18n.t("enums.order_detail.making_status.#{k}"), k]} %>
+                <td><%= f.select :arranging_status, OrderDetail.arranging_statuses.keys.map {|k| [I18n.t("enums.order_detail.arranging_status.#{k}"), k]} %>
                     <%= f.submit "更新", class: "btn btn-success" %>
                 </td>
               <% end %>

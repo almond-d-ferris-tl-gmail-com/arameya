@@ -2,14 +2,20 @@ class Public::AdMemMessagesController < ApplicationController
   before_action :authenticate_member!
 
   def create
+    # puts params
+    ad_mem_message_params =  params["ad_mem_message"]
+    # puts ad_mem_message_params
+    # puts ad_mem_message_params["room_id"]
+    # puts ad_mem_message_params["am_mess_body"]
+    # byebug
     if member_signed_in?
-      message = Message.new(content: message_params[:content], member_id: current_member.id)
+      message = AdMemMessage.new(am_mess_body: ad_mem_message_params["am_mess_body"], room_id: ad_mem_message_params["room_id"])
     else
-      message = Message.new(content: message_params[:content], admin_id: current_admin.id)
+      message = AdMemMessage.new(am_mess_body: ad_mem_message_params["am_mess_body"], admin_id: current_admin.id)
     end
     
-    if message.save
-      redirect_to room_path(message.room)
+    if message.save!
+      redirect_to room_path(message.room)# public/rooms#show
     else
       redirect_back(fallback_location: root_path)
     end
@@ -17,24 +23,6 @@ class Public::AdMemMessagesController < ApplicationController
 
   private
   def message_params
-    params.require(:message).permit(:message, :room_id).merge(member_id: current_member.id)
+    params.require(:ad_mem_message).permit(:room_id, :am_mess_title, :am_mess_item, :am_mess_body).merge(member_id: current_member.id)
   end
 end
-
-###########
-
-  def create
-    #フォームから受け取った値でチャットルームオブジェクトを取得
-    @chat_room=ChatRoom.find(params[:chat_message][:chat_room_id])
-    #フォームから受け取った値で、チャットメッセージオブジェクトを作成
-    @chat_message=ChatMessage.new(user_id: current_user.id, chat_room_id: @chat_room.id, content: params[:chat_message][:content])
-    #保存に成功したら、フラッシュメッセージを表示し、チャットルームへリダイレクトする。
-    if @chat_message.save
-      flash[:notice]="メッセージの送信に成功しました。"
-      redirect_to chat_room_path(@chat_room)
-    #保存に失敗した場合は、フラッシュメッセージ表示し、チャットルームへリダイレクトする。
-    else
-      flash[:alert]="メッセージの送信に失敗しました。"
-      redirect_to chat_room_path(@chat_room)
-    end
-  end

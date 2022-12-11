@@ -59,7 +59,7 @@ Rails.application.routes.draw do
         # 「会員個人が行なったレビュー・評価」を表示するためにmembersの中にreviewsを入れる(do-endで括る)
         # フォルダ構成はそのままだが、URLとprefixが変わる
         resources :members, only: [:show, :edit, :update] do
-            resources :rooms, only: [:create, :index, :show] # 管理者は複数の会員とメッセージのやりとりがあるので複数のルームが必要→indexの一覧が必要
+            resources :rooms, only: [:create, :show] # 管理者は複数の会員とメッセージのやりとりがあるので複数のルームが必要→indexの一覧が必要→先にshowだけ作成する
             resources :ad_mem_messages, only: [:create]
             resources :reviews, only: [:index, :show, :destroy]
         end
