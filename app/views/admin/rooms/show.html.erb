@@ -5,13 +5,31 @@
 <br>
     <!--送信部分-->
     <p>宛先：<%= @member.last_name %><%= @member.first_name %>さん</p>
-    <%= form_with model: @message, url: admin_member_ad_mem_messages_path do |f| %><!--admin/rooms#show-->
+    <%= form_with model: @message, url: admin_member_ad_mem_messages_path do |f| %><!--admin/ad_mem_messages#create-->
         <%= f.hidden_field :room_id, value: @room.id %>
         <%= f.text_area :am_mess_body %>
         <%= f.submit '送信する', class: "btn btn-success" %>
     <% end %>
-
+    
     <!--メッセージ内容-->
+    <% @messages.each do |message| %>
+        <ul class="list-unstyled">
+            <% if message.am_mess_speaker %>
+            <!--/arameya/app/controllers/admin/ad_mem_messages_controller.rbにてam_mess_speakerがtrueだったら...を設定しているので、こちらで=trueをしなくてOK-->
+                <li>送信者：管理者</li>
+            <% else %>
+                <li>送信者：<%= @member.last_name %><%= @member.first_name %></li>
+            <% end %>
+            <li><%= message.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %>に送信済み</li>
+            <!--.in_time_zone('Tokyo')→UTC(協定世界時刻のデフォルト値)をJST(日本時間)に換算する-->
+            <!--.strftime("%Y-%m-%d %H:%M:%S")→UTCを消して時刻のフォーマットに変更する-->
+            <li>メッセージ内容：<%= message.am_mess_body %></li>
+        </ul>
+    <% end %>
+
+<!----------------------------------------------->
+    <!--メッセージ内容-->
+    <% @messages = [] %><!--@messagesの配列を空にする(↓の記述をブラウザに表示させない)-->
     <% @messages.each do |message| %>
         <% if @room.admin_id == current_admin.id %>
             <ul class="list-unstyled">
@@ -22,9 +40,10 @@
                 <li>送信者：管理者</li>
             </ul>
         <% else %>
+        <% byebug %>
             <ul class="list-unstyled">
-                <li>メッセージ内容：<%= @mem_mess.am_mess_body %></li>
-                <li><%= @mem_mess.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %>に送信済み</li>
+                <li>メッセージ内容：<%= message.am_mess_body %></li>
+                <li><%= message.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %>に送信済み</li>
                 <!--.in_time_zone('Tokyo')→UTC(協定世界時刻のデフォルト値)をJST(日本時間)に換算する-->
                 <!--.strftime("%Y-%m-%d %H:%M:%S")→UTCを消して時刻のフォーマットに変更する-->
                 <li>送信者：<%= @member.last_name %><%= @member.first_name %></li>

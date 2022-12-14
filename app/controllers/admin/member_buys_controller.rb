@@ -5,7 +5,7 @@ class Admin::MemberBuysController < ApplicationController
 
   def index #会員の購入履歴一覧画面
     #ページネーション
-    @items = Item.all.page(params[:page]).per(10)
+    @orders = Order.all.page(params[:page]).per(10)
   end
 
   def show #会員の購入履歴詳細画面

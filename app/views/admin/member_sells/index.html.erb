@@ -23,12 +23,14 @@
   <% @items.each do |item| %>
     <tr height="50">
       <td><%= item.id %></td>
-      <td><%=link_to item.name, admin_item_path(item.id) %></td><!--show画面に遷移-->
+      <td><%=link_to item.name, admin_member_sell_path(item.id) %></td><!--admin/member_sells#show-->
       <td><%= item.price %></td>
       <td><%= item.genre.name %></td>
       
-      <% if item.is_active == true %><!---->
+      <% if item.sell_status == 0 %><!---->
         <td><font color="green">販売中</font></td>
+      <% elsif item.sell_status == 1 %>
+        <td><font color="gray">下書き</font></td>
       <% else %>
         <td><font color="gray">販売停止中</font></td>
       <% end %>

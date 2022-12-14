@@ -39,4 +39,8 @@ class Member < ApplicationRecord
   #ad_mem_messagesから見てmemberは1→「belongs_to :member」(属する)を記述する
   #memberから見てad_mem_messagesは多(n)→「has_many :ad_mem_messages, dependent: :destroy」を記述する
   has_many :ad_mem_messages, dependent: :destroy
+  
+  def full_name
+    last_name + first_name
+  end
 end

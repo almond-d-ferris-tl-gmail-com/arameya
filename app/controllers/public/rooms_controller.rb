@@ -8,11 +8,8 @@ before_action :authenticate_member!
     @message = AdMemMessage.new
     #受け取ったパラメータでルームオブジェクトを取得
     @room = Room.find(params[:id])
-    #ルーム内のメッセージを全て表示する
-    @messages = @room.ad_mem_messages
-    #管理者(メッセージ相手)メッセージの取得
-    # /arameya/app/models/ad_mem_message.rbにてメッセージ発言者:true(管理者)を設定
-    @ad_mess = @messages.admin_message
+    #ルーム内のメッセージを全て表示して降順(最新が上)にする
+    @messages = @room.ad_mem_messages.order(created_at: :desc)
   end
 
   def create
@@ -22,7 +19,7 @@ before_action :authenticate_member!
      if @room.nil?
        @room = Room.new(params[:id])
      end
-     redirect_to rooms_path(room)# public/rooms#show
+     redirect_to room_path(room)# public/rooms#show
   end
 
 end

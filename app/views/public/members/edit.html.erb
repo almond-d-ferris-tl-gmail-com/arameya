@@ -1,14 +1,5 @@
 <!--<h2>Public::Members#edit</h2>-->
 <!--<p>Find me in app/views/public/members/edit.html.erb</p>-->
-
-<!--会員マイページサイドメニューバー グリッドシステム設定はそれぞれの本体部分で行う-->
-<div class="container-fluid">
-  <div class="row">
-    <div class="offset-xl-1"></div>
-    <div class="col-xl-2">
-      <%= render "/layouts/member_mypage", member:current_member %>
-    </div>
-    <div class="col-xl-9">
 <br>
       <% if @member.errors.any? %>
         <%= @member.errors.count %>error prohibited this obj from being saved:

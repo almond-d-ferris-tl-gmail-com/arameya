@@ -10,8 +10,4 @@ class AdMemMessage < ApplicationRecord
   # 0: 選択して下さい, 1: 購入に関する問い合わせ, 2: 販売に関する問い合わせ, 3: 取引に関する問い合わせ, 4:その他}
   enum am_mess_title: { option: 0, buy: 1, sell: 2, deal: 3, others: 4 }
   
-  # /arameya/app/controllers/publicまたはadmin/rooms_controller.rbのshowにてメッセージ相手の取得のために設定
-  scope :admin_message,  -> { where(am_mess_speaker: true) }
-  scope :member_message,  -> { where(am_mess_speaker: false) }
-  
 end

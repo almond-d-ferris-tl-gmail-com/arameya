@@ -25,6 +25,8 @@ class Item < ApplicationRecord
     #itemから見てorder_detailは多(n)→「has_many :order_details, dependent: :destroy」を記述する
     #has_many:・・・テーブル同士を関連付ける、dependent(依存): :destroy・・・親モデルの削除時に、紐づいている子モデルも一緒に削除される
     has_many :order_details, dependent: :destroy
+    # order_detailを通してitemとorderを繋ぐ
+    has_many :orders, through: :order_details
 
     #item1:review多(n)の関係
     #reviewから見てitemは1→「belongs_to :item」(属する)を記述する

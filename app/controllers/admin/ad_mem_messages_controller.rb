@@ -4,8 +4,9 @@ class Admin::AdMemMessagesController < ApplicationController
   def create
     # puts params エラーチェック
     if admin_signed_in?
-      # binding.irb エラーチェック
-      message = AdMemMessage.new(am_mess_body: message_params[:am_mess_body], room_id: message_params[:room_id])
+    # binding.irb エラーチェック
+    # 管理者→am_mess_speaker: true
+      message = AdMemMessage.new(am_mess_body: message_params[:am_mess_body], room_id: message_params[:room_id], am_mess_speaker: true)
     else
       message = AdMemMessage.new(am_mess_body: message_params[:am_mess_body], member_id: @member.id)
     end
@@ -18,7 +19,6 @@ class Admin::AdMemMessagesController < ApplicationController
   end
 
   private
-  
   def message_params
     params.require(:ad_mem_message).permit(:room_id, :am_mess_title, :am_mess_item, :am_mess_body).merge(admin_id: current_admin.id)
   end
