@@ -60,8 +60,11 @@ https://docs.google.com/spreadsheets/d/1oIOboeFLDaLIajo8Zmj7hE_ZwDBmJhXm5DQwYszy
 ワイヤーフレーム(会員)
 https://docs.google.com/spreadsheets/d/13h1wzukO7bZ5VcHPkrpCMgXjUu7kestyG0ZLjvHdiho/edit?usp=sharing
 
-プレゼン(動画付)(2022/12/13現在)
-https://docs.google.com/presentation/d/13WJ75Z9XVxXJexonxd_--7vgfnUP_P8W/edit?usp=sharing&ouid=115827655114800530264&rtpof=true&sd=true
+プレゼン資料(2022/12/13現在)
+https://docs.google.com/presentation/d/19x72WABPJnOa5EfpNdDG0SkFI2OnTH0q/edit?usp=sharing&ouid=115827655114800530264&rtpof=true&sd=true
+
+プレゼン動画(2022/12/13現在)
+https://drive.google.com/file/d/1_C1BWZkrF9f2TOgibH29yQdnGjkA4woE/view?usp=sharing
 <!---->
 
 
