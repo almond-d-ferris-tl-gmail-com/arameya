@@ -14,7 +14,10 @@ class Public::BuyItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
-    @cart_item = current_member.cart_items.build #新規注文
+    if member_signed_in? # ログインしていたらカート画面に進める
+      @cart_item = current_member.cart_items.build #新規注文
+    end
+
   end
   
   private

@@ -5,7 +5,7 @@ class Public::SellOrdersController < ApplicationController
 
   def index
     #ページネーション
-    @orders = Order.all.page(params[:page]).per(10)
+    @orders = Order.all.order('id DESC').page(params[:page]).per(10)
   end
 
   def show

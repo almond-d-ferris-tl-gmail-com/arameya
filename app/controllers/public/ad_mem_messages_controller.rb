@@ -11,7 +11,7 @@ class Public::AdMemMessagesController < ApplicationController
       message = AdMemMessage.new(am_mess_body: message_params[:am_mess_body], admin_id: admin.id)
     end
     
-    if message.save!
+    if message.save
       redirect_to room_path(admin, message.room)# public/rooms#show
     else
       redirect_back(fallback_location: root_path)

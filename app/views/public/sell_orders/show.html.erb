@@ -1,9 +1,9 @@
-<!--<h1>Public::SellOrders#show</h1>-->
+<!--<h2>Public::SellOrders#show</h2>-->
 <!--<p>Find me in app/views/public/sell_orders/show.html.erb</p>-->
 <br>
 <%= notice %>
 
-<h1><span style="background-color:lightgray" class="m-5">　注文履歴詳細　</span></h1>
+<h2><span style="background-color:lightgray" class="m-5">　注文履歴詳細　</span></h2>
 <br>
   <table border="0" class="mx-auto">
     <tr>
@@ -28,10 +28,10 @@
       <td><%= @order.payment_method_i18n %></td><!--i18n→日本語に変換する-->
     </tr>
     <tr>
-      <td height="50">注文ステータス</td><!--プルダウン-->
+      <td height="50">受注ステータス</td><!--プルダウン-->
       <td><!--遷移先:public/sell_orders#update-->
           <%= form_with model: @order, url: sell_order_path(@order.id), method: :patch, local: true do |f| %>
-            <%= f.select :order_status, Order.order_statuses.keys.map {|k| [I18n.t("enums.order.status.#{k}"), k]} %>
+            <%= f.select :order_status, Order.order_statuses.keys.map {|k| [I18n.t("enums.order.order_status.#{k}"), k]} %>
             <!--ブラウザには日本語で表示→英語でデータを渡すために、再度英語に変換する-->
           <%= f.submit "更新" , class: "btn btn-success" %>
           <% end %>
@@ -51,7 +51,7 @@
             <th width="300">単価(税込)</th>
             <th width="150">数量</th>
             <th width="200">小計</th>
-            <th width="400">製作ステータス</th>
+            <th width="400">準備ステータス</th>
           </tr>
         </thead>
   
@@ -66,7 +66,7 @@
               <td><%= order_detail.amount %></td>
               <!--小計-->
               <td><%= order_detail.subtotal_price.to_s(:delimited) %></td>
-              <!--製作ステータス-->
+              <!--準備ステータス-->
               <%= form_with model: order_detail, url: sell_order_detail_path(order_detail.id), method: :patch, local: true do |f| %><!--public/sell_order_details#update-->
               <!--ブラウザには日本語で表示→英語でデータを渡すために、再度英語に変換する-->
                 <td><%= f.select :arranging_status, OrderDetail.arranging_statuses.keys.map {|k| [I18n.t("enums.order_detail.arranging_status.#{k}"), k]} %>

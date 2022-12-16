@@ -60,6 +60,9 @@ https://docs.google.com/spreadsheets/d/1oIOboeFLDaLIajo8Zmj7hE_ZwDBmJhXm5DQwYszy
 ワイヤーフレーム(会員)
 https://docs.google.com/spreadsheets/d/13h1wzukO7bZ5VcHPkrpCMgXjUu7kestyG0ZLjvHdiho/edit?usp=sharing
 
+テスト仕様書
+https://docs.google.com/spreadsheets/d/1lWiJ-7U2cRggRNYOe_Nih1k-xFin7i6V/edit?usp=sharing&ouid=115827655114800530264&rtpof=true&sd=true
+
 プレゼン資料(2022/12/13現在)
 https://docs.google.com/presentation/d/19x72WABPJnOa5EfpNdDG0SkFI2OnTH0q/edit?usp=sharing&ouid=115827655114800530264&rtpof=true&sd=true
 

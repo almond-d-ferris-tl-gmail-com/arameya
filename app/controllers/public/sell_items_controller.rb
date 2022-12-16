@@ -7,8 +7,8 @@ class Public::SellItemsController < ApplicationController
     # ログインしている会員が販売している商品のみを表示させる
     #ページネーション
     @items = Item.where(member_id: current_member.id).includes(:member).page(params[:page]).per(10)#.order("created_at DESC")
-    #商品の最大値を取得
-    @items_max = Item.maximum(:id)
+    #商品の最大件値を取得
+    @items_max = Item.where(member_id: current_member.id).maximum(:id)
   end
 
   def new#商品新規登録
