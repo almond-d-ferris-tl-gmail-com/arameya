@@ -4,11 +4,13 @@ class Admin::MemberSellsController < ApplicationController
   # before_action :authenticate_admin!
 
   def index #会員の販売商品一覧画面
+    @member = Member.find(params[:member_id])
     #ページネーション
     @items = Item.all.page(params[:page]).per(10)
   end
 
   def show #会員の販売商品詳細画面
+    @member = Member.find(params[:member_id])
     @item = Item.find(params[:id])
   end
 end

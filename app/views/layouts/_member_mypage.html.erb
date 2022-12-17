@@ -7,6 +7,12 @@
     <%= link_to "[購入]配送先一覧", buy_addresses_path, class: "btn btn-primary btn-block" %><!--遷移先：public/buy_addresses#index-->
 </div>
 <div class="text-center mt-5">
+    <%= link_to "[販売]商品一覧", member_sell_items_path(@member.id), class: "btn btn-primary btn-block" %><!--遷移先：public/sell_items#index-->
+</div>
+<div class="text-center mt-5">
+    <%= link_to "[販売]注文履歴一覧", member_sell_orders_path(@member.id), class: "btn btn-primary btn-block" %><!--遷移先：public/sell_orders#index-->
+</div>
+<div class="text-center mt-5">
     <%= link_to "[購入]レビュー・評価一覧", reviews_path, class: "btn btn-primary btn-block" %><!--遷移先：public/reviews#index-->
 </div>
 <div class="text-center mt-5">

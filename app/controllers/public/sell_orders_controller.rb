@@ -4,8 +4,9 @@ class Public::SellOrdersController < ApplicationController
    before_action :authenticate_member!
 
   def index
+    @member = current_member
     #ページネーション
-    @orders = Order.all.order('id DESC').page(params[:page]).per(10)
+    @orders = Order.where(member_id: current_member.id).includes(:member).page(params[:page]).per(10)#.order("created_at DESC")
   end
 
   def show

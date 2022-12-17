@@ -1,42 +1,56 @@
-<!--<h1>Admin::MemberSells#show</h1>-->
+<!--<h2>Admin::MemberSells#show</h2>-->
 <!--<p>Find me in app/views/admin/member_sells/show.html.erb</p>-->
 <br>
-<h1><span style="background-color:lightgray" class="m-5">　商品詳細　</span></h1>
+<h2><span style="background-color:lightgray" class="m-5">　<%= @member.last_name %><%= @member.first_name %>さんの販売商品詳細　</span></h2>
 <!--表示したいものが一つだけの場合、each文は書けない-->
 <br>
-<table border="0" style="display:flex; justify-content:center">
-  <tr>
-    <td rowspan="6"  width="350"><!--セル結合:colspan(列の長さ)、rowspan(行の長さ)-->
+<table border="0" class="mx-auto" width="1200">
+  <tr class="align-top">
+    <td rowspan="8"  width="300" class="align-middle"><!--セル結合:colspan(列の長さ)、rowspan(行の長さ)-->
       <% if @item.image.attached? %>
-        <%= image_tag @item.image, size: "300x200" %>
+        <%= image_tag @item.image, width: '250px', height: 'auto' %>
       <% else %>
         <%= image_tag 'no_image', size: "300x300" %>
       <% end %>
     </td>
   </tr>
   <tr>
-    <td height="50">商品名</td>
-    <td><%= @item.name %></td>
-  </tr>
-  <tr>
-    <td height="50">商品説明</td>
-    <td><%= @item.introduction %></td>
-  </tr>
-  <tr>
-    <td height="50">ジャンル</td>
+    <th height="50" width="150">ジャンル</th>
     <td><%= @item.genre.name %></td>
   </tr>
   <tr>
-    <td height="50">税込価格<br>(税抜価格)</td>
-    <!--税込価格の計算式/nagano_cake/app/models/item.rb-->
-    <td><%= @item.tax_included_price %>(<%= @item.price %>)円</td>
+    <th>商品名</th>
+    <td><h4><b><%= @item.name %></b></h4></td>
   </tr>
   <tr>
-    <td height="50">販売ステータス　　</td>
-    <% if @item.is_active == true %>
-      <td><font color="green">販売中</font></td>
+    <th height="60">状態</th>
+      <% if @item.used_condition == false %>
+        <td>新品</td>
+      <% else %>
+        <td>中古</td>
+      <% end %>
+  </tr>
+  <tr class="align-top">
+    <th>商品説明</th>
+    <td><%= safe_join(@item.introduction.split("\n"),tag(:br)) %></td>
+  </tr>
+  <tr>
+    <th height="70">税込価格<br>(税抜価格)</th>
+    <!--税込価格の計算式/arameya/app/models/item.rb-->
+    <td><%= @item.tax_included_price.to_s(:delimited) %>円<br>(<%= @item.price.to_s(:delimited) %>円)</td><!--to_s(:delimited)→文字列に変換してカンマをつける-->
+  </tr>
+  <tr>
+    <th height="50">送料</th>
+    <td><%= @item.postage.to_s(:delimited) %>円</td><!--to_s(:delimited)→文字列に変換してカンマをつける-->
+  </tr>
+  <tr>
+    <th height="50">販売ステータス</th>
+    <% if @item.sell_status == 0 %>
+      <td><font color="green"><b>販売中</b></font></td>
+    <% elsif @item.sell_status == 1 %>
+      <td><font color="orange"><b>下書き</b></font></td>
     <% else %>
-      <td><font color="gray">販売停止中</font></td>
+      <td><font color="gray"><b>販売停止中</b></font></td>
     <% end %>
   </tr>
 </table>

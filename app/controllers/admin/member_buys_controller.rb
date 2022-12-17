@@ -4,11 +4,13 @@ class Admin::MemberBuysController < ApplicationController
   # before_action :authenticate_admin!
 
   def index #会員の購入履歴一覧画面
+    @member = Member.find(params[:member_id])
     #ページネーション
     @orders = Order.all.page(params[:page]).per(10)
   end
 
   def show #会員の購入履歴詳細画面
+    @member = Member.find(params[:member_id])
     @order = Order.find(params[:id])
     @item = Item.find(params[:id])
     @order_details = @order.order_details

@@ -1,15 +1,7 @@
 <!--<h1>Admin::MemberSells#index</h1>-->
 <!--<p>Find me in app/views/admin/member_sells/index.html.erb</p>-->
 <br>
-<table style="display:flex; justify-content:center">
-  <tr>
-    <th width="400"><h1><span style="background-color:lightgray" class="m-5">　商品一覧　</span></h1></th>
-    <th width="150"></th>
-    <th width="150"></th>
-    <th width="150"></th>
-    <th width="150"></th>
-  </tr>
-</table>
+<h2><span style="background-color:lightgray" class="m-5">　<%= @member.last_name %><%= @member.first_name %>さんの販売商品一覧　</span></h2>
 <br>
 <table style="display:flex; justify-content:center">
   <tr bgcolor="lightgray" height="50">
@@ -23,7 +15,7 @@
   <% @items.each do |item| %>
     <tr height="50">
       <td><%= item.id %></td>
-      <td><%=link_to item.name, admin_member_sell_path(item.id) %></td><!--admin/member_sells#show-->
+      <td><%=link_to item.name, admin_member_member_sell_path(@member.id, item.id) %></td><!--admin/member_sells#show-->
       <td><%= item.price %></td>
       <td><%= item.genre.name %></td>
       

@@ -1,7 +1,7 @@
 <!--<h2>Public::BuyItems#index</h2>-->
 <!--<p>Find me in app/views/public/buy_items/index.html.erb</p>-->
 <br>
-<h2><span style="background-color:lightgray" class="m-5">　[購入]商品一覧　</span><span style="font-size:20px">(全<%= @items_max %>件)</span></h2>
+<h2><span style="background-color:lightgray" class="m-5">　商品一覧　</span><span style="font-size:20px">(全<%= @items_max %>件)</span></h2>
 
   <div class="m-5 d-flex flex-wrap"><!--flex-wrap→改行する-->
     <% @items.each do |item| %>
@@ -11,7 +11,9 @@
         <% else %>
           <%= image_tag 'no_image', size: "300x300" %><br><!--画像４枚-->
         <% end %>
+        <div class="d-block text-truncate" style="max-width: 150px;"><!--幅150px以上は文字切り詰め-->
         <%= item.name %><br><!--商品名-->
+        </div>
         税抜
         <%= item.price.to_s(:delimited) %><!--金額--><!--to_s(:delimited)→文字列に変換してカンマをつける-->
         円<br>

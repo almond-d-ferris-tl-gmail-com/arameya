@@ -17,118 +17,115 @@
 
   <body class="d-flex flex-column vh-100">
     <header class="shadow-sm">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-          <!--ロゴ-->
-          <a class="navbar-brand; text-white" href="/" ><h5>あらめ屋<%#= image_tag 'logo', size: "50x50" %></h5></a>
-          
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ml-auto">
-            
-              <% if admin_signed_in? %><!--管理者側ログイン後 admin→テーブル名-->
-              
-                <li><!--admin/homes#top-->
-                  <%= link_to admin_path, class: "nav-link text-light" do %>
-                    <button type="button" class="btn btn-outline-info">会員一覧</button>
-                  <% end %>
-                </li>
+      <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xl-2">
+              <a class="navbar-brand; text-white" href="/"><%= image_tag 'arameya_logo', width: '100%', height: 'auto' %></a>
+    
+              <!--ナビゲーションメニュー/トグル設定-->
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            </div>
+            <div class="col-xl-8 offset-2"><!--offset:col間の空白-->
+              <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ms-auto">
                 
-                <li><!--admin/genres#index-->
-                  <%= link_to admin_genres_path, class: "nav-link text-light" do %>
-                    <button type="button" class="btn btn-outline-info">ジャンル一覧</button>
+                  <% if admin_signed_in? %><!--管理者側ログイン後 admin→テーブル名-->
+                  
+                    <li><!--admin/homes#top-->
+                      <%= link_to admin_path, class: "nav-link text-light" do %>
+                        <button type="button" class="btn btn-outline-info">会員一覧</button>
+                      <% end %>
+                    </li>
+                    
+                    <li><!--admin/genres#index-->
+                      <%= link_to admin_genres_path, class: "nav-link text-light" do %>
+                        <button type="button" class="btn btn-outline-info">ジャンル一覧</button>
+                      <% end %>
+                    </li>
+                    
+                    <li><!--admin/sessions#destroy-->
+                      <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link text-light" do %>
+                        <button type="button" class="btn btn-outline-info">ログアウト</button>
+                      <% end %>
+                    </li>
+                    
+                  <% elsif member_signed_in? %><!--会員側ログイン後 member→テーブル名-->
+    
+                    <li><!--検索窓-->
+                      <%= render "/public/searches/form" %>
+                    </li>
+    
+                    <li class="d-flex align-items-center justify-content-center text-white">
+                      ようこそ、<br><%= current_member.last_name %> <%= current_member.first_name %>さん！　
+                    </li>
+                    
+                    <li><!--public/members#show　(current_user.id)-->
+                      <%= link_to members_my_page_path, class: "nav-link text-light" do %>
+                        <button type="button" class="btn btn-outline-info">マイページ</button>
+                      <% end %>
+                    </li>
+                    
+                    <li><!--public/buy_items#index-->
+                      <%= link_to buy_items_path, class: "nav-link text-light" do %>
+                        <button type="button" class="btn btn-outline-info">商品一覧</button>
+                      <% end %>
+                    </li>
+                    
+                    <li><!--public/cart_items#index-->
+                      <%= link_to cart_items_path, class: "nav-link text-light" do %>
+                        <button type="button" class="btn btn-outline-info">カート</button>
+                      <% end %>
+                    </li>
+                    
+                    <li><!--public/buy_orders#index-->
+                      <%= link_to buy_orders_path, class: "nav-link text-light" do %>
+                        <button type="button" class="btn btn-outline-info">注文履歴一覧</button>
+                      <% end %>
+                    </li>
+                    
+                    <li><!--public/sessions#destroy-->
+                      <%= link_to destroy_member_session_path, method: :delete, class: "nav-link text-light" do %>
+                        <button type="button" class="btn btn-outline-info">ログアウト</button>
+                      <% end %>
+                    </li>
+                    
+                  <% else %><!--ログイン前-->
+    
+                    <li><!--検索窓-->
+                      <%= render "/public/searches/form" %>
+                    </li>
+    
+                    <li class="nav-item"><!--public/homes#about-->
+                      <%= link_to about_path, class: "nav-link text-light" do %>
+                        <button type="button" class="btn btn-outline-info">About</button>
+                      <% end %>
+                    </li>
+                    
+                    <li><!--public/buy_items#index-->
+                      <%= link_to buy_items_path, class: "nav-link text-light" do %>
+                        <button type="button" class="btn btn-outline-info">商品一覧</button>
+                      <% end %>
+                    </li>
+                    
+                    <li><!--public/registrations#new-->
+                      <%= link_to new_member_registration_path, class: "nav-link text-light" do %>
+                        <button type="button" class="btn btn-outline-info">新規登録</button>
+                      <% end %>
+                    </li>
+                    
+                    <li><!--public/sessions#new-->
+                      <%= link_to new_member_session_path, class: "nav-link text-light" do %>
+                        <button type="button" class="btn btn-outline-info">ログイン</button>
+                      <% end %>
+                    </li>
                   <% end %>
-                </li>
-                
-                <li><!--admin/sessions#destroy-->
-                  <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link text-light" do %>
-                    <button type="button" class="btn btn-outline-info">ログアウト</button>
-                  <% end %>
-                </li>
-                
-              <% elsif member_signed_in? %><!--会員側ログイン後 member→テーブル名-->
-
-                <li><!--検索窓-->
-                  <%= render "/public/searches/form" %>
-                </li>
-
-                <li class="d-flex align-items-center justify-content-center text-white">
-                  ようこそ、<%= current_member.last_name %> <%= current_member.first_name %>さん！
-                </li>
-                
-                <li><!--public/members#show　(current_user.id)-->
-                  <%= link_to members_my_page_path, class: "nav-link text-light" do %>
-                    <button type="button" class="btn btn-outline-info">マイ<br>ページ</button>
-                  <% end %>
-                </li>
-                
-                <li><!--public/buy_items#index-->
-                  <%= link_to buy_items_path, class: "nav-link text-light" do %>
-                    <button type="button" class="btn btn-outline-info">[購入]<br>商品一覧</button>
-                  <% end %>
-                </li>
-                
-                <li><!--public/cart_items#index-->
-                  <%= link_to cart_items_path, class: "nav-link text-light" do %>
-                    <button type="button" class="btn btn-outline-info">[購入]<br>カート</button>
-                  <% end %>
-                </li>
-                
-                <li><!--public/buy_orders#index-->
-                  <%= link_to buy_orders_path, class: "nav-link text-light" do %>
-                    <button type="button" class="btn btn-outline-info">[購入]<br>注文履歴一覧</button>
-                  <% end %>
-                </li>
-                
-                <li><!--public/sell_items#index-->
-                  <%= link_to sell_items_path, class: "nav-link text-light" do %>
-                    <button type="button" class="btn btn-outline-info">[販売]<br>商品一覧</button>
-                  <% end %>
-                </li>
-                
-                <li><!--public/sell_orders#index-->
-                  <%= link_to sell_orders_path, class: "nav-link text-light" do %>
-                    <button type="button" class="btn btn-outline-info">[販売]<br>注文履歴一覧</button>
-                  <% end %>
-                </li>
-                
-                <li><!--public/sessions#destroy-->
-                  <%= link_to destroy_member_session_path, method: :delete, class: "nav-link text-light" do %>
-                    <button type="button" class="btn btn-outline-info">ログ<br>アウト</button>
-                  <% end %>
-                </li>
-                
-              <% else %><!--ログイン前-->
-
-                <li><!--検索窓-->
-                  <%= render "/public/searches/form" %>
-                </li>
-
-                <li class="nav-item"><!--public/homes#about-->
-                  <%= link_to about_path, class: "nav-link text-light" do %>
-                    <button type="button" class="btn btn-outline-info">About</button>
-                  <% end %>
-                </li>
-                
-                <li><!--public/buy_items#index-->
-                  <%= link_to buy_items_path, class: "nav-link text-light" do %>
-                    <button type="button" class="btn btn-outline-info">[購入]商品一覧</button>
-                  <% end %>
-                </li>
-                
-                <li><!--public/registrations#new-->
-                  <%= link_to new_member_registration_path, class: "nav-link text-light" do %>
-                    <button type="button" class="btn btn-outline-info">新規登録</button>
-                  <% end %>
-                </li>
-                
-                <li><!--public/sessions#new-->
-                  <%= link_to new_member_session_path, class: "nav-link text-light" do %>
-                    <button type="button" class="btn btn-outline-info">ログイン</button>
-                  <% end %>
-                </li>
-              <% end %>
-            
-            </ul>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </nav>

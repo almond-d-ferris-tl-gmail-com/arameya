@@ -4,7 +4,7 @@
 <h2><span style="background-color:lightgray" class="m-5">　[販売]商品新規登録　</span></h2>
 <br>
 
-<%= form_with model: @item_new, url: sell_items_path do |f| %><!--遷移先:public/sell_items#create-->
+<%= form_with model: @item_new, url: member_sell_items_path(@member.id) do |f| %><!--遷移先:public/sell_items#create-->
   <table border="0" class="mx-auto">
     <tr>
       <th height="50">商品画像</th>

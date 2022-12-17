@@ -3,7 +3,7 @@
 <br>
 <h2><span style="background-color:lightgray" class="m-5">　[販売]商品編集　</span></h2>
 <br>
-<%= form_with model: @item, url: sell_item_path(@item.id) do |f| %><!--遷移先:public/sell_items#update-->
+<%= form_with model: @item, url: member_sell_item_path(@member.id, @item.id) do |f| %><!--遷移先:public/sell_items#update-->
   <table border="0" class="mx-auto">
     <tr>
       <th height="50">商品画像</th>

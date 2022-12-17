@@ -7,7 +7,7 @@
     <th width="150"></th>
     <th width="150"></th>
     <th width="150"></th>
-    <th width="150"><%= link_to "商品新規登録", new_sell_item_path, class: "btn btn-success" %></th><!--遷移先:public/sell_items#new-->
+    <th width="150"><%= link_to "商品新規登録", new_member_sell_item_path(@member.id), class: "btn btn-success" %></th><!--遷移先:public/sell_items#new-->
   </tr>
 </table>
 <br>
@@ -26,7 +26,7 @@
     <tr height="50">
       <td class="text-center"><%= item.id %></td>
       <td class="text-center"><%= item.genre.name %></td>
-      <td><%=link_to item.name, sell_item_path(item.id) %></td><!--遷移先:public/sell_items#show-->
+      <td><%=link_to item.name, member_sell_item_path(@member.id, item.id) %></td><!--遷移先:public/sell_items#show-->
       <td class="text-right"><%= item.price.to_s(:delimited) %>円</td><!--to_s(:delimited)→文字列に変換してカンマをつける-->
       
       <% if item.sell_status == 0 %>

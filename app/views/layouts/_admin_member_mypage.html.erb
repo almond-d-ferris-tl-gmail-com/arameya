@@ -4,10 +4,10 @@
     <%= link_to "会員情報詳細", admin_member_path(@member.id), class: "btn btn-primary btn-block" %><!--遷移先：admin/members#show-->
 </div>
 <div class="text-center mt-5">
-    <%= link_to "[購入]履歴一覧", admin_member_buys_path, class: "btn btn-primary btn-block" %><!--遷移先：admin/member_buys#index-->
+    <%= link_to "[購入]履歴一覧", admin_member_member_buys_path(@member.id), class: "btn btn-primary btn-block" %><!--遷移先：admin/member_buys#index-->
 </div>
 <div class="text-center mt-5">
-    <%= link_to "[販売]商品一覧", admin_member_sells_path, class: "btn btn-primary btn-block" %><!--遷移先：admin/member_sells#index-->
+    <%= link_to "[販売]商品一覧", admin_member_member_sells_path(@member.id), class: "btn btn-primary btn-block" %><!--遷移先：admin/member_sells#index-->
 </div>
 <div class="text-center mt-5">
     <%= link_to "レビュー・評価一覧", admin_member_reviews_path(@member.id), class: "btn btn-primary btn-block" %><!--遷移先：admin/reviews#index-->
