@@ -6,44 +6,53 @@
   <table border="1" width="1400" class="mx-auto"><!--ボーダーを入れるときは←の設定する(widthはtdの総計)-->
     <thead>
       <tr bgcolor="lightgray" style="text-align:center" height="50">
-        <th>注文日</th>
-        <th>配送先</th>
-        <th>注文商品</th>
-        <th>支払金額</th>
-        <th>ステータス</th>
-        <th>注文詳細</th>
-        <th colspan="2">レビュー</th>
-        <th></th>
+        <th width="100">注文日</th>
+        <th width="300">配送先</th>
+        <th width="500">注文商品</th><!-- colspan="2"-->
+        <th width="100">支払金額</th>
+        <th width="130">ステータス</th>
+        <th width="120">注文詳細</th>
+        <th width="150">レビュー</th>
       </tr>
     </thead>
 
     <tbody>
       <% @orders.each do |order| %>
         <tr height="80">
-          <td width="100"><%= order.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td><!--注文日-->
+          <td><%= order.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td><!--注文日-->
           <!--.in_time_zone('Tokyo')→UTC(協定世界時刻のデフォルト値)をJST(日本時間)に換算する-->
           <!--.strftime("%Y-%m-%d %H:%M:%S")→UTCを消して時刻のフォーマットに変更する-->
-          <td width="500">〒<%= order.postal_code %><%= order.address %><br><%= order.name %></td><!--郵便番号、住所、氏名-->
+          <td>〒<%= order.postal_code %><%= order.address %><br><%= order.name %></td><!--郵便番号、住所、氏名-->
 
-          <td width="400">
+          <td class="align-text-top">
           <% order.order_details.each do |order_detail| %>
-            <%#= image_tag order.item.get_image %><%= order_detail.item.name %><!--注文商品--><br>
+            <%= image_tag order_detail.item.get_image %>
+            <%= order_detail.item.name %><br><!--注文商品-->
           <% end %>
           </td>
-          
-          <td width="100"><%= order.total_payment.to_s(:delimited) %></td><!--支払金額--><!--to_s(:delimited)→文字列に変換してカンマをつける-->
-          <td width="150"><%= order.order_status_i18n %></td><!--ステータス--><!--i18n→日本語に変換する-->
-          <td width="150" align="center"><!--注文詳細-->
+
+          <!--<div class="container">-->
+          <!--  <div class="row">-->
+          <!--    <div class="col">-->
+          <!--      <img class="my-5 w-100" src="img/">-->
+          <!--      </div>-->
+          <!--    <div class="col d-flex align-items-center">-->
+          <!--      <p class="mb-0">画像の中央あたりに横に並べたいです</p>-->
+          <!--  　 </div>-->
+          <!--　 </div>-->
+          <!--</div>-->
+  
+          <td align="right"><%= order.total_payment.to_s(:delimited) %></td><!--支払金額--><!--to_s(:delimited)→文字列に変換してカンマをつける-->
+          <td align="center"><%= order.order_status_i18n %></td><!--ステータス--><!--i18n→日本語に変換する-->
+          <td align="center"><!--注文詳細-->
             <!--遷移先：public/buy_orders#show(注文履歴詳細)-->
-            <%= link_to "表示する", buy_order_path(order.id), class: "btn btn-primary" %>　　
+            <%= link_to "表示する", buy_order_path(order.id), class: "btn btn-primary" %>
           </td>
-          <td width="200" align="center"><!--レビュー-->
+          <td align="center"><!--レビュー-->
             <!--遷移先：public/reviews#new(レビュー新規作成)-->
-            <%= link_to "新規投稿する", new_review_path(order_id: order.id), class: "btn btn-success" %>
-          </td>
-          <td width="200" align="center"><!--レビュー-->
-            <!--遷移先：public/reviews#show(レビュー詳細)-->
-            <%#= link_to "投稿内容を見る", review_path(review.id), class: "btn btn-primary" %>
+            <% order.order_details.each do |order_detail| %>
+              <%= link_to "新規投稿する", new_buy_item_review_path(@item.id), class: "btn btn-success" %><br><br><br>
+            <% end %>
           </td>
         </tr>
       <% end %>

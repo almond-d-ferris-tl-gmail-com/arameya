@@ -19,14 +19,18 @@ Rails.application.routes.draw do
         #URLは変えず、ファイル構成だけ指定のパスにする(フォルダ名にはpublicをつけて、URLにはつけない)
         resources :rooms, only: [:create, :show] # 会員は1つのルームだけあればいいので、indexは不要
         resources :ad_mem_messages, only: [:create]
-        resources :reviews, only: [:index, :new, :show, :edit, :create, :update, :destroy]
         get '/search', to: 'searches#search'
         # orders#showよりも上に記述しないとcompleteがid扱いされる
         post 'buy_orders/comfirm'
         get 'buy_orders/complete'
         resources :buy_orders, only: [:new, :index, :show, :create]
+        
+        # 注文完了時、カート内商品を全て削除する必要があるためdestroy_allを追加
+        delete 'cart_items/destroy_all'
         resources :cart_items, only: [:index, :create, :update, :destroy]
-        resources :buy_items, only: [:index, :show]
+        resources :buy_items, only: [:index, :show] do
+            resources :reviews, only: [:index, :new, :show, :edit, :create, :update, :destroy]
+        end
         resources :buy_addresses, only: [:index, :edit, :create, :update, :destroy]
         
         # membersはURLを変更するのでresourcesは使えない

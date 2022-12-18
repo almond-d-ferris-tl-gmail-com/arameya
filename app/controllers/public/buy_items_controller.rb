@@ -8,8 +8,8 @@ class Public::BuyItemsController < ApplicationController
     @items = Item.where(sell_status:0).order('id DESC').page(params[:page]).per(8)
     #where→()内の条件が合っていればデータを持ってくる、今回は販売中の商品(sell_status:0)のみデータを表示させる
     #DESC→降順に並び替える、per(8)→8件表示
-    #商品の最大値を取得
-    @items_max = Item.maximum(:id)
+    #商品数を表示
+    @items_max = Item.where(sell_status:0).count
   end
 
   def show
@@ -17,7 +17,6 @@ class Public::BuyItemsController < ApplicationController
     if member_signed_in? # ログインしていたらカート画面に進める
       @cart_item = current_member.cart_items.build #新規注文
     end
-
   end
   
   private

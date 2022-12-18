@@ -43,6 +43,7 @@ class Public::BuyOrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    @total_payment = 0
   end
   
   def create#new:注文情報入力→comfirm:注文情報確認→create→complete:注文確定(サンクス)
@@ -66,7 +67,7 @@ class Public::BuyOrdersController < ApplicationController
           # カート情報を削除するので item との紐付けが切れる前に保存する
           order_detail.save
           end
-          # cart_items.destroy_all#データ削除の遷移先(public/cart_items#destroy_all)
+          cart_items.destroy_all#データ削除の遷移先(public/cart_items#destroy_all)
         redirect_to buy_orders_complete_path#public/buy_orders#complete(注文確定(サンクス))
         # ユーザーに関連するカートのデータ(購入したデータ)をすべて削除(カートを空にする)
       else

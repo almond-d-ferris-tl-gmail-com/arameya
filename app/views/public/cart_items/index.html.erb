@@ -4,25 +4,26 @@
 <p id="notice"><%= notice %></p>
 <h2><span style="background-color:lightgray" class="m-5">　ショッピングカート　</span></h2>
 <br>
-  <table border="1" class="mx-auto">
+  <table border="1" width="1400" class="mx-auto">
     <thead>
       <tr bgcolor="lightgray" height="50">
         <th class="text-center" width="200">販売元</th>
-        <th class="text-center" width="500">商品名</th>
+        <th class="text-center" width="500" colspan="2">商品名</th>
         <th class="text-center" width="100">単価(税込)</th>
         <th class="text-center" width="150">数量</th>
         <th class="text-center" width="100">送料</th>
         <th class="text-center" width="100">小計</th>
-        <th class="text-center" width="200"></th>
+        <th class="text-center" width="150"></th>
       </tr>
     </thead>
   
     <tbody>
       <% @cart_items.each do |cart_item| %>
-      <% @total = @total + cart_item.subtotal_price %><!--小計を足していく-->
+      <% @total = @total + cart_item.subtotal_price + cart_item.item.postage %><!--小計と送料を足していく-->
         <tr height="80">
           <td><%= cart_item.item.member.last_name %><%= cart_item.item.member.first_name %></td><!--販売元-->
-          <td><%= image_tag cart_item.item.get_image, width: '80px', height: 'auto' %>　<%= cart_item.item.name %></td><!--商品画像--><!--商品名-->
+          <td><%= image_tag cart_item.item.get_image, width: '80px', height: 'auto' %></td><!--商品画像-->
+          <td><%= cart_item.item.name %></td><!--商品名-->
           <td class="text-right"><%= cart_item.item.tax_included_price.to_s(:delimited) %></td><!--税込--><!--to_s(:delimited)→文字列に変換してカンマをつける-->
           
         <!--プルダウンの実装-->
@@ -35,14 +36,14 @@
           </td>
           
           <td class="text-right"><%= cart_item.item.postage.to_s(:delimited) %></td><!--送料-->
-          <td class="text-right"><%= cart_item.subtotal_price.to_s(:delimited) %></td><!--小計-->
+          <td class="text-right"><%= (cart_item.subtotal_price + cart_item.item.postage).to_s(:delimited) %></td><!--小計-->
           <!--遷移先：public/cart_items#destroy-->
           <td class="text-center"><%= link_to "削除する", cart_item_path(cart_item.id), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
         </tr>
       <% end %>
       
       <tr height="50">
-        <th class="text-center" bgcolor="lightgray" colspan="5">合計金額</th>
+        <th class="text-center" bgcolor="lightgray" colspan="6">合計金額</th>
         <td class="text-right"><b><%= @total.to_s(:delimited) %></td></b><!--22行目で計算済-->
         <td></td>
       </tr>

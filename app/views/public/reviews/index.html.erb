@@ -6,7 +6,6 @@
   <table border="1" width="1200" class="mx-auto"><!--ボーダーを入れるときは←の設定する(widthはtdの総計)-->
     <thead>
       <tr bgcolor="lightgray" style="text-align:center" height="50">
-        <th>レビューID</th>
         <th>レビュー投稿日時</th>
         <th>購入元</th>
         <th>件名</th>
@@ -18,7 +17,6 @@
     <tbody>
       <% @reviews.each do |review| %>
         <tr height="80">
-          <td width="100"><%= review.id %></td><!--レビューID-->
           <td width="180"><%= review.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td><!--レビュー投稿日時-->
           <!--.in_time_zone('Tokyo')→UTC(協定世界時刻のデフォルト値)をJST(日本時間)に換算する-->
           <!--.strftime("%Y-%m-%d %H:%M:%S")→UTCを消して時刻のフォーマットに変更する-->

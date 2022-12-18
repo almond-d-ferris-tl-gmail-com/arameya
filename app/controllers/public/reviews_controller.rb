@@ -5,31 +5,36 @@ class Public::ReviewsController < ApplicationController
 
   def new #レビュー・評価新規作成
     @review_new = Review.new
-    @order = Order.find(params[:order_id])
+    @item = Item.find_by(id: params[:item_id])
+    # @order = Order.find(params[:order_id])
   end
     
   def index #レビュー・評価一覧
+    @item = Item.find_by(id: params[:item_id])
     @reviews = current_member.reviews.all
   end
 
   def edit#レビュー・評価編集
     @review = Review.find(params[:id])
-    @order = Order.find(params[:id])
+    @item = Item.find_by(id: params[:item_id])
+    #@order = Order.find(params[:id])
   end
 
   def show#レビュー・評価詳細
     @review = Review.find(params[:id])
-    @order = Order.find(params[:id])
+    @item = Item.find_by(id: params[:item_id])
+    #@order = Order.find(params[:id])
   end
 
   def create
     #newで新規登録後、一覧(index)に遷移する
     @review_new = Review.new(review_params)#updateのパラメータ
     @review_new.member_id = current_member.id
+    @item = Item.find_by(id: params[:item_id])
     #byebug
      #binding.pry # ターミナルに「Review.create(review_params)」を入力する
     if @review_new.save!
-      redirect_to reviews_path#indexのパス
+      redirect_to buy_item_reviews_path#indexのパス
     else
       render :index
     end
@@ -40,8 +45,9 @@ class Public::ReviewsController < ApplicationController
     #@の変数は↑のeditに合わせているのではなく、render(失敗)したときの遷移先がedit画面なので、
     #そちらで使用されている@edit~と合わせる必要があり、結果的に↑と同じ変数名になる
     @review = Review.find(params[:id])
-    if @review.update(review_params)#updateのパラメータ
-      redirect_to reviews_path #public/reviews#index
+    @item = Item.find_by(id: params[:item_id])
+    if @review.update(buy_item_review_params)#updateのパラメータ
+      redirect_to buy_item_reviews_path #public/reviews#index
     else
       render :edit
     end
@@ -50,11 +56,11 @@ class Public::ReviewsController < ApplicationController
   def destroy
     @review = Review.find(params[:id])
     @review.destroy
-    redirect_to '/reviews' #indexへのURL
+    redirect_to buy_item_reviews_path #public/reviews#index
   end
   
   private#editで編集可能部分
-  def review_params #updateのパラメータ
+  def buy_item_review_params #updateのパラメータ
     params.require(:review).permit(:review_title, :review_body, :star, :item_id)
   end
 

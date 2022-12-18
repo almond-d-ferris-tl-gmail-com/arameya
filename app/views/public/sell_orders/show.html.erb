@@ -7,30 +7,30 @@
 <br>
   <table border="0" class="mx-auto">
     <tr>
-      <td height="50" width="200">購入者</td>
+      <th height="50" width="200">購入者</td>
       <td width="300"><%= @order.member.last_name %> <%= @order.member.first_name %></td>
     </tr>
     <tr>
-      <td height="50">注文日</td>
-      <td width="300"><%= @order.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d") %></td>
+      <th height="50">注文日</td>
+      <td width="300"><%= @order.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
       <!--.in_time_zone('Tokyo')→UTC(協定世界時刻のデフォルト値)をJST(日本時間)に換算する-->
       <!--.strftime("%Y-%m-%d")→UTCを消して時刻のフォーマットに変更する-->
     </tr>
     <tr>
-      <td height="50">配送先</td>
+      <th height="50">配送先</td>
       <td colspan="2">
           〒<%= @order.postal_code %>　<%= @order.address %><br>
           <%= @order.name %>
       </td>
     </tr>
     <tr>
-      <td height="50">支払方法</td>
+      <th height="50">支払方法</td>
       <td><%= @order.payment_method_i18n %></td><!--i18n→日本語に変換する-->
     </tr>
     <tr>
-      <td height="50">受注ステータス</td><!--プルダウン-->
+      <th height="50">受注ステータス</td><!--プルダウン-->
       <td><!--遷移先:public/sell_orders#update-->
-          <%= form_with model: @order, url: sell_order_path(@order.id), method: :patch, local: true do |f| %>
+          <%= form_with model: @order, url: member_sell_order_path(@member.id, @order.id), method: :patch, local: true do |f| %>
             <%= f.select :order_status, Order.order_statuses.keys.map {|k| [I18n.t("enums.order.order_status.#{k}"), k]} %>
             <!--ブラウザには日本語で表示→英語でデータを渡すために、再度英語に変換する-->
           <%= f.submit "更新" , class: "btn btn-success" %>
@@ -61,13 +61,13 @@
               <!--商品名-->
               <td><%= order_detail.item.name %></td>
               <!--単価(税込)-->
-              <td><%= order_detail.item.tax_included_price.to_s(:delimited) %></td>
+              <td class="text-right"><%= order_detail.item.tax_included_price.to_s(:delimited) %></td>
               <!--数量-->
-              <td><%= order_detail.amount %></td>
+              <td class="text-right"><%= order_detail.amount %></td>
               <!--小計-->
-              <td><%= order_detail.subtotal_price.to_s(:delimited) %></td>
+              <td class="text-right"><%= order_detail.subtotal_price.to_s(:delimited) %></td>
               <!--準備ステータス-->
-              <%= form_with model: order_detail, url: sell_order_detail_path(order_detail.id), method: :patch, local: true do |f| %><!--public/sell_order_details#update-->
+              <%= form_with model: order_detail, url: member_sell_order_detail_path(@member.id, order_detail.id), method: :patch do |f| %><!--public/sell_order_details#update-->
               <!--ブラウザには日本語で表示→英語でデータを渡すために、再度英語に変換する-->
                 <td><%= f.select :arranging_status, OrderDetail.arranging_statuses.keys.map {|k| [I18n.t("enums.order_detail.arranging_status.#{k}"), k]} %>
                     <%= f.submit "更新", class: "btn btn-success" %>
@@ -83,15 +83,15 @@
       <table border="0">
           <tr height="50">
             <td width="200"><b>商品合計</b></td>
-            <td><%= @order.total_payment.to_s(:delimited) %>円</td>
+            <td class="text-right"><%= @order.total_payment.to_s(:delimited) %>円</td>
           </tr>
           <tr height="50">
             <td><b>送料</b></td>
-            <td width="150"><%= @order.shipping_cost %>円</td>
+            <td width="150" class="text-right"><%= @order.shipping_cost %>円</td>
           </tr>
           <tr height="50">
             <td><b>請求金額合計</b></td>
-            <td><%= (@order.total_payment + @order.shipping_cost).to_s(:delimited) %>円</td>
+            <td class="text-right"><%= (@order.total_payment + @order.shipping_cost).to_s(:delimited) %>円</td>
           </tr>      
       </table>
     </div><!--col-3-->

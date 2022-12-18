@@ -39,7 +39,7 @@ class Public::CartItemsController < ApplicationController
   
   def update
     @update_cart_item = CartItem.find(params[:id])
-    #byebug←エラーのチェックで使用(デフォルトでGemfaileに導入されている)
+    #byebug←エラーのチェックで使用(デフォルトでGemfileに導入されている)
     #rails sを起動させて操作すると、controllerで記述した箇所で止まるのでターミナルで@~などを入力してデータが入っているかチェックできる
     #exitで終了する
     if @update_cart_item.update_attribute(:amount, params[:cart_item][:amount])#updateのパラメータ

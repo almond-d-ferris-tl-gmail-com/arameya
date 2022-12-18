@@ -14,9 +14,8 @@
 
 <table class="mx-auto">
   <tr bgcolor="lightgray" height="50">
-    <th class="text-center" width="100">商品ID</th>
-    <th class="text-center" width="200">ジャンル</th>
-    <th class="text-center" width="500">商品名</th>
+    <th class="text-center" width="250">ジャンル</th>
+    <th class="text-center" width="550">商品名</th>
     <th class="text-center" width="100">単価(税抜)</th>
     <th class="text-center" width="150">ステータス</th>
     <th></th>
@@ -24,7 +23,6 @@
 
   <% @items.each do |item| %>
     <tr height="50">
-      <td class="text-center"><%= item.id %></td>
       <td class="text-center"><%= item.genre.name %></td>
       <td><%=link_to item.name, member_sell_item_path(@member.id, item.id) %></td><!--遷移先:public/sell_items#show-->
       <td class="text-right"><%= item.price.to_s(:delimited) %>円</td><!--to_s(:delimited)→文字列に変換してカンマをつける-->

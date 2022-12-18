@@ -8,8 +8,8 @@ class Public::SellItemsController < ApplicationController
     # ログインしている会員が販売している商品のみを表示させる
     #ページネーション
     @items = Item.where(member_id: current_member.id).includes(:member).page(params[:page]).per(10)#.order("created_at DESC")
-    #会員が販売している商品の最大件値を取得
-    @items_max = Item.where(member_id: current_member.id).maximum(:id)
+    #会員が販売している商品数を取得
+    @items_max = Item.where(member_id: current_member.id).count
   end
 
   def new#商品新規登録
@@ -36,7 +36,7 @@ class Public::SellItemsController < ApplicationController
     # byebug
     if @item_new.save!
       flash[:notice] ="商品新規登録が完了しました"
-      redirect_to member_sell_item_path(@item_new) #public/sell_items#show
+      redirect_to member_sell_item_path(@member.id, @item_new) #public/sell_items#show
     else
       render :new
     end

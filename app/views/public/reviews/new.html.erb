@@ -3,21 +3,20 @@
 <br>
 <h2><span style="background-color:lightgray" class="m-5">　レビュー・評価新規作成　</span></h2>
 <br>
-<%= form_with model: @review_new, url: reviews_path do |f| %><!--遷移先:public/reviews#create-->
+<%= form_with model: @review_new, url: buy_item_reviews_path(@item.id) do |f| %><!--遷移先:public/reviews#create-->
 <table border="0" class="mx-auto" width="1200">
   <tr>
-    <th height="50" width="180">購入元</th>
-    <td><%#= @order.item.member.last_name %> <%#= @order.item.member.first_name %></td>
+    <th height="50" width="180">販売元</th>
+    <td><%= @item.member.last_name %><%= @item.member.first_name %></td>
   </tr>
   <tr>
     <th>購入商品</th>
-    <% @order.order_details.each do |order| %>
+    <%# @item.order_details.each do |item| %>
     <td>
-      <p><%#= @order.inspect %></p>
-      <p><%= order.item.name %></p>
-      <%= f.hidden_field :item_id, :value => order.item.id %>
+      <p><%= @item.name %></p>
+      <%= f.hidden_field :item_id, :value => item.id %>
     </td><!--商品名-->
-    <% end %>
+    <%# end %>
   </tr>
 
   <tr>
