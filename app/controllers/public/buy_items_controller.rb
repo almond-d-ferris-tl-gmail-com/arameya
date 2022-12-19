@@ -13,6 +13,7 @@ class Public::BuyItemsController < ApplicationController
   end
 
   def show
+    @review = Review.find(params[:id])
     @item = Item.find(params[:id])
     if member_signed_in? # ログインしていたらカート画面に進める
       @cart_item = current_member.cart_items.build #新規注文
