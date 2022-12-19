@@ -13,7 +13,7 @@
     <%= link_to "[販売]商品一覧", member_sell_items_path(@member.id), class: "btn btn-primary btn-block" %><!--遷移先：public/sell_items#index-->
 </div>
 <div class="text-center mt-5">
-    <%= link_to "[販売]注文履歴一覧", member_sell_orders_path(@member.id), class: "btn btn-primary btn-block" %><!--遷移先：public/sell_orders#index-->
+    <%= link_to "[販売]注文履歴一覧", sell_orders_path, class: "btn btn-primary btn-block" %><!--遷移先：public/sell_orders#index-->
 </div>
 <div class="text-center mt-5">
     <%= link_to "[会員宛]メッセージ一覧", members_my_page_path, class: "btn btn-primary btn-block" %><!--遷移先：public/members#show-->

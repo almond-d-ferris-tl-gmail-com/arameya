@@ -4,22 +4,19 @@ class Public::SellOrdersController < ApplicationController
    before_action :authenticate_member!
 
   def index
-    @member = current_member
     #ページネーション
     @orders = Order.where(member_id: current_member.id).includes(:member).page(params[:page]).per(10)#.order("created_at DESC")
   end
 
   def show
-    @member = current_member
     @order = Order.find(params[:id])
     @order_details = @order.order_details
   end
   
   def update
-    @member = current_member
     @order = Order.find(params[:id])
     @order_details = @order.order_details
-    @order.update(member_sell_order_params)#public/sell_orders#updateのパラメータ
+    @order.update(sell_order_params)#public/sell_orders#updateのパラメータ
     # 注文ステータスを「入金待ち」にする→準備ステータスが全て「商品準備不可」に更新される
     if @order.order_status == "waiting"#入金待ち
         @order_details.each do |order_detail|
@@ -31,11 +28,11 @@ class Public::SellOrdersController < ApplicationController
           order_detail.update(arranging_status: 1)#商品準備中
         end
     end
-    redirect_to member_sell_order_path(@member.id, @order.id), notice: "ステータスを変更しました"#public/sell_orders#show
+    redirect_to sell_order_path(@order.id), notice: "ステータスを変更しました"#public/sell_orders#show
   end
   
   private
-  def member_sell_order_params#public/sell_orders#update 注文ステータス変更、準備ステータス変更
+  def sell_order_params#public/sell_orders#update 注文ステータス変更、準備ステータス変更
   #permitメソッド:paramsで取得したパラメーターに対し保存の許可を行う
     params.require(:order).permit(:order_status)
   end

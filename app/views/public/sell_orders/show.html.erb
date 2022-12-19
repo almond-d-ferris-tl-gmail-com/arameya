@@ -30,7 +30,7 @@
     <tr>
       <th height="50">受注ステータス</td><!--プルダウン-->
       <td><!--遷移先:public/sell_orders#update-->
-          <%= form_with model: @order, url: member_sell_order_path(@member.id, @order.id), method: :patch, local: true do |f| %>
+          <%= form_with model: @order, url: sell_order_path(@order.id), method: :patch, local: true do |f| %>
             <%= f.select :order_status, Order.order_statuses.keys.map {|k| [I18n.t("enums.order.order_status.#{k}"), k]} %>
             <!--ブラウザには日本語で表示→英語でデータを渡すために、再度英語に変換する-->
           <%= f.submit "更新" , class: "btn btn-success" %>
@@ -67,7 +67,7 @@
               <!--小計-->
               <td class="text-right"><%= order_detail.subtotal_price.to_s(:delimited) %></td>
               <!--準備ステータス-->
-              <%= form_with model: order_detail, url: member_sell_order_detail_path(@member.id, order_detail.id), method: :patch do |f| %><!--public/sell_order_details#update-->
+              <%= form_with model: order_detail, url: sell_order_detail_path(order_detail.id), method: :patch do |f| %><!--public/sell_order_details#update-->
               <!--ブラウザには日本語で表示→英語でデータを渡すために、再度英語に変換する-->
                 <td><%= f.select :arranging_status, OrderDetail.arranging_statuses.keys.map {|k| [I18n.t("enums.order_detail.arranging_status.#{k}"), k]} %>
                     <%= f.submit "更新", class: "btn btn-success" %>

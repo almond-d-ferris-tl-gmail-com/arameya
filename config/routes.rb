@@ -32,6 +32,8 @@ Rails.application.routes.draw do
             resources :reviews, only: [:index, :new, :show, :edit, :create, :update, :destroy]
         end
         resources :buy_addresses, only: [:index, :edit, :create, :update, :destroy]
+        resources :sell_order_details, only: [:update]
+        resources :sell_orders, only: [:index, :show, :update]
         
         get 'members/reviews', to: 'members#reviews'
         # membersはURLを変更するのでresourcesは使えない
@@ -48,8 +50,6 @@ Rails.application.routes.draw do
         # 会員の退会処理(ステータスの更新)(URL変更なし)
         patch '/members/withdraw'
         resources :members do
-            resources :sell_order_details, only: [:update]
-            resources :sell_orders, only: [:index, :show, :update]
             resources :sell_items, only: [:index, :new, :show, :edit, :create, :update, :destroy]
         end
         
