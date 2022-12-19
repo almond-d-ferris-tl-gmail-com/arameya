@@ -19,6 +19,11 @@ class Public::MembersController < ApplicationController
   def complete
   end
   
+  def reviews
+    @reviews = current_member.reviews.page(params[:page]).per(10).order("created_at DESC")
+    @item = Item.find_by(id: params[:buy_item_id])
+  end
+  
   def update
     #editで編集後、マイページ(show)に遷移する
     #@の変数は↑のeditに合わせているのではなく、render(失敗)したときの遷移先がedit画面なので、

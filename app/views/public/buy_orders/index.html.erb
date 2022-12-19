@@ -31,17 +31,6 @@
           <% end %>
           </td>
 
-          <!--<div class="container">-->
-          <!--  <div class="row">-->
-          <!--    <div class="col">-->
-          <!--      <img class="my-5 w-100" src="img/">-->
-          <!--      </div>-->
-          <!--    <div class="col d-flex align-items-center">-->
-          <!--      <p class="mb-0">画像の中央あたりに横に並べたいです</p>-->
-          <!--  　 </div>-->
-          <!--　 </div>-->
-          <!--</div>-->
-  
           <td align="right"><%= order.total_payment.to_s(:delimited) %></td><!--支払金額--><!--to_s(:delimited)→文字列に変換してカンマをつける-->
           <td align="center"><%= order.order_status_i18n %></td><!--ステータス--><!--i18n→日本語に変換する-->
           <td align="center"><!--注文詳細-->
@@ -51,7 +40,7 @@
           <td align="center"><!--レビュー-->
             <!--遷移先：public/reviews#new(レビュー新規作成)-->
             <% order.order_details.each do |order_detail| %>
-              <%= link_to "新規投稿する", new_buy_item_review_path(@item.id), class: "btn btn-success" %><br><br><br>
+              <%= link_to "投稿する", new_buy_item_review_path(order_detail.item.id), class: "btn btn-success" %><br><br><br>
             <% end %>
           </td>
         </tr>

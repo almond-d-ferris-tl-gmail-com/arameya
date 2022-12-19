@@ -5,7 +5,7 @@
 <h2><span style="background-color:lightgray" class="m-5">　レビュー・評価編集　</span></h2>
 <br>
 <!--url(遷移先):public/reviews#update(変更メソッドはpatch)-->
-<%= form_with model: @review, url: review_path, method: :patch do |f| %>
+<%= form_with model: @review, url: buy_item_review_path(@item.id), method: :patch do |f| %>
 <table border="0" class="mx-auto" width="1200">
   <tr>
     <th height="50" width="180">購入元</th>
@@ -13,13 +13,10 @@
   </tr>
   <tr>
     <th>購入商品</th>
-    <% @order.order_details.each do |order| %>
     <td>
-      <p><%#= @order.inspect %></p>
-      <p><%= order.item.name %></p>
-      <%= f.hidden_field :item_id, :value => order.item.id %>
-    </td><!--商品名-->
-    <% end %>
+      <p><%= @item.name %></p>
+      <%= f.hidden_field :item_id, :value => @item.id %>
+    </td>
   </tr>
 
   <tr>

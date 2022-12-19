@@ -39,6 +39,7 @@ class Public::BuyOrdersController < ApplicationController
 
   def index
     @orders = current_member.orders.all
+    #@review = Review.find(params[:review_id])
   end
 
   def show

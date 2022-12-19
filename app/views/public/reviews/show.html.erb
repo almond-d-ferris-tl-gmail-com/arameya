@@ -17,10 +17,7 @@
           </tr>
           <tr>
             <th height="50">購入商品</th>
-                <% @order.order_details.each do |order| %>
-                <td><%= order.item.name %></td>
-                  <%#= f.hidden_field :item_id, :value => order.item.id %>
-                <% end %>
+                <td><%= @item.name %></td>
           </tr>
           <tr>
             <th height="50">件名</th>
@@ -56,7 +53,7 @@
           </tr>
           <tr>
             <th></th>
-            <td><%= link_to '編集する', edit_review_path, class: "btn btn-success" %></td> <!--url(遷移先):public/reviews#edit(レビュー内容編集)-->
+            <td><%= link_to '編集する', edit_buy_item_review_path(@item.id), class: "btn btn-success" %></td> <!--url(遷移先):public/reviews#edit(レビュー内容編集)-->
           </tr>
         </table>
     </div>

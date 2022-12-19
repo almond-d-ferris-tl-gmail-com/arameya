@@ -33,6 +33,7 @@ Rails.application.routes.draw do
         end
         resources :buy_addresses, only: [:index, :edit, :create, :update, :destroy]
         
+        get 'members/reviews', to: 'members#reviews'
         # membersはURLを変更するのでresourcesは使えない
         # show 会員のマイページ
         get 'members/my_page', to: 'members#show'
