@@ -4,13 +4,12 @@
 <!--/nagano_cake/config/locales/ja.yml-->
 <%= notice %><!--ログインに成功したらメッセージを表示する-->
 
-<h2><span style="background-color:lightgray" class="m-5">　注文履歴一覧　</span></h2>
+<h2><span style="background-color:lightgray" class="m-5">　[販売]注文履歴一覧　</span></h2>
 <br>
   <table class="table" style="display:flex; justify-content:center">
     <tr bgcolor="lightgray" height="50">
       <th width="250">購入日時</th>
       <th width="300">購入者</th>
-      <th width="200">購入個数</th>
       <th width="200">注文ステータス</th>
     </tr>
     
@@ -20,9 +19,7 @@
           <td><%=link_to order.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S"), sell_order_path(order.id) %></td>
           <!--.in_time_zone('Tokyo')→UTC(協定世界時刻のデフォルト値)をJST(日本時間)に換算する-->
           <!--.strftime("%Y-%m-%d %H:%M:%S")→UTCを消して時刻のフォーマットに変更する-->
-          <td><%= order.name %></td>
-          <!--order.amountだとorderテーブルのamountカラムになってしまう。その注文に紐づいている注文商品数-->
-          <td><%= order.order_details.sum(:amount) %></td><!--個人の注文数量総計-->
+          <td><%= order.member.last_name %> <%= order.member.first_name %></td>
           <td><%= order.order_status_i18n %></td><!--i18n→日本語に変換する-->
         </tr>
     <% end %>

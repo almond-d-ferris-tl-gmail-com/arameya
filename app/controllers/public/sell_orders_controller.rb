@@ -5,12 +5,19 @@ class Public::SellOrdersController < ApplicationController
 
   def index
     #ページネーション
-    @orders = Order.where(member_id: current_member.id).includes(:member).page(params[:page]).per(10)#.order("created_at DESC")
+    # orderを取得したい→orderはitem.idを持っていない→item.idを持っているのはorder_detail→orderの子テーブルであるorder.detailをincludesで検索してつなげる→whereで絞り込む
+    @orders = Order.includes(:order_details).where(order_details: {item_id: current_member.items.map(&:id)}).page(params[:page]).per(10)
   end
 
   def show
+    # orderが入るとorder_detailsが作られる→order_detailsにはitem_idが存在する(売れた商品のid)→itemはcurrent_member(販売者に紐づいている)→
+    # 販売者から見た「自分のitemが買われたorderを知りたい」に対して「自分の持つitemに関係のあるorder_details」を持つ「order」を取得する
     @order = Order.find(params[:id])
-    @order_details = @order.order_details
+    # filter_map・・・{}の中身(今回はif文で条件指定)と合致したものだけ値を返す、購入者が複数の販売者から商品を購入してもif文で自分が販売している商品のみを抽出する
+    @order_details = @order.order_details.filter_map { |order_detail| order_detail if current_member.items.map(&:id).include?(order_detail.item_id)}
+    # map・・・{}の中身の値をすべて返す(今回は小計subtotal_priceの合計値を返す)
+    @total_price = @order_details.map {|order_detail| order_detail.subtotal_price }.sum
+    @total_postage = @order_details.map {|order_detail| order_detail.item.postage }.sum
   end
   
   def update
@@ -34,7 +41,6 @@ class Public::SellOrdersController < ApplicationController
   private
   def sell_order_params#public/sell_orders#update 注文ステータス変更、準備ステータス変更
   #permitメソッド:paramsで取得したパラメーターに対し保存の許可を行う
-    params.require(:order).permit(:order_status)
+    params.require(:order).permit(:order_status, :arranging_status)
   end
-
 end

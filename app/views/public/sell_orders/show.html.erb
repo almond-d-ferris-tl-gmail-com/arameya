@@ -3,7 +3,7 @@
 <br>
 <%= notice %>
 
-<h2><span style="background-color:lightgray" class="m-5">　注文履歴詳細　</span></h2>
+<h2><span style="background-color:lightgray" class="m-5">　[販売]注文履歴詳細　</span></h2>
 <br>
   <table border="0" class="mx-auto">
     <tr>
@@ -41,60 +41,46 @@
   
 <br><br>
 
-<div class="container">
-  <div class="row">
-    <div class="col-9"><!--左側-->
-      <table class="table">
-        <thead>
-          <tr bgcolor="lightgray" height="50">
-            <th width="1000">商品名</th>
-            <th width="300">単価(税込)</th>
-            <th width="150">数量</th>
-            <th width="200">小計</th>
-            <th width="400">準備ステータス</th>
-          </tr>
-        </thead>
-  
-        <tbody>
-          <% @order_details.each do |order_detail| %>
-            <tr height="50">
-              <!--商品名-->
-              <td><%= order_detail.item.name %></td>
-              <!--単価(税込)-->
-              <td class="text-right"><%= order_detail.item.tax_included_price.to_s(:delimited) %></td>
-              <!--数量-->
-              <td class="text-right"><%= order_detail.amount %></td>
-              <!--小計-->
-              <td class="text-right"><%= order_detail.subtotal_price.to_s(:delimited) %></td>
-              <!--準備ステータス-->
-              <%= form_with model: order_detail, url: sell_order_detail_path(order_detail.id), method: :patch do |f| %><!--public/sell_order_details#update-->
-              <!--ブラウザには日本語で表示→英語でデータを渡すために、再度英語に変換する-->
-                <td><%= f.select :arranging_status, OrderDetail.arranging_statuses.keys.map {|k| [I18n.t("enums.order_detail.arranging_status.#{k}"), k]} %>
-                    <%= f.submit "更新", class: "btn btn-success" %>
-                </td>
-              <% end %>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div><!--col-9-->
+  <table border="1" class="mx-auto">
+    <thead>
+      <tr bgcolor="lightgray" height="50">
+        <th class="text-center" width="600">商品名</th>
+        <th class="text-center" width="150">単価(税込)</th>
+        <th class="text-center" width="100">数量</th>
+        <th class="text-center" width="150">送料</th>
+        <th class="text-center" width="150">小計</th>
+        <th class="text-center" width="250">準備ステータス</th>
+      </tr>
+    </thead>
 
-    <div class="col-3"><!--右側-->
-      <table border="0">
-          <tr height="50">
-            <td width="200"><b>商品合計</b></td>
-            <td class="text-right"><%= @order.total_payment.to_s(:delimited) %>円</td>
-          </tr>
-          <tr height="50">
-            <td><b>送料</b></td>
-            <td width="150" class="text-right"><%= @order.shipping_cost %>円</td>
-          </tr>
-          <tr height="50">
-            <td><b>請求金額合計</b></td>
-            <td class="text-right"><%= (@order.total_payment + @order.shipping_cost).to_s(:delimited) %>円</td>
-          </tr>      
-      </table>
-    </div><!--col-3-->
-  </div><!--row-->
-</div><!--container-->
+    <tbody>
+      <% @order_details.each do |order_detail| %>
+      <%# @total_payment = @total_payment + order.subtotal_price + order.item.postage %><!--●小計と送料を足していく-->
+        <tr height="50">
+          <!--商品名-->
+          <td><%= order_detail.item.name %></td>
+          <!--単価(税込)-->
+          <td class="text-right"><%= order_detail.item.tax_included_price.to_s(:delimited) %></td>
+          <!--数量-->
+          <td class="text-right"><%= order_detail.amount %></td>
+          <!--送料-->
+          <td class="text-right"><%= order_detail.item.postage.to_s(:delimited) %></td>
+          <!--小計-->
+          <td class="text-right"><%= (order_detail.subtotal_price + order_detail.item.postage).to_s(:delimited) %></td>
+          <!--準備ステータス-->
+          <%= form_with model: order_detail, url: sell_order_detail_path(order_detail.id), method: :patch do |f| %><!--public/sell_order_details#update-->
+          <!--ブラウザには日本語で表示→英語でデータを渡すために、再度英語に変換する-->
+            <td class="text-center"><%= f.select :arranging_status, OrderDetail.arranging_statuses.keys.map {|k| [I18n.t("enums.order_detail.arranging_status.#{k}"), k]} %>
+                <%= f.submit "更新", class: "btn btn-success" %>
+            </td>
+          <% end %>
+        </tr>
+      <tr height="50">
+        <th class="text-center" bgcolor="lightgray" colspan="4">合計金額</th>
+        <td class="text-right"><b><%= (@total_price + @total_postage).to_s(:delimited) %></td></b>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
 <br>
+

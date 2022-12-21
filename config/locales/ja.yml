@@ -7,6 +7,7 @@ ja:
       order_status:
         waiting: "入金待ち"
         confirming: "入金確認済み"
+        get_ready: "発送準備中"
         sent: "発送済み"
     order_detail:
       arranging_status:

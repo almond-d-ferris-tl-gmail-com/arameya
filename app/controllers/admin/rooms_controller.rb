@@ -1,6 +1,6 @@
 class Admin::RoomsController < ApplicationController
   def show
-    @member = Member.find(params[:id])
+    @member = Member.find(params[:member_id])
     
     #フォームに渡すために、モデルのインスタンスを作成
     @message = AdMemMessage.new

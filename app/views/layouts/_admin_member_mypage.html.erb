@@ -13,5 +13,5 @@
     <%= link_to "レビュー・評価一覧", admin_member_reviews_path(@member.id), class: "btn btn-primary btn-block" %><!--遷移先：admin/reviews#index-->
 </div>
 <div class="text-center mt-5">
-    <%= link_to "[管理者ー会員]メッセージ受信", admin_member_room_path(@member.id), class: "btn btn-primary btn-block" %><!--遷移先：admin/rooms#show-->
+    <%= link_to "[管理者ー会員]メッセージ受信", admin_member_room_path(@member.id, @room.id), class: "btn btn-primary btn-block" %><!--遷移先：admin/rooms#show-->
 </div>

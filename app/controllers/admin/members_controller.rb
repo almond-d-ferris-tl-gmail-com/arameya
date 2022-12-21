@@ -5,6 +5,9 @@ class Admin::MembersController < ApplicationController
   
   def show #会員情報詳細画面
     @member = Member.find(params[:id])
+    # 会員のルームのwhereで指定した管理者IDの配列0番目の要素(first)を取り出す
+    # (管理者は現在1名だが、今後複数になる可能性があることを想定してfirstで指定する)
+    @room = @member.rooms.where(admin_id: current_admin.id).first # firstの後に.idをつけることができる。それはroom.idのこと
   end
 
   def edit #会員情報編集画面
