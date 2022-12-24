@@ -17,8 +17,6 @@ Rails.application.routes.draw do
     scope module: :public do
         #namespace→scope moduleに変更
         #URLは変えず、ファイル構成だけ指定のパスにする(フォルダ名にはpublicをつけて、URLにはつけない)
-        resources :rooms, only: [:create, :show] # 会員は1つのルームだけあればいいので、indexは不要
-        resources :ad_mem_messages, only: [:create]
         get '/search', to: 'searches#search'
         # orders#showよりも上に記述しないとcompleteがid扱いされる
         post 'buy_orders/comfirm'
@@ -51,6 +49,8 @@ Rails.application.routes.draw do
         patch '/members/withdraw'
         resources :members do
             resources :sell_items, only: [:index, :new, :show, :edit, :create, :update, :destroy]
+            resources :ad_mem_messages, only: [:create]
+            resources :rooms, only: [:create, :show] # 会員は1つのルームだけあればいいので、indexは不要
         end
         
         # 'URL' => 'コントローラ#アクション', as: :Prefix(パスが入った変数)の変更
@@ -67,6 +67,7 @@ Rails.application.routes.draw do
             resources :rooms, only: [:create, :show] # 管理者は複数の会員とメッセージのやりとりがあるので複数のルームが必要→indexの一覧が必要→先にshowだけ作成する
             resources :ad_mem_messages, only: [:create]
             resources :reviews, only: [:index, :show, :destroy]
+            resources :member_sell_orders, only: [:index, :show]
             resources :member_sells, only: [:index, :show]
             resources :member_buys, only: [:index, :show]
         end

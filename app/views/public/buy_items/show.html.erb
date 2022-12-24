@@ -54,37 +54,39 @@
     <% end %>
   </div>
 <br>
-      <%# @reviews.each do |review| %>
-        <table border="0" width="600" class="mx-auto">
-          <tr>
-            <td><p><b>レビュー・評価</b></p></td>
-          </tr>
-          <tr>
-            <td>
-                <div id="star-rate-<%= @review.id %>"></div>
-                <script>
-                    var elem = document.getElementById('star-rate-<%= @review.id %>');
-                    var opt = {  
-                    starOn: "<%= asset_path('star-on.png') %>",
-                    starOff: "<%= asset_path('star-off.png') %>",
-                    starHalf: "<%= asset_path('star-half.png') %>",
-                    half: true,
-                    readOnly: true,
-                    score: <%= @review.star %>,
-                    };
-                    raty(elem,opt);
-                </script>
-            </td>
-            <td><%= @review.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
-                <!--.in_time_zone('Tokyo')→UTC(協定世界時刻のデフォルト値)をJST(日本時間)に換算する-->
-                <!--.strftime("%Y-%m-%d %H:%M:%S")→UTCを消して時刻のフォーマットに変更する-->
-          </tr>
-          <tr>
-            <td><%= @review.review_title %></td><!--件名-->
-            <td><%= @review.member.last_name %>　<%= @review.member.first_name %></td><!--投稿者-->
-          </tr>
-          <tr>
-            <td colspan="2"><%= @review.review_body %></td>
-          </tr>
-        </table>
-      <%# end %>
+  <% @item.reviews.each do |review| %>
+    <table border="0" width="600" class="mx-auto">
+      <tr>
+        <td><p><b>レビュー・評価</b></p></td>
+      </tr>
+      <tr>
+        <td>
+          <div id="star-rate-<%= review.id %>"></div>
+          <script>
+            var elem = document.getElementById('star-rate-<%= review.id %>');
+            var opt = {  
+            starOn: "<%= asset_path('star-on.png') %>",
+            starOff: "<%= asset_path('star-off.png') %>",
+            starHalf: "<%= asset_path('star-half.png') %>",
+            half: true,
+            readOnly: true,
+            score: <%= review.star %>,
+            };
+            raty(elem,opt);
+          </script>
+        </td>
+        <td><%= review.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
+            <!--.in_time_zone('Tokyo')→UTC(協定世界時刻のデフォルト値)をJST(日本時間)に換算する-->
+            <!--.strftime("%Y-%m-%d %H:%M:%S")→UTCを消して時刻のフォーマットに変更する-->
+      </tr>
+      <tr>
+        <td><%= review.review_title %></td><!--件名-->
+        <td><%= review.member.last_name %>　<%= review.member.first_name %></td><!--投稿者-->
+      </tr>
+      <tr>
+        <td colspan="2"><%= review.review_body %></td>
+      </tr>
+      <br><br>
+    </table>
+  <% end %>
+<br>

@@ -11,49 +11,57 @@
 <br>
 <h2><span style="background-color:lightgray" class="m-5">　<%= @member.last_name %><%= @member.first_name %>さんの会員詳細　</span></h2>
 <br>
-      <table border="0" class="mx-auto">
-        <tr>
-          <td height="50" width="200">会員ID</td>
-          <td width="300"><%= @member.id %></td>
-        </tr>
-        <tr>
-          <td height="50">氏名</td>
-          <td width="300"><%= @member.last_name %> <%= @member.first_name %></td>
-        </tr>
-        <tr>
-          <td height="50">フリガナ</td>
-          <td><%= @member.last_name_kana %> <%= @member.first_name_kana %></td>
-        </tr>
-        <tr>
-          <td height="50">郵便番号</td>
-          <td><%= @member.postal_code %></td>
-        </tr>
-        <tr>
-          <td height="50">住所</td>
-          <td><%= @member.address %></td>
-        </tr>
-        <tr>
-         <td height="50">電話番号</td>
-          <td><%= @member.telephone_number %></td>
-        </tr>
-        <tr>
-          <td height="50">メールアドレス</td>
-          <td><%= @member.email %></td>
-        </tr>
-        <tr>
-          <td height="50">会員ステータス</td>
-            <% if @member.is_deleted == false %>
-              <td><font color="green">有効</font></td>
-            <% else %>
-              <td><font color="gray">退会</font></td>
-            <% end %>
-        </tr>
-        <tr>
-         <td height="50"></td>
-          <!--path(遷移先):admin/members#edit(個人の会員情報編集)-->                       <!--path(遷移先):admin/orders#show(個人の注文履歴一覧)-->
-          <td><%= link_to '編集する', edit_admin_member_path, class: "btn btn-success" %>　<%#= link_to '注文履歴一覧を見る', admin_order_path, class: "btn btn-primary" %></td>
-        </tr>
-      </table>
+    <table border="0" class="mx-auto">
+      <tr>
+        <th height="50" width="200">会員ID</th>
+        <td width="300"><%= @member.id %></td>
+      </tr>
+      <tr>
+        <th height="50" width="100">氏名</th>
+        <td width="300"><%= @member.last_name %> <%= @member.first_name %></td>
+      </tr>
+      <tr>
+        <th height="50">フリガナ</th>
+        <td><%= @member.last_name_kana %> <%= @member.first_name_kana %></td>
+      </tr>
+      <tr>
+        <th height="50">会社名</th>
+        <td><%= @member.company %></td>
+      </tr>
+      <tr>
+        <th height="50">役職・部署名</th>
+        <td><%= @member.department %></td>
+      </tr>
+      <tr>
+        <th height="50">郵便番号</th>
+        <td><%= @member.postal_code %></td>
+      </tr>
+      <tr>
+        <th height="50">住所</th>
+        <td><%= @member.address %></td>
+      </tr>
+      <tr>
+        <th height="50">電話番号</th>
+        <td><%= @member.telephone_number %></td>
+      </tr>
+      <tr>
+        <th height="50">メールアドレス</th>
+        <td><%= @member.email %></td>
+      </tr>
+      <tr>
+        <th height="50">会員ステータス</th>
+          <% if @member.is_deleted == false %>
+            <td><font color="green">有効</font></td>
+          <% else %>
+            <td><font color="gray">退会</font></td>
+          <% end %>
+      </tr>
+      <tr>
+       <td height="50"></td>
+        <!--path(遷移先):admin/members#edit(個人の会員情報編集)-->                       <!--path(遷移先):admin/orders#show(個人の注文履歴一覧)-->
+        <td><%= link_to '編集する', edit_admin_member_path, class: "btn btn-success" %>　<%#= link_to '注文履歴一覧を見る', admin_order_path, class: "btn btn-primary" %></td>
+      </tr>
+    </table>
     </div>
   </div>
 </div>

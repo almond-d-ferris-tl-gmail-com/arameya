@@ -1,13 +1,6 @@
 <!--<h2>Admin::Members#edit</h2>-->
 <!--<p>Find me in app/views/admin/members/edit.html.erb</p>-->
 <!--管理者側の会員サイドメニューバー グリッドシステム設定はそれぞれの本体部分で行う-->
-<div class="container-fluid">
-  <div class="row">
-    <div class="offset-xl-1"></div>
-    <div class="col-xl-2">
-      <%= render "/layouts/admin_member_mypage" %>
-    </div>
-    <div class="col-xl-9">
 <br>
 <h2><span style="background-color:lightgray" class="m-5">　<%= @member.last_name %><%= @member.first_name %>さんの会員情報編集　</span></h2>
 <br>
@@ -15,49 +8,49 @@
 
     <table border="0" class="mx-auto">
       <tr>
-        <td height="50" width="200">会員ID</td>
+        <th height="50" width="200">会員ID</th>
         <td><%= @member.id %></td>
       </tr>
-
       <tr>
-        <td height="50"><%= f.label :"氏名" %></td>
-        <!--autofocus: true：カーソルが移動して入力状態になる→htmlに１つだけ設定できる-->
-        <!--姓-->
+        <th height="50" width="150"><%= f.label :"氏名" %></th>
+        <!--姓--><!--autofocus: true：カーソルが移動して入力状態になる→htmlに１つだけ設定できる-->
         <td width="250"><%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %></td>
         <!--名-->
         <td><%= f.text_field :first_name, autocomplete: "first_name" %></td>
       </tr>
-      
       <tr>
-        <td height="50"><%= f.label :"フリガナ" %></td>
+        <th height="50"><%= f.label :"フリガナ" %></th>
         <!--セイ-->
         <td><%= f.text_field :last_name_kana, autocomplete: "last_name_kana" %></td>
         <!--メイ-->
         <td><%= f.text_field :first_name_kana, autocomplete: "first_name_kana" %></td>
       </tr>
-      
       <tr>
-        <td height="50"><%= f.label :"郵便番号" %></td>
+        <th height="50"><%= f.label :"会社名" %></th>
+        <td colspan="3"><%= f.text_field :company, autocomplete: "company", size: "50" %></td>
+      </tr>
+      <tr>
+        <th height="50"><%= f.label :"役職・部署名" %></th>
+        <td colspan="3"><%= f.text_field :department, autocomplete: "department", size: "50" %></td>
+      </tr>
+      <tr>
+        <th height="50"><%= f.label :"郵便番号" %></th>
         <td><%= f.text_field :postal_code, autocomplete: "postal_code" %></td>
       </tr>
-
       <tr>
-        <td height="50"><%= f.label :"住所" %></td>
+        <th height="50"><%= f.label :"住所" %></th>
         <td colspan="2"><%= f.text_area :address, autocomplete: "address", size: "50" %></td>
       </tr>
-
       <tr>
-        <td height="50"><%= f.label :"電話番号" %></td>
+        <th height="50"><%= f.label :"電話番号" %></th>
         <td><%= f.text_field :telephone_number, autocomplete: "telephone_number" %></td>
       </tr>
-
       <tr>
-        <td height="50"><%= f.label :"メールアドレス" %></td>
-        <td><%= f.email_field :email, autocomplete: "email" %></td>
+        <th height="50"><%= f.label :"メールアドレス" %></th>
+        <td><%= f.email_field :email, autocomplete: "email", size: "50" %></td>
       </tr>
-
       <tr>
-        <td height="50"><%= f.label :"会員ステータス" %></td>
+        <th height="50"><%= f.label :"会員ステータス" %></th>
         <td><!--ラジオボタン-->
           <%= f.radio_button :is_deleted, :false %>
           <%= f.label :is_deleted, "有効", {value: :false, style: "display: inline-block;"} %>
@@ -65,7 +58,6 @@
           <%= f.label :is_deleted, "退会", {value: :true, style: "display: inline-block;"} %>
         </td>
       </tr>
-
       <tr>
         <td height="50"></td>
         <td><%= f.submit "変更を保存", class: "btn btn-success" %></td>

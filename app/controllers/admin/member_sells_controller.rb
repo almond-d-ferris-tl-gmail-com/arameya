@@ -5,8 +5,8 @@ class Admin::MemberSellsController < ApplicationController
 
   def index #会員の販売商品一覧画面
     @member = Member.find(params[:member_id])
-    #ページネーション
-    @items = Item.all.page(params[:page]).per(10)
+    #会員本人が販売している商品のみを表示、ページネーション
+    @items = @member.items.page(params[:page]).per(10)
   end
 
   def show #会員の販売商品詳細画面

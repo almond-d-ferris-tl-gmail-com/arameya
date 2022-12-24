@@ -33,7 +33,7 @@ class Admin::MembersController < ApplicationController
   #会員情報編集(edit)をした後、updateに遷移する
   private
   def admin_member_params#updateのパラメータ
-    params.require(:Member).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :postal_code, :address, :telephone_number, :email, :is_deleted)
+    params.require(:member).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :company, :department, :postal_code, :address, :telephone_number, :email, :is_deleted)
   end
   
 end

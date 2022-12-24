@@ -2,7 +2,7 @@ class Public::RoomsController < ApplicationController
 before_action :authenticate_member!
 
   def show
-    @member = Member.find(params[:id])
+    @member = Member.find(params[:member_id])
       
     #フォームに渡すために、モデルのインスタンスを作成
     @message = AdMemMessage.new
@@ -19,7 +19,7 @@ before_action :authenticate_member!
      if @room.nil?
        @room = Room.new(params[:id])
      end
-     redirect_to room_path(room)# public/rooms#show
+     redirect_to member_room_path(@member.id, @room.id)# public/rooms#show
   end
 
 end

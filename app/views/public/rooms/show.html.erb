@@ -5,7 +5,7 @@
 <br>
     <!--送信部分-->
     <p>宛先：管理者</p>
-    <%= form_with model: @message, url: ad_mem_messages_path do |f| %><!--public/ad_mem_messages#create-->
+    <%= form_with model: @message, url: member_ad_mem_messages_path do |f| %><!--public/ad_mem_messages#create-->
         <%= f.hidden_field :room_id, value: @room.id %>
         <%= f.text_area :am_mess_body %>
         <%= f.submit '送信する', class: "btn btn-success" %>
@@ -16,9 +16,9 @@
         <ul class="list-unstyled">
             <% if message.am_mess_speaker %>
             <!--/arameya/app/controllers/public/ad_mem_messages_controller.rbにてam_mess_speakerがfalseだったら...を設定しているので、こちらで=falseをしなくてOK-->
-                <li>送信者：<%= @member.last_name %><%= @member.first_name %></li>
-            <% else %>
                 <li>送信者：管理者</li>
+            <% else %>
+                <li>送信者：<%= @member.last_name %><%= @member.first_name %></li>
             <% end %>
             <li><%= message.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %>に送信済み</li>
             <!--.in_time_zone('Tokyo')→UTC(協定世界時刻のデフォルト値)をJST(日本時間)に換算する-->

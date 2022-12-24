@@ -5,26 +5,24 @@
 <br>
 <table style="display:flex; justify-content:center">
   <tr bgcolor="lightgray" height="50">
-    <th width="150">商品ID</th>
-    <th width="350">商品名</th>
-    <th width="150">税抜価格(円)</th>
-    <th width="150">ジャンル</th>
-    <th width="150">ステータス</th>
+    <th class="text-center" width="500">商品名</th>
+    <th class="text-center" width="150">税抜価格(円)</th>
+    <th class="text-center" width="150">ジャンル</th>
+    <th class="text-center" width="150">ステータス</th>
   </tr>
 
   <% @items.each do |item| %>
     <tr height="50">
-      <td><%= item.id %></td>
       <td><%=link_to item.name, admin_member_member_sell_path(@member.id, item.id) %></td><!--admin/member_sells#show-->
-      <td><%= item.price %></td>
-      <td><%= item.genre.name %></td>
+      <td class="text-right"><%= item.price.to_s(:delimited) %></td><!--to_s(:delimited)→文字列に変換してカンマをつける-->
+      <td class="text-center"><%= item.genre.name %></td>
       
       <% if item.sell_status == 0 %><!---->
-        <td><font color="green">販売中</font></td>
+        <td class="text-center"><font color="green">販売中</font></td>
       <% elsif item.sell_status == 1 %>
-        <td><font color="gray">下書き</font></td>
+        <td class="text-center"><font color="gray">下書き</font></td>
       <% else %>
-        <td><font color="gray">販売停止中</font></td>
+        <td class="text-center"><font color="gray">販売停止中</font></td>
       <% end %>
     </tr>
   <% end %>

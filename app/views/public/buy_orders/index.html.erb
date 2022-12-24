@@ -26,7 +26,7 @@
 
           <td class="align-text-top">
           <% order.order_details.each do |order_detail| %>
-            <%= image_tag order_detail.item.get_image %>
+            <%= image_tag order_detail.item.get_image %><!--商品画像-->
             <%= order_detail.item.name %><br><!--注文商品-->
           <% end %>
           </td>

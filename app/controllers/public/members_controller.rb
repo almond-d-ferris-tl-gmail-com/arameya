@@ -52,7 +52,7 @@ class Public::MembersController < ApplicationController
   #会員情報編集(edit)をした後、updateに遷移する
   private
   def members_information_params#updateのパラメータ
-    params.require(:member).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :email, :postal_code, :address, :telephone_number)
+    params.require(:member).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :company, :department, :postal_code, :address, :telephone_number, :email)
   end
   
   def create_room
