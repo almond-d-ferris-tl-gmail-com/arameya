@@ -10,13 +10,13 @@ class Genre < ApplicationRecord
 # Itemとgenreを左外部結合する(itemにgenreを繋げてgenreの名前を検索する)
   def self.search_for(content, method)
     if method == 'perfect'
-      Item.left_joins(:genre).where(genre:{name: content})
+      Item.left_joins(:genre).where(genre:{name: content}).order('id DESC')
     elsif method == 'forward'
-      Item.left_joins(:genre).where('genres.name LIKE ?', content+'%')
+      Item.left_joins(:genre).where('genres.name LIKE ?', content+'%').order('id DESC')
     elsif method == 'backward'
-      Item.left_joins(:genre).where('genres.name LIKE ?', '%'+content)
+      Item.left_joins(:genre).where('genres.name LIKE ?', '%'+content).order('id DESC')
     else
-      Item.left_joins(:genre).where('genres.name LIKE ?', '%'+content+'%')
+      Item.left_joins(:genre).where('genres.name LIKE ?', '%'+content+'%').order('id DESC')
     end
   end
 end

@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   # ログインしていない場合、ヘッダーのボタンをクリックしたら強制的にログイン画面に移動する
   # except→ログイン画面への遷移を除外する→topボタンを押したらtopに遷移する
-  #before_action :authenticate_customer!, except: [:top]#customer→テーブル名
+  #before_action :authenticate_member!, except: [:top]#member→テーブル名
 
   #CSRF対策(クロスサイトリクエストフォージェリ)
     protect_from_forgery with: :exception

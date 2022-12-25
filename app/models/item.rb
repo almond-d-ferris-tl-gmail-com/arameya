@@ -54,13 +54,13 @@ class Item < ApplicationRecord
 # 検索機能
     def self.search_for(content, method)
         if method == 'perfect'
-            Item.where(name: content)
+            Item.where(name: content).order('id DESC')
         elsif method == 'forward'
-            Item.where('name LIKE ?', content + '%')
+            Item.where('name LIKE ?', content + '%').order('id DESC')
         elsif method == 'backward'
-            Item.where('name LIKE ?', '%' + content)
+            Item.where('name LIKE ?', '%' + content).order('id DESC')
         else
-        Item.where('name LIKE ?', '%' + content + '%')
+        Item.where('name LIKE ?', '%' + content + '%').order('id DESC')
         end
     end
 end

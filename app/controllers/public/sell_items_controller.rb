@@ -34,10 +34,11 @@ class Public::SellItemsController < ApplicationController
     @item_new = Item.new(sell_item_params) #public/sell_items#updateのパラメータ
     @item_new.member_id = current_member.id # 商品登録者とログインユーザを紐づける
     # byebug
-    if @item_new.save!
+    if @item_new.save
       flash[:notice] ="商品新規登録が完了しました"
       redirect_to member_sell_item_path(@member.id, @item_new) #public/sell_items#show
     else
+      flash.now[:danger] = '登録に失敗しました'
       render :new
     end
   end

@@ -1,7 +1,7 @@
 class Public::HomesController < ApplicationController
   # ログインしていない場合、ヘッダーのボタンをクリックしたら強制的にログイン画面に移動する
   # except→ログイン画面への遷移を除外する→topボタンを押したらtopに遷移する
-  #before_action :authenticate_customer!, except: [:top]#customer→テーブル名
+  before_action :authenticate_member!, except: [:top, :about]#member→テーブル名
 
   def top
     @items = Item.where(sell_status:0).order('id DESC').limit(8)
