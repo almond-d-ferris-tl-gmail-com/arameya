@@ -21,9 +21,9 @@
       <td><%= member.email %></td>
 
         <% if member.is_deleted == false %>
-      <td><font color="green">有効</font></td>
+      <td class="text-center"><font color="green">有効</font></td>
         <% else %>
-      <td><font color="gray">退会</font></td>
+      <td class="text-center"><font color="gray">退会</font></td>
         <% end %>
     </tr>
   <% end %>

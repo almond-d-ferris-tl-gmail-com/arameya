@@ -12,7 +12,7 @@ class Public::AdMemMessagesController < ApplicationController
     end
     
     if message.save
-      redirect_to member_room_path(@member, message.room)# public/rooms#show
+      redirect_to member_room_path(@member.id, message.room)# public/rooms#show
     else
       redirect_back(fallback_location: root_path)
     end

@@ -1,28 +1,75 @@
 <!--<h1>Public::Rooms#show</h1>-->
 <!--<p>Find me in app/views/public/rooms/show.html.erb</p>-->
 <br>
-<h2><span style="background-color:lightgray" class="m-5">　メッセージルーム　</span></h2>
+<h2><span style="background-color:lightgray" class="m-5">　[管理者宛]メッセージルーム　</span></h2>
 <br>
     <!--送信部分-->
-    <p>宛先：管理者</p>
-    <%= form_with model: @message, url: member_ad_mem_messages_path do |f| %><!--public/ad_mem_messages#create-->
-        <%= f.hidden_field :room_id, value: @room.id %>
-        <%= f.text_area :am_mess_body %>
-        <%= f.submit '送信する', class: "btn btn-success" %>
-    <% end %>
-
+    <table border="0" class="mx-auto">
+        <tr>
+            <th height="50" width="150">宛先</th>
+            <td>管理者</td>
+        </tr>
+        
+        <%= form_with model: @message, url: member_ad_mem_messages_path do |f| %><!--public/ad_mem_messages#create-->
+            <%= f.hidden_field :room_id, value: @room.id %>
+        <tr>
+            <th height="50"><%= f.label :"件名" %></th>
+            <!--プルダウンを実装-->
+            <td>
+            <%= f.select :am_mess_title, AdMemMessage.am_mess_titles.keys.map {|k| [I18n.t("enums.ad_mem_message.am_mess_title.#{k}"), k]} %>
+            <!--ブラウザには日本語で表示→英語でデータを渡すために、再度英語に変換する-->
+            </td>
+        </tr>
+        <tr>
+            <th height="50"><%= f.label :"商品名" %></th>
+            <td><%= f.text_field :am_mess_item, autocomplete: "am_mess_item", size: "50" %></td>
+        </tr>
+        <tr>
+            <th height="50"><%= f.label :"メッセージ内容" %></th>
+            <td><%= f.text_area :am_mess_body, size: "50x10" %></td>
+        </tr>
+        <tr>
+            <th></th>
+            <td><%= f.submit '送信する', class: "btn btn-success" %></td>
+        </tr>
+        <% end %>
+    </table>
+<br><br>
     <!--メッセージ内容-->
-    <% @messages.each do |message| %>
-        <ul class="list-unstyled">
+    <table border="0" class="mx-auto">
+        <% @messages.each do |message| %>
+            <tr>
             <% if message.am_mess_speaker %>
             <!--/arameya/app/controllers/public/ad_mem_messages_controller.rbにてam_mess_speakerがfalseだったら...を設定しているので、こちらで=falseをしなくてOK-->
-                <li>送信者：管理者</li>
+                <th width="100">送信者</th>
+                <td><b><font color="blue">管理者</font></b></td>
             <% else %>
-                <li>送信者：<%= @member.last_name %><%= @member.first_name %></li>
+                <th width="100">送信者</th>
+                <td><b><font color="green"><%= @member.last_name %><%= @member.first_name %></font></b></td>
             <% end %>
-            <li><%= message.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %>に送信済み</li>
-            <!--.in_time_zone('Tokyo')→UTC(協定世界時刻のデフォルト値)をJST(日本時間)に換算する-->
-            <!--.strftime("%Y-%m-%d %H:%M:%S")→UTCを消して時刻のフォーマットに変更する-->
-            <li>メッセージ内容：<%= message.am_mess_body %></li>
-        </ul>
-    <% end %>
+            </tr>    
+            <tr>
+                <th>送信時間</th>
+                <td><%= message.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
+                <!--.in_time_zone('Tokyo')→UTC(協定世界時刻のデフォルト値)をJST(日本時間)に換算する-->
+                <!--.strftime("%Y-%m-%d %H:%M:%S")→UTCを消して時刻のフォーマットに変更する-->
+            </tr>    
+            <tr>
+                <th>件名</th>
+                <td><%= message.am_mess_title %></td>
+            </tr>    
+            <tr>
+                <th>商品名</th>
+                <td><%= message.am_mess_item %></td>
+            </tr>    
+            <tr>
+                <th>内容</th>
+                <td><%= message.am_mess_body %></td>
+            </tr>
+            <tr>
+                <th height="50"></th>
+                <td></td>
+            </tr>
+        <% end %>
+    </table>
+<br>
