@@ -5,16 +5,18 @@ class Admin::AdMemMessagesController < ApplicationController
    before_action :set_member
   
   def create
+    @member = Member.find(params[:member_id])    
+    
     # puts params エラーチェック
     if admin_signed_in?
     # binding.irb エラーチェック
     # 管理者→am_mess_speaker: true
-      message = AdMemMessage.new(am_mess_body: message_params[:am_mess_body], room_id: message_params[:room_id], am_mess_speaker: true)
+      message = AdMemMessage.new(room_id: message_params[:room_id], am_mess_title: message_params[:am_mess_title], am_mess_item: message_params[:am_mess_item], am_mess_body: message_params[:am_mess_body], am_mess_speaker: true)
     else
-      message = AdMemMessage.new(am_mess_body: message_params[:am_mess_body], member_id: @member.id)
+      message = AdMemMessage.new(member_id: @member.id, am_mess_title: message_params[:am_mess_title], am_mess_item: message_params[:am_mess_item], am_mess_body: message_params[:am_mess_body])
     end
     
-    if message.save
+    if message.save!
       redirect_to admin_member_room_path(@member, message.room) # admin/rooms#show
     else
       redirect_back(fallback_location: root_path)
