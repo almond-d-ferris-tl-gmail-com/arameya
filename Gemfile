@@ -74,8 +74,15 @@ gem 'rails-i18n'
 # 評価機能
 gem 'jquery-rails'
 
-# デバッグツール
-gem 'pry-rails'
+group :development, :test do # EC2インスタンス起動時、エラーにならないように設定
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  
+  # group内に移動
+  gem 'pry-byebug'
+  # デバッグツール
+  gem 'pry-rails'
+end
 
 # デプロイのためのデータベース(MYSQL)
 gem 'dotenv-rails'
