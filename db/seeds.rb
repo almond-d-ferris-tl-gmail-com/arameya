@@ -7,32 +7,32 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # 管理者ログイン
-Admin.find_or_create_by(
+Admin.create(
     email: "a@a",
-    encrypted_password: "aaaaaa"
+    password: "aaaaaa"
 )
 
 # 会員ログイン
-Member.find_or_create_by(
-    email: 'sakanagura@test.jp', encrypted_password: 'sakana', last_name: '肴倉', first_name: '康', last_name_kana: 'サカナグラ', first_name_kana: 'ヤスシ', company: '', department: '', postal_code: '522-0231', address: '滋賀県彦根市極楽寺町777', telephone_number: '070-4444-9999'
+Member.create(
+    email: 'sakanagura@test.jp', password: 'sakana', last_name: '肴倉', first_name: '康', last_name_kana: 'サカナグラ', first_name_kana: 'ヤスシ', company: '', department: '', postal_code: '522-0231', address: '滋賀県彦根市極楽寺町777', telephone_number: '070-4444-9999'
 )    
-Member.find_or_create_by(
-    email: 'kirakira_neon@test.jp', encrypted_password: 'kirakira', last_name: '宮本', first_name: 'ねおん', last_name_kana: 'ミヤモト', first_name_kana: 'ネオン', company: '', department: '', postal_code: '108-0072', address: '東京都港区白金3-44-55　ルーチェ・カノッサ309号室', telephone_number: '090-1111-5555'
+Member.create(
+    email: 'kirakira_neon@test.jp', password: 'kirakira', last_name: '宮本', first_name: 'ねおん', last_name_kana: 'ミヤモト', first_name_kana: 'ネオン', company: '', department: '', postal_code: '108-0072', address: '東京都港区白金3-44-55　ルーチェ・カノッサ309号室', telephone_number: '090-1111-5555'
 )
 
 # ジャンル登録
-Genre.find_or_create_by(
+Genre.create(
     name: '本'
 )
-Genre.find_or_create_by(
+Genre.create(
     name: 'CD・DVD'
 )
-Genre.find_or_create_by(
+Genre.create(
     name: 'ホーム＆キッチン' 
 )
 
 # 商品登録
-Item.find_or_create_by(
+Item.create(
     genre_id: Genre.find_by(name: 'ホーム＆キッチン').id, 
     member_id: Member.find_by(last_name: '肴倉', first_name: '康').id, 
     name: 'パナソニック ヘアドライヤー イオニティ シルバー調 EH-NE6E-S', 
@@ -45,7 +45,7 @@ Item.find_or_create_by(
     price: 9000, postage: 0, sell_status: 0
     # image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sell_item1.jpg"), filename:"sell_item1.jpg") 
 )
-Item.find_or_create_by(
+Item.create(
     genre_id: Genre.find_by(name: '本').id, 
     member_id: Member.find_by(last_name: '肴倉', first_name: '康').id, 
     name: '変な家 単行本（ソフトカバー） – 2021/7/22', 
