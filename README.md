@@ -70,4 +70,5 @@ https://docs.google.com/presentation/d/19x72WABPJnOa5EfpNdDG0SkFI2OnTH0q/edit?us
 https://drive.google.com/file/d/1e8_k6grtbHHcEQ9yana-sJK3A8oic-nN/view?usp=sharing
 <!---->
 あいうえおテスト
+かきくけこ
 
