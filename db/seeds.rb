@@ -14,18 +14,15 @@ Admin.create(
 
 # # 会員ログイン
 # Member.create(
-#     email: 'sakanagura@test.jp', password: 'sakana', last_name: '肴倉', first_name: '康', last_name_kana: 'サカナグラ', first_name_kana: 'ヤスシ', company: '', department: '', postal_code: '522-0231', address: '滋賀県彦根市極楽寺町777', telephone_number: '070-4444-9999'
+#     last_name: '肴倉', first_name: '康', last_name_kana: 'サカナグラ', first_name_kana: 'ヤスシ', company: '', department: '', postal_code: '522-0231', address: '滋賀県彦根市極楽寺町777', telephone_number: '070-4444-9999', email: 'sakanagura@test.jp', password: 'sakana'
 # )    
 # Member.create(
-#     email: 'kirakira_neon@test.jp', password: 'kirakira', last_name: '宮本', first_name: 'ねおん', last_name_kana: 'ミヤモト', first_name_kana: 'ネオン', company: '', department: '', postal_code: '108-0072', address: '東京都港区白金3-44-55　ルーチェ・カノッサ309号室', telephone_number: '090-1111-5555'
+#     last_name: '宮本', first_name: 'ねおん', last_name_kana: 'ミヤモト', first_name_kana: 'ネオン', company: '', department: '', postal_code: '108-0072', address: '東京都港区白金3-44-55　ルーチェ・カノッサ309号室', telephone_number: '090-1111-5555', email: 'kirakira_neon@test.jp', password: 'kirakira'
 # )
 
 # # ジャンル登録
 # Genre.create(
 #     name: '本'
-# )
-# Genre.create(
-#     name: 'CD・DVD'
 # )
 # Genre.create(
 #     name: 'ホーム＆キッチン' 
