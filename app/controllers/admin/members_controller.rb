@@ -8,6 +8,10 @@ class Admin::MembersController < ApplicationController
     # 会員のルームのwhereで指定した管理者IDの配列0番目の要素(first)を取り出す
     # (管理者は現在1名だが、今後複数になる可能性があることを想定してfirstで指定する)
     @room = @member.rooms.where(admin_id: current_admin.id).first # firstの後に.idをつけることができる。それはroom.idのこと
+    @review = @member.reviews
+    #@message = @member.ad_mem_messages
+    @message = @room.ad_mem_messages
+    #byebug
   end
 
   def edit #会員情報編集画面

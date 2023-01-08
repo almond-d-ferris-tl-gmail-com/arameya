@@ -13,8 +13,15 @@
     <%= link_to "[販売]履歴一覧", admin_member_member_sell_orders_path(@member.id), class: "btn btn-primary btn-block" %><!--遷移先：admin/member_sell_orders#index-->
 </div>
 <div class="text-center mt-5">
-    <%= link_to "レビュー・評価一覧", admin_member_reviews_path(@member.id), class: "btn btn-primary btn-block" %><!--遷移先：admin/reviews#index-->
+    <!--inspect→何の値が入っているか確認できる。空だったら「#<ActiveRecord::Associations::CollectionProxy []>」と表示される-->
+    <p><%#= @review.inspect %></p>
+    <% if @review.any? %><!--レビューがなければボタンを表示させない-->
+       <%= link_to "レビュー・評価一覧", admin_member_reviews_path(@member.id), class: "btn btn-primary btn-block" %><!--遷移先：admin/reviews#index-->
+    <% end %>
 </div>
 <div class="text-center mt-5">
-    <%= link_to "[会員宛]メッセージ受信", admin_member_room_path(@member.id, @room.id), class: "btn btn-primary btn-block" %><!--遷移先：admin/rooms#show-->
+     <p><%#= @message.inspect %></p>
+    <% if @message.any? %><!--メッセージがなければボタンを表示させない-->
+        <%= link_to "[会員宛]メッセージ受信", admin_member_room_path(@member.id, @room.id), class: "btn btn-primary btn-block" %><!--遷移先：admin/rooms#show-->
+    <% end %>
 </div>
