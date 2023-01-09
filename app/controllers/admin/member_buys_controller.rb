@@ -6,7 +6,7 @@ class Admin::MemberBuysController < ApplicationController
   def index #会員の購入履歴一覧画面
     @member = Member.find(params[:member_id])
     #会員本人が購入した商品のみを表示、ページネーション
-    @orders = @member.orders.page(params[:page]).per(10)
+    @orders = @member.orders.page(params[:page]).per(10).order(created_at: :desc)
   end
 
   def show #会員の購入履歴詳細画面

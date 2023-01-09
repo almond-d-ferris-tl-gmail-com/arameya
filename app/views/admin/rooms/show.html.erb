@@ -64,8 +64,8 @@
                 <td><%= message.am_mess_item %></td>
             </tr>    
             <tr>
-                <th>内容</th>
-                <td><%= message.am_mess_body %></td>
+                <th>内容</th><!--改行を反映する-->
+                <td><%= safe_join(message.am_mess_body.split("\n"),tag(:br)) %></td>
             </tr>
             <tr>
                 <th height="50"></th>
