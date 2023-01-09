@@ -8,12 +8,12 @@ DMM WEBCAMPコンテンツ【ポートフォリオ制作】の研修課題
 ### 会員
 - 自らさまざまなジャンルの商品販売・購入ができる。
 - 販売では商品登録のほか、円滑な取引をするために会員同士でメッセージのやりとりができる。(予定)
-- 購入ではジャンル名、商品名で検索できる。また、購入した商品にレビューや評価をつけることができる。(予定)
-- 売買に関して相談などがある場合、管理者に対してメッセージを送ることができる。(予定)
+- 購入ではジャンル名、商品名で検索できる。また、購入した商品にレビューや評価をつけることができる。
+- 売買に関して相談などがある場合、管理者に対してメッセージを送ることができる。
 
 ### 管理者
 - 会員を把握し、不正なログイン、不適切な販売、レビューなどが行われていないか確認する。
-- 会員に対して通知をしたり、相談があった場合、返信することができる。(予定)
+- 会員に対して通知をしたり、相談があった場合、返信することができる。
 
 ## ●サイトテーマ
 ### 目的
@@ -66,11 +66,7 @@ https://docs.google.com/spreadsheets/d/1lWiJ-7U2cRggRNYOe_Nih1k-xFin7i6V/edit?us
 テスト仕様書(デプロイ後)
 https://docs.google.com/spreadsheets/d/1uM-HJry5nEqKFpiovaQSCmzBL0uDAGLB/edit?usp=sharing&ouid=115827655114800530264&rtpof=true&sd=true
 
-プレゼン資料(2022/12/13現在)
-https://docs.google.com/presentation/d/19x72WABPJnOa5EfpNdDG0SkFI2OnTH0q/edit?usp=sharing&ouid=115827655114800530264&rtpof=true&sd=true
-
-プレゼン動画(2022/12/20現在)
-https://drive.google.com/file/d/1e8_k6grtbHHcEQ9yana-sJK3A8oic-nN/view?usp=sharing
-<!---->
-
+画像使用
+https://www.amazon.co.jp/%E3%83%91%E3%83%8A%E3%82%BD%E3%83%8B%E3%83%83%E3%82%AF-%E3%83%98%E3%82%A2%E3%83%89%E3%83%A9%E3%82%A4%E3%83%A4%E3%83%BC-%E3%82%A4%E3%82%AA%E3%83%8B%E3%83%86%E3%82%A3-%E3%82%B7%E3%83%AB%E3%83%90%E3%83%BC%E8%AA%BF-EH-NE6E-S/dp/B08JYC56BZ/ref=sr_1_1?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&crid=2YCGPNPLU8IP0&keywords=%E3%83%91%E3%83%8A%E3%82%BD%E3%83%8B%E3%83%83%E3%82%AF+%E3%83%98%E3%82%A2%E3%83%89%E3%83%A9%E3%82%A4%E3%83%A4%E3%83%BC+%E3%82%A4%E3%82%AA%E3%83%8B%E3%83%86%E3%82%A3+%E3%82%B7%E3%83%AB%E3%83%90%E3%83%BC+eh-ne6e-s&qid=1673270248&sprefix=%E3%83%91%E3%83%8A%E3%82%BD%E3%83%8B%E3%83%83%E3%82%AF+%E3%83%98%E3%82%A2%E3%83%89%E3%83%A9%E3%82%A4%E3%83%A4%E3%83%BC+%E3%82%A4%E3%82%AA%E3%83%8B%E3%83%86%E3%82%A3+%E3%82%B7%E3%83%AB%E3%83%90%E3%83%BC%E8%AA%BF+eh-ne6e-s%2Caps%2C148&sr=8-1
+https://www.amazon.co.jp/%E5%A4%89%E3%81%AA%E5%AE%B6-%E9%9B%A8%E7%A9%B4/dp/4864108455/ref=tmm_pap_swatch_0?_encoding=UTF8&qid=1673270107&sr=8-1
 
