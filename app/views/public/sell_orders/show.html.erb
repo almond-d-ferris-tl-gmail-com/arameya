@@ -75,11 +75,11 @@
             </td>
           <% end %>
         </tr>
+      <% end %>
       <tr height="50">
         <th class="text-center" bgcolor="lightgray" colspan="4">合計金額</th>
         <td class="text-right"><b><%= (@total_price + @total_postage).to_s(:delimited) %></td></b>
       </tr>
-      <% end %>
     </tbody>
   </table>
 <br>
