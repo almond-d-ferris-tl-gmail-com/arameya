@@ -6,7 +6,7 @@ class Public::SellOrdersController < ApplicationController
   def index
     #ページネーション
     # orderを取得したい→orderはitem.idを持っていない→item.idを持っているのはorder_detail→orderの子テーブルであるorder.detailをincludesで検索してつなげる→whereで絞り込む
-    @orders = Order.includes(:order_details).where(order_details: {item_id: current_member.items.map(&:id)}).page(params[:page]).per(10).order("created_at DESC")
+    @orders = Order.includes(:order_details).where(order_details: {item_id: current_member.items.map(&:id)}).page(params[:page]).per(10).order(created_at: :desc)
   end
 
   def show
