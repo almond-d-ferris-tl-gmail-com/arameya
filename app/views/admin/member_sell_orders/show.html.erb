@@ -8,28 +8,28 @@
 <br>
   <table border="0" class="mx-auto">
     <tr>
-      <td height="50" width="200">購入者</td>
+      <th height="50" width="200">購入者</th>
       <td width="300"><%= @order.member.last_name %> <%= @order.member.first_name %></td>
     </tr>
     <tr>
-      <td height="50">注文日</td>
-      <td width="300"><%= @order.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d") %></td>
+      <th height="50">注文日時</th>
+      <td width="300"><%= @order.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
       <!--.in_time_zone('Tokyo')→UTC(協定世界時刻のデフォルト値)をJST(日本時間)に換算する-->
       <!--.strftime("%Y-%m-%d")→UTCを消して時刻のフォーマットに変更する-->
     </tr>
     <tr>
-      <td height="50">配送先</td>
+      <th height="50">配送先</th>
       <td colspan="2">
           〒<%= @order.postal_code %>　<%= @order.address %><br>
           <%= @order.name %>
       </td>
     </tr>
     <tr>
-      <td height="50">支払方法</td>
+      <th height="50">支払方法</th>
       <td><%= @order.payment_method_i18n %></td><!--i18n→日本語に変換する-->
     </tr>
     <tr>
-      <td height="50">注文ステータス</td>
+      <th height="50">注文ステータス</th>
       <td><%= @order.order_status_i18n %></td><!--i18n→日本語に変換する-->
 <!--遷移先:-->
     </tr>
@@ -64,3 +64,4 @@
       </tr>
     </tbody>
   </table>
+<br>
